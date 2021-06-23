@@ -1,0 +1,21 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->2;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+collateral_ratio_paused = ! collateral_ratio_paused
+
+IRs:
+TMP_219 = ! collateral_ratio_paused 
+collateral_ratio_paused(bool) := TMP_219(bool)"];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+2->1;
+}

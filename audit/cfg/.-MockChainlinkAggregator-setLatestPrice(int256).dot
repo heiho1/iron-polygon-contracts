@@ -1,0 +1,12 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+mock_price = _mock_price
+
+IRs:
+mock_price(int256) := _mock_price(int256)"];
+}

@@ -1,0 +1,292 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(redeem_paused == false,Redeeming is paused)
+
+IRs:
+TMP_655(bool) = redeem_paused == False
+TMP_656(None) = SOLIDITY_CALL require(bool,string)(TMP_655,Redeeming is paused)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+"];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+(_share_price,_ecr,_redemption_fee) = ITreasury(treasury).info()
+
+IRs:
+TMP_657 = CONVERT treasury to ITreasury
+TUPLE_5(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256) = HIGH_LEVEL_CALL, dest:TMP_657(ITreasury), function:info, arguments:[]  
+_share_price(uint256)= UNPACK TUPLE_5 index: 1 
+_ecr(uint256)= UNPACK TUPLE_5 index: 4 
+_redemption_fee(uint256)= UNPACK TUPLE_5 index: 7 "];
+5->6;
+6[label="Node Type: NEW VARIABLE 6
+
+EXPRESSION:
+_collateral_price = getCollateralPrice()
+
+IRs:
+TMP_658(uint256) = INTERNAL_CALL, Pool.getCollateralPrice()()
+_collateral_price(uint256) := TMP_658(uint256)"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+require(bool,string)(_collateral_price > 0,Invalid collateral price)
+
+IRs:
+TMP_659(bool) = _collateral_price > 0
+TMP_660(None) = SOLIDITY_CALL require(bool,string)(TMP_659,Invalid collateral price)"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+require(bool,string)(_share_price > 0,Invalid share price)
+
+IRs:
+TMP_661(bool) = _share_price > 0
+TMP_662(None) = SOLIDITY_CALL require(bool,string)(TMP_661,Invalid share price)"];
+8->9;
+9[label="Node Type: NEW VARIABLE 9
+
+EXPRESSION:
+_dollar_amount_post_fee = _dollar_amount - ((_dollar_amount * _redemption_fee) / PRICE_PRECISION)
+
+IRs:
+TMP_663(uint256) = _dollar_amount (c)* _redemption_fee
+TMP_664(uint256) = TMP_663 (c)/ PRICE_PRECISION
+TMP_665(uint256) = _dollar_amount (c)- TMP_664
+_dollar_amount_post_fee(uint256) := TMP_665(uint256)"];
+9->10;
+10[label="Node Type: NEW VARIABLE 10
+
+EXPRESSION:
+_collateral_output_amount = 0
+
+IRs:
+_collateral_output_amount(uint256) := 0(uint256)"];
+10->11;
+11[label="Node Type: NEW VARIABLE 11
+
+EXPRESSION:
+_share_output_amount = 0
+
+IRs:
+_share_output_amount(uint256) := 0(uint256)"];
+11->12;
+12[label="Node Type: IF 12
+
+EXPRESSION:
+_ecr < COLLATERAL_RATIO_MAX
+
+IRs:
+TMP_666(bool) = _ecr < COLLATERAL_RATIO_MAX
+CONDITION TMP_666"];
+12->13[label="True"];
+12->15[label="False"];
+13[label="Node Type: NEW VARIABLE 13
+
+EXPRESSION:
+_share_output_value = _dollar_amount_post_fee - ((_dollar_amount_post_fee * _ecr) / PRICE_PRECISION)
+
+IRs:
+TMP_667(uint256) = _dollar_amount_post_fee (c)* _ecr
+TMP_668(uint256) = TMP_667 (c)/ PRICE_PRECISION
+TMP_669(uint256) = _dollar_amount_post_fee (c)- TMP_668
+_share_output_value(uint256) := TMP_669(uint256)"];
+13->14;
+14[label="Node Type: EXPRESSION 14
+
+EXPRESSION:
+_share_output_amount = (_share_output_value * PRICE_PRECISION) / _share_price
+
+IRs:
+TMP_670(uint256) = _share_output_value (c)* PRICE_PRECISION
+TMP_671(uint256) = TMP_670 (c)/ _share_price
+_share_output_amount(uint256) := TMP_671(uint256)"];
+14->15;
+15[label="Node Type: END_IF 15
+"];
+15->16;
+16[label="Node Type: IF 16
+
+EXPRESSION:
+_ecr > 0
+
+IRs:
+TMP_672(bool) = _ecr > 0
+CONDITION TMP_672"];
+16->17[label="True"];
+16->19[label="False"];
+17[label="Node Type: NEW VARIABLE 17
+
+EXPRESSION:
+_collateral_output_value = ((_dollar_amount_post_fee * _ecr) / PRICE_PRECISION) / (10 ** missing_decimals)
+
+IRs:
+TMP_673(uint256) = _dollar_amount_post_fee (c)* _ecr
+TMP_674(uint256) = TMP_673 (c)/ PRICE_PRECISION
+TMP_675(uint256) = 10 (c)** missing_decimals
+TMP_676(uint256) = TMP_674 (c)/ TMP_675
+_collateral_output_value(uint256) := TMP_676(uint256)"];
+17->18;
+18[label="Node Type: EXPRESSION 18
+
+EXPRESSION:
+_collateral_output_amount = (_collateral_output_value * PRICE_PRECISION) / _collateral_price
+
+IRs:
+TMP_677(uint256) = _collateral_output_value (c)* PRICE_PRECISION
+TMP_678(uint256) = TMP_677 (c)/ _collateral_price
+_collateral_output_amount(uint256) := TMP_678(uint256)"];
+18->19;
+19[label="Node Type: END_IF 19
+"];
+19->20;
+20[label="Node Type: NEW VARIABLE 20
+
+EXPRESSION:
+_totalCollateralBalance = ITreasury(treasury).globalCollateralBalance()
+
+IRs:
+TMP_679 = CONVERT treasury to ITreasury
+TMP_680(uint256) = HIGH_LEVEL_CALL, dest:TMP_679(ITreasury), function:globalCollateralBalance, arguments:[]  
+_totalCollateralBalance(uint256) := TMP_680(uint256)"];
+20->21;
+21[label="Node Type: EXPRESSION 21
+
+EXPRESSION:
+require(bool,string)(_collateral_output_amount <= _totalCollateralBalance,<collateralBalance)
+
+IRs:
+TMP_681(bool) = _collateral_output_amount <= _totalCollateralBalance
+TMP_682(None) = SOLIDITY_CALL require(bool,string)(TMP_681,<collateralBalance)"];
+21->22;
+22[label="Node Type: EXPRESSION 22
+
+EXPRESSION:
+require(bool,string)(_collateral_out_min <= _collateral_output_amount && _share_out_min <= _share_output_amount,>slippage)
+
+IRs:
+TMP_683(bool) = _collateral_out_min <= _collateral_output_amount
+TMP_684(bool) = _share_out_min <= _share_output_amount
+TMP_685(bool) = TMP_683 && TMP_684
+TMP_686(None) = SOLIDITY_CALL require(bool,string)(TMP_685,>slippage)"];
+22->23;
+23[label="Node Type: IF 23
+
+EXPRESSION:
+_collateral_output_amount > 0
+
+IRs:
+TMP_687(bool) = _collateral_output_amount > 0
+CONDITION TMP_687"];
+23->24[label="True"];
+23->26[label="False"];
+24[label="Node Type: EXPRESSION 24
+
+EXPRESSION:
+redeem_collateral_balances[msg.sender] = redeem_collateral_balances[msg.sender] + _collateral_output_amount
+
+IRs:
+REF_244(uint256) -> redeem_collateral_balances[msg.sender]
+REF_245(uint256) -> redeem_collateral_balances[msg.sender]
+TMP_688(uint256) = REF_245 (c)+ _collateral_output_amount
+REF_244 (->redeem_collateral_balances) := TMP_688(uint256)"];
+24->25;
+25[label="Node Type: EXPRESSION 25
+
+EXPRESSION:
+unclaimed_pool_collateral = unclaimed_pool_collateral + _collateral_output_amount
+
+IRs:
+TMP_689(uint256) = unclaimed_pool_collateral (c)+ _collateral_output_amount
+unclaimed_pool_collateral(uint256) := TMP_689(uint256)"];
+25->26;
+26[label="Node Type: END_IF 26
+"];
+26->27;
+27[label="Node Type: IF 27
+
+EXPRESSION:
+_share_output_amount > 0
+
+IRs:
+TMP_690(bool) = _share_output_amount > 0
+CONDITION TMP_690"];
+27->28[label="True"];
+27->30[label="False"];
+28[label="Node Type: EXPRESSION 28
+
+EXPRESSION:
+redeem_share_balances[msg.sender] = redeem_share_balances[msg.sender] + _share_output_amount
+
+IRs:
+REF_246(uint256) -> redeem_share_balances[msg.sender]
+REF_247(uint256) -> redeem_share_balances[msg.sender]
+TMP_691(uint256) = REF_247 (c)+ _share_output_amount
+REF_246 (->redeem_share_balances) := TMP_691(uint256)"];
+28->29;
+29[label="Node Type: EXPRESSION 29
+
+EXPRESSION:
+unclaimed_pool_share = unclaimed_pool_share + _share_output_amount
+
+IRs:
+TMP_692(uint256) = unclaimed_pool_share (c)+ _share_output_amount
+unclaimed_pool_share(uint256) := TMP_692(uint256)"];
+29->30;
+30[label="Node Type: END_IF 30
+"];
+30->31;
+31[label="Node Type: EXPRESSION 31
+
+EXPRESSION:
+last_redeemed[msg.sender] = block.number
+
+IRs:
+REF_248(uint256) -> last_redeemed[msg.sender]
+REF_248 (->last_redeemed) := block.number(uint256)"];
+31->32;
+32[label="Node Type: EXPRESSION 32
+
+EXPRESSION:
+IDollar(dollar).poolBurnFrom(msg.sender,_dollar_amount)
+
+IRs:
+TMP_693 = CONVERT dollar to IDollar
+HIGH_LEVEL_CALL, dest:TMP_693(IDollar), function:poolBurnFrom, arguments:['msg.sender', '_dollar_amount']  "];
+32->33;
+33[label="Node Type: IF 33
+
+EXPRESSION:
+_share_output_amount > 0
+
+IRs:
+TMP_695(bool) = _share_output_amount > 0
+CONDITION TMP_695"];
+33->34[label="True"];
+33->35[label="False"];
+34[label="Node Type: EXPRESSION 34
+
+EXPRESSION:
+_mintShareToCollateralReserve(_share_output_amount)
+
+IRs:
+INTERNAL_CALL, Pool._mintShareToCollateralReserve(uint256)(_share_output_amount)"];
+34->35;
+35[label="Node Type: END_IF 35
+"];
+}

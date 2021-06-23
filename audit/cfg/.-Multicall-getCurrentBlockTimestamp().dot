@@ -1,0 +1,12 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+timestamp = block.timestamp
+
+IRs:
+timestamp(uint256) := block.timestamp(uint256)"];
+}

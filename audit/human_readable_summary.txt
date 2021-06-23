@@ -1,0 +1,65 @@
++---------------------------+-------------+-------+--------------------+--------------+--------------------+
+|            Name           | # functions |  ERCS |     ERC20 info     | Complex code |      Features      |
++---------------------------+-------------+-------+--------------------+--------------+--------------------+
+|   CollateralRatioPolicy   |      24     |       |                    |      No      | Tokens interaction |
+|                           |             |       |                    |              |    AbiEncoderV2    |
+|                           |             |       |                    |              |    Upgradeable     |
+|     CollateralReserve     |      11     |       |                    |      No      |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    Upgradeable     |
+|      ConsolidatedFund     |      11     |       |                    |      No      | Tokens interaction |
+|           Dollar          |      35     | ERC20 |     No Minting     |      No      |    AbiEncoderV2    |
+|                           |             |       | Approve Race Cond. |              |    Upgradeable     |
+|                           |             |       |                    |              |                    |
+|         MasterChef        |      22     |       |                    |      No      | Tokens interaction |
+|            Pool           |      27     |       |                    |      No      |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    Upgradeable     |
+|           Share           |      39     | ERC20 |     No Minting     |      No      |    AbiEncoderV2    |
+|                           |             |       | Approve Race Cond. |              |    Upgradeable     |
+|                           |             |       |                    |              |                    |
+|          Treasury         |      41     |       |                    |      No      | Tokens interaction |
+|                           |             |       |                    |              |    AbiEncoderV2    |
+|                           |             |       |                    |              |    Upgradeable     |
+|        TreasuryFund       |      14     |       |                    |      No      |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    AbiEncoderV2    |
+|                           |             |       |                    |              |    Upgradeable     |
+|       TreasuryPolicy      |      15     |       |                    |      No      |    AbiEncoderV2    |
+|                           |             |       |                    |              |    Upgradeable     |
+|          ZapPool          |      19     |       |                    |      No      |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    AbiEncoderV2    |
+|                           |             |       |                    |              |    Upgradeable     |
+|     IConsolidatedFund     |      2      |       |                    |      No      |                    |
+|           IShare          |      2      |       |                    |      No      |    AbiEncoderV2    |
+|     IShareTreasuryFund    |      3      |       |                    |      No      |    AbiEncoderV2    |
+|         IUniswapLP        |      6      |       |                    |      No      |    AbiEncoderV2    |
+|      IUniswapV2Router     |      1      |       |                    |      No      |                    |
+|         Babylonian        |      1      |       |                    |      No      |                    |
+|         FixedPoint        |      10     |       |                    |      No      |                    |
+|      SpotPriceGetter      |      3      |       |                    |      No      | Tokens interaction |
+|         UQ112x112         |      3      |       |                    |      No      |                    |
+|      CollateralOracle     |      11     |       |                    |      No      |    AbiEncoderV2    |
+|        DollarOracle       |      12     |       |                    |      No      |    AbiEncoderV2    |
+|       PcsPairOracle       |      15     |       |                    |      No      |    AbiEncoderV2    |
+|        ShareOracle        |      13     |       |                    |      No      |    AbiEncoderV2    |
+|      VaultController      |      16     |       |                    |      No      |    Receive ETH     |
+|                           |             |       |                    |              |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    Upgradeable     |
+|         DataTypes         |      0      |       |                    |      No      |                    |
+| IAaveIncentivesController |      4      |       |                    |      No      |                    |
+|        ILendingPool       |      3      |       |                    |      No      |    AbiEncoderV2    |
+|     TreasuryVaultAave     |      22     |       |                    |      No      |    Receive ETH     |
+|                           |             |       |                    |              |      Send ETH      |
+|                           |             |       |                    |              | Tokens interaction |
+|                           |             |       |                    |              |    Upgradeable     |
+|        IMasterChef        |      1      |       |                    |      No      |                    |
+|      IMasterChefFund      |      2      |       |                    |      No      |                    |
+|           IWETH           |      4      |       |                    |      No      |    Receive ETH     |
+|            Math           |      4      |       |                    |      No      |                    |
+|         Multicall         |      8      |       |                    |      No      |                    |
+|          Timelock         |      9      |       |                    |      No      |    Receive ETH     |
+|                           |             |       |                    |              |      Send ETH      |
++---------------------------+-------------+-------+--------------------+--------------+--------------------+

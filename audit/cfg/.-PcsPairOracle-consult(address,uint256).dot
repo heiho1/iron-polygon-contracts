@@ -1,0 +1,46 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: IF 1
+
+EXPRESSION:
+token == token0
+
+IRs:
+TMP_1433(bool) = token == token0
+CONDITION TMP_1433"];
+1->2[label="True"];
+1->3[label="False"];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+amountOut = price0Average.mul(amountIn).decode144()
+
+IRs:
+TMP_1434(FixedPoint.uq144x112) = LIBRARY_CALL, dest:FixedPoint, function:FixedPoint.mul(FixedPoint.uq112x112,uint256), arguments:['price0Average', 'amountIn'] 
+TMP_1435(uint144) = LIBRARY_CALL, dest:FixedPoint, function:FixedPoint.decode144(FixedPoint.uq144x112), arguments:['TMP_1434'] 
+amountOut(uint256) := TMP_1435(uint144)"];
+2->5;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+require(bool,string)(token == token1,PairOracle: INVALID_TOKEN)
+
+IRs:
+TMP_1436(bool) = token == token1
+TMP_1437(None) = SOLIDITY_CALL require(bool,string)(TMP_1436,PairOracle: INVALID_TOKEN)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+amountOut = price1Average.mul(amountIn).decode144()
+
+IRs:
+TMP_1438(FixedPoint.uq144x112) = LIBRARY_CALL, dest:FixedPoint, function:FixedPoint.mul(FixedPoint.uq112x112,uint256), arguments:['price1Average', 'amountIn'] 
+TMP_1439(uint144) = LIBRARY_CALL, dest:FixedPoint, function:FixedPoint.decode144(FixedPoint.uq144x112), arguments:['TMP_1438'] 
+amountOut(uint256) := TMP_1439(uint144)"];
+4->5;
+5[label="Node Type: END_IF 5
+"];
+}

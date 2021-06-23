@@ -1,0 +1,33 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+_transfer(sender,recipient,amount)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._transfer(address,address,uint256)(sender,recipient,amount)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_approve(sender,_msgSender(),_allowances[sender][_msgSender()].sub(amount,ERC20: transfer amount exceeds allowance))
+
+IRs:
+TMP_441(address) = INTERNAL_CALL, Context._msgSender()()
+REF_106(mapping(address => uint256)) -> _allowances[sender]
+TMP_442(address) = INTERNAL_CALL, Context._msgSender()()
+REF_107(uint256) -> REF_106[TMP_442]
+TMP_443(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256,string), arguments:['REF_107', 'amount', 'ERC20: transfer amount exceeds allowance'] 
+INTERNAL_CALL, ERC20Custom._approve(address,address,uint256)(sender,TMP_441,TMP_443)"];
+2->3;
+3[label="Node Type: RETURN 3
+
+EXPRESSION:
+true
+
+IRs:
+RETURN True"];
+}

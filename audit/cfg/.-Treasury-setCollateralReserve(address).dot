@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_collateralReserve != address(0),invalidAddress)
+
+IRs:
+TMP_1022 = CONVERT 0 to address
+TMP_1023(bool) = _collateralReserve != TMP_1022
+TMP_1024(None) = SOLIDITY_CALL require(bool,string)(TMP_1023,invalidAddress)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+collateralReserve = _collateralReserve
+
+IRs:
+collateralReserve(address) := _collateralReserve(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

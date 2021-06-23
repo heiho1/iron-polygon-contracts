@@ -1,0 +1,55 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_balance[address(this)] >= amt,!bal)
+
+IRs:
+TMP_21 = CONVERT this to address
+REF_12(uint256) -> _balance[TMP_21]
+TMP_22(bool) = REF_12 >= amt
+TMP_23(None) = SOLIDITY_CALL require(bool,string)(TMP_22,!bal)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_balance[address(this)] = sub(_balance[address(this)],amt)
+
+IRs:
+TMP_24 = CONVERT this to address
+REF_13(uint256) -> _balance[TMP_24]
+TMP_25 = CONVERT this to address
+REF_14(uint256) -> _balance[TMP_25]
+TMP_26(uint256) = INTERNAL_CALL, MockCollateral.sub(uint256,uint256)(REF_14,amt)
+REF_13 (->_balance) := TMP_26(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_totalSupply = sub(_totalSupply,amt)
+
+IRs:
+TMP_27(uint256) = INTERNAL_CALL, MockCollateral.sub(uint256,uint256)(_totalSupply,amt)
+_totalSupply(uint256) := TMP_27(uint256)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+Transfer(address(this),address(0),amt)
+
+IRs:
+TMP_28 = CONVERT this to address
+TMP_29 = CONVERT 0 to address
+Emit Transfer(TMP_28.TMP_29.amt)"];
+4->5;
+5[label="Node Type: RETURN 5
+
+EXPRESSION:
+true
+
+IRs:
+RETURN True"];
+}

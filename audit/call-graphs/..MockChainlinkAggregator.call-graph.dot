@@ -1,0 +1,12 @@
+strict digraph {
+subgraph cluster_68_MockChainlinkAggregator {
+label = "MockChainlinkAggregator"
+"68_setDecimals" [label="setDecimals"]
+"68_latestRoundData" [label="latestRoundData"]
+"68_setLatestPrice" [label="setLatestPrice"]
+"68_constructor" [label="constructor"]
+"68_decimals" [label="decimals"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

@@ -1,0 +1,34 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_6990_MockPairOracle {
+label = "MockPairOracle"
+"6990_setPeriod" [label="setPeriod"]
+"6990_consult" [label="consult"]
+"6990_constructor" [label="constructor"]
+"6990_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"6990_update" [label="update"]
+"6990_mock" [label="mock"]
+"6990_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"6990_setPeriod" -> "6990_onlyOwner"
+}subgraph cluster_7079_IPairOracle {
+label = "IPairOracle"
+"7079_consult" [label="consult"]
+"7079_update" [label="update"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"201_transferOwnership" -> "require(bool,string)"
+}
+}

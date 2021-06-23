@@ -1,0 +1,13 @@
+strict digraph {
+subgraph cluster_7256_IUniswapLP {
+label = "IUniswapLP"
+"7256_price0CumulativeLast" [label="price0CumulativeLast"]
+"7256_token0" [label="token0"]
+"7256_getReserves" [label="getReserves"]
+"7256_price1CumulativeLast" [label="price1CumulativeLast"]
+"7256_getTokenWeights" [label="getTokenWeights"]
+"7256_token1" [label="token1"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

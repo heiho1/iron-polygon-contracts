@@ -1,0 +1,25 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(x != 0,FixedPoint: DIV_BY_ZERO)
+
+IRs:
+TMP_1274(bool) = x != 0
+TMP_1275(None) = SOLIDITY_CALL require(bool,string)(TMP_1274,FixedPoint: DIV_BY_ZERO)"];
+1->2;
+2[label="Node Type: RETURN 2
+
+EXPRESSION:
+uq112x112(self._x / uint224(x))
+
+IRs:
+REF_346(uint224) -> self._x
+TMP_1276 = CONVERT x to uint224
+TMP_1277(uint224) = REF_346 (c)/ TMP_1276
+TMP_1278 = new uq112x112(TMP_1277)
+RETURN TMP_1278"];
+}

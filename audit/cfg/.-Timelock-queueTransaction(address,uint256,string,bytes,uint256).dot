@@ -1,0 +1,59 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == admin,Timelock::queueTransaction: Call must come from admin.)
+
+IRs:
+TMP_20(bool) = msg.sender == admin
+TMP_21(None) = SOLIDITY_CALL require(bool,string)(TMP_20,Timelock::queueTransaction: Call must come from admin.)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(eta >= getBlockTimestamp() + delay,Timelock::queueTransaction: Estimated execution block must satisfy delay.)
+
+IRs:
+TMP_22(uint256) = INTERNAL_CALL, Timelock.getBlockTimestamp()()
+TMP_23(uint256) = TMP_22 (c)+ delay
+TMP_24(bool) = eta >= TMP_23
+TMP_25(None) = SOLIDITY_CALL require(bool,string)(TMP_24,Timelock::queueTransaction: Estimated execution block must satisfy delay.)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+txHash = keccak256(bytes)(abi.encode(target,value,signature,data,eta))
+
+IRs:
+TMP_26(bytes) = SOLIDITY_CALL abi.encode()(target,value,signature,data,eta)
+TMP_27(bytes32) = SOLIDITY_CALL keccak256(bytes)(TMP_26)
+txHash(bytes32) := TMP_27(bytes32)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+queuedTransactions[txHash] = true
+
+IRs:
+REF_1(bool) -> queuedTransactions[txHash]
+REF_1 (->queuedTransactions) := True(bool)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+QueueTransaction(txHash,target,value,signature,data,eta)
+
+IRs:
+Emit QueueTransaction(txHash.target.value.signature.data.eta)"];
+5->6;
+6[label="Node Type: RETURN 6
+
+EXPRESSION:
+txHash
+
+IRs:
+RETURN txHash"];
+}

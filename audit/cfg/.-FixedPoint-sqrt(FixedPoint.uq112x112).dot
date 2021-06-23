@@ -1,0 +1,18 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+uq112x112(uint224(Babylonian.sqrt(uint256(self._x)) << 56))
+
+IRs:
+REF_354(uint224) -> self._x
+TMP_1303 = CONVERT REF_354 to uint256
+TMP_1304(uint256) = LIBRARY_CALL, dest:Babylonian, function:Babylonian.sqrt(uint256), arguments:['TMP_1303'] 
+TMP_1305(uint256) = TMP_1304 << 56
+TMP_1306 = CONVERT TMP_1305 to uint224
+TMP_1307 = new uq112x112(TMP_1306)
+RETURN TMP_1307"];
+}

@@ -1,0 +1,18 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(owner() == _msgSender(),Ownable: caller is not the owner)
+
+IRs:
+TMP_327(address) = INTERNAL_CALL, Ownable.owner()()
+TMP_328(address) = INTERNAL_CALL, Context._msgSender()()
+TMP_329(bool) = TMP_327 == TMP_328
+TMP_330(None) = SOLIDITY_CALL require(bool,string)(TMP_329,Ownable: caller is not the owner)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

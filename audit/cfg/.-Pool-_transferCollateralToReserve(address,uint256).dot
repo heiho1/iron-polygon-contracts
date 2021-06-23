@@ -1,0 +1,32 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_reserve = collateralReserve()
+
+IRs:
+TMP_706(address) = INTERNAL_CALL, Pool.collateralReserve()()
+_reserve(address) := TMP_706(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_reserve != address(0),Invalid reserve address)
+
+IRs:
+TMP_707 = CONVERT 0 to address
+TMP_708(bool) = _reserve != TMP_707
+TMP_709(None) = SOLIDITY_CALL require(bool,string)(TMP_708,Invalid reserve address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+ERC20(collateral).safeTransferFrom(_sender,_reserve,_amount)
+
+IRs:
+TMP_710 = CONVERT collateral to ERC20
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransferFrom(IERC20,address,address,uint256), arguments:['TMP_710', '_sender', '_reserve', '_amount'] "];
+}

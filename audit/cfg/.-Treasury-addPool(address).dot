@@ -1,0 +1,52 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->5;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(pools[pool_address] == false,poolExisted)
+
+IRs:
+REF_311(bool) -> pools[pool_address]
+TMP_980(bool) = REF_311 == False
+TMP_981(None) = SOLIDITY_CALL require(bool,string)(TMP_980,poolExisted)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+pools[pool_address] = true
+
+IRs:
+REF_312(bool) -> pools[pool_address]
+REF_312 (->pools) := True(bool)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+pools_array.push(pool_address)
+
+IRs:
+REF_314 -> LENGTH pools_array
+TMP_983(uint256) := REF_314(uint256)
+TMP_984(uint256) = TMP_983 (c)+ 1
+REF_314 (->pools_array) := TMP_984(uint256)
+REF_315(address) -> pools_array[TMP_983]
+REF_315 (->pools_array) := pool_address(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+PoolAdded(pool_address)
+
+IRs:
+Emit PoolAdded(pool_address)"];
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+5->1;
+}

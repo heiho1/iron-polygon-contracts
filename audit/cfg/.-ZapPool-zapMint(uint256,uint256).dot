@@ -1,0 +1,271 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->30;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(mint_paused == false,Minting is paused)
+
+IRs:
+TMP_1154(bool) = mint_paused == False
+TMP_1155(None) = SOLIDITY_CALL require(bool,string)(TMP_1154,Minting is paused)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+"];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+(_share_price,_tcr,_minting_fee) = ITreasury(treasury).info()
+
+IRs:
+TMP_1156 = CONVERT treasury to ITreasury
+TUPLE_6(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256) = HIGH_LEVEL_CALL, dest:TMP_1156(ITreasury), function:info, arguments:[]  
+_share_price(uint256)= UNPACK TUPLE_6 index: 1 
+_tcr(uint256)= UNPACK TUPLE_6 index: 3 
+_minting_fee(uint256)= UNPACK TUPLE_6 index: 6 "];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+require(bool,string)(_share_price > 0,Invalid share price)
+
+IRs:
+TMP_1157(bool) = _share_price > 0
+TMP_1158(None) = SOLIDITY_CALL require(bool,string)(TMP_1157,Invalid share price)"];
+6->7;
+7[label="Node Type: NEW VARIABLE 7
+
+EXPRESSION:
+_price_collateral = getCollateralPrice()
+
+IRs:
+TMP_1159(uint256) = INTERNAL_CALL, ZapPool.getCollateralPrice()()
+_price_collateral(uint256) := TMP_1159(uint256)"];
+7->8;
+8[label="Node Type: NEW VARIABLE 8
+
+EXPRESSION:
+_collateral_value = (_collateral_amount * (10 ** missing_decimals) * _price_collateral) / PRICE_PRECISION
+
+IRs:
+TMP_1160(uint256) = 10 (c)** missing_decimals
+TMP_1161(uint256) = _collateral_amount (c)* TMP_1160
+TMP_1162(uint256) = TMP_1161 (c)* _price_collateral
+TMP_1163(uint256) = TMP_1162 (c)/ PRICE_PRECISION
+_collateral_value(uint256) := TMP_1163(uint256)"];
+8->9;
+9[label="Node Type: NEW VARIABLE 9
+
+EXPRESSION:
+_actual_dollar_amount = _collateral_value - ((_collateral_value * _minting_fee) / PRICE_PRECISION)
+
+IRs:
+TMP_1164(uint256) = _collateral_value (c)* _minting_fee
+TMP_1165(uint256) = TMP_1164 (c)/ PRICE_PRECISION
+TMP_1166(uint256) = _collateral_value (c)- TMP_1165
+_actual_dollar_amount(uint256) := TMP_1166(uint256)"];
+9->10;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+require(bool,string)(_actual_dollar_amount >= _dollar_out_min,slippage)
+
+IRs:
+TMP_1167(bool) = _actual_dollar_amount >= _dollar_out_min
+TMP_1168(None) = SOLIDITY_CALL require(bool,string)(TMP_1167,slippage)"];
+10->11;
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+collateral.safeTransferFrom(msg.sender,address(this),_collateral_amount)
+
+IRs:
+TMP_1169 = CONVERT this to address
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransferFrom(IERC20,address,address,uint256), arguments:['collateral', 'msg.sender', 'TMP_1169', '_collateral_amount'] "];
+11->12;
+12[label="Node Type: IF 12
+
+EXPRESSION:
+_tcr < COLLATERAL_RATIO_MAX
+
+IRs:
+TMP_1171(bool) = _tcr < COLLATERAL_RATIO_MAX
+CONDITION TMP_1171"];
+12->13[label="True"];
+12->20[label="False"];
+13[label="Node Type: NEW VARIABLE 13
+
+EXPRESSION:
+_share_value = (_collateral_value * (RATIO_PRECISION - _tcr)) / RATIO_PRECISION
+
+IRs:
+TMP_1172(uint256) = RATIO_PRECISION (c)- _tcr
+TMP_1173(uint256) = _collateral_value (c)* TMP_1172
+TMP_1174(uint256) = TMP_1173 (c)/ RATIO_PRECISION
+_share_value(uint256) := TMP_1174(uint256)"];
+13->14;
+14[label="Node Type: NEW VARIABLE 14
+
+EXPRESSION:
+_min_share_amount = (_share_value * PRICE_PRECISION * (RATIO_PRECISION - slippage)) / _share_price / RATIO_PRECISION
+
+IRs:
+TMP_1175(uint256) = _share_value (c)* PRICE_PRECISION
+TMP_1176(uint256) = RATIO_PRECISION (c)- slippage
+TMP_1177(uint256) = TMP_1175 (c)* TMP_1176
+TMP_1178(uint256) = TMP_1177 (c)/ _share_price
+TMP_1179(uint256) = TMP_1178 (c)/ RATIO_PRECISION
+_min_share_amount(uint256) := TMP_1179(uint256)"];
+14->15;
+15[label="Node Type: NEW VARIABLE 15
+
+EXPRESSION:
+_swap_collateral_amount = (_collateral_amount * (RATIO_PRECISION - _tcr)) / RATIO_PRECISION
+
+IRs:
+TMP_1180(uint256) = RATIO_PRECISION (c)- _tcr
+TMP_1181(uint256) = _collateral_amount (c)* TMP_1180
+TMP_1182(uint256) = TMP_1181 (c)/ RATIO_PRECISION
+_swap_collateral_amount(uint256) := TMP_1182(uint256)"];
+15->16;
+16[label="Node Type: EXPRESSION 16
+
+EXPRESSION:
+collateral.safeApprove(address(router),0)
+
+IRs:
+TMP_1183 = CONVERT router to address
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeApprove(IERC20,address,uint256), arguments:['collateral', 'TMP_1183', '0'] "];
+16->17;
+17[label="Node Type: EXPRESSION 17
+
+EXPRESSION:
+collateral.safeApprove(address(router),_swap_collateral_amount)
+
+IRs:
+TMP_1185 = CONVERT router to address
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeApprove(IERC20,address,uint256), arguments:['collateral', 'TMP_1185', '_swap_collateral_amount'] "];
+17->18;
+18[label="Node Type: NEW VARIABLE 18
+
+EXPRESSION:
+_received_amounts = router.swapExactTokensForTokens(_swap_collateral_amount,_min_share_amount,router_path,address(this),block.timestamp + LIMIT_SWAP_TIME)
+
+IRs:
+TMP_1187 = CONVERT this to address
+TMP_1188(uint256) = block.timestamp (c)+ LIMIT_SWAP_TIME
+TMP_1189(uint256[]) = HIGH_LEVEL_CALL, dest:router(IUniswapV2Router), function:swapExactTokensForTokens, arguments:['_swap_collateral_amount', '_min_share_amount', 'router_path', 'TMP_1187', 'TMP_1188']  
+_received_amounts(uint256[]) := TMP_1189(uint256[])"];
+18->19;
+19[label="Node Type: EXPRESSION 19
+
+EXPRESSION:
+ZapSwapped(_swap_collateral_amount,_received_amounts[_received_amounts.length - 1])
+
+IRs:
+REF_338 -> LENGTH _received_amounts
+TMP_1190(uint256) = REF_338 (c)- 1
+REF_339(uint256) -> _received_amounts[TMP_1190]
+Emit ZapSwapped(_swap_collateral_amount.REF_339)"];
+19->20;
+20[label="Node Type: END_IF 20
+"];
+20->21;
+21[label="Node Type: NEW VARIABLE 21
+
+EXPRESSION:
+_balanceShare = ERC20(address(share)).balanceOf(address(this))
+
+IRs:
+TMP_1192 = CONVERT share to address
+TMP_1193 = CONVERT TMP_1192 to ERC20
+TMP_1194 = CONVERT this to address
+TMP_1195(uint256) = HIGH_LEVEL_CALL, dest:TMP_1193(ERC20), function:balanceOf, arguments:['TMP_1194']  
+_balanceShare(uint256) := TMP_1195(uint256)"];
+21->22;
+22[label="Node Type: NEW VARIABLE 22
+
+EXPRESSION:
+_balanceCollateral = collateral.balanceOf(address(this))
+
+IRs:
+TMP_1196 = CONVERT this to address
+TMP_1197(uint256) = HIGH_LEVEL_CALL, dest:collateral(ERC20), function:balanceOf, arguments:['TMP_1196']  
+_balanceCollateral(uint256) := TMP_1197(uint256)"];
+22->23;
+23[label="Node Type: IF 23
+
+EXPRESSION:
+_balanceShare > 0
+
+IRs:
+TMP_1198(bool) = _balanceShare > 0
+CONDITION TMP_1198"];
+23->24[label="True"];
+23->25[label="False"];
+24[label="Node Type: EXPRESSION 24
+
+EXPRESSION:
+ERC20Custom(address(share)).burn(_balanceShare)
+
+IRs:
+TMP_1199 = CONVERT share to address
+TMP_1200 = CONVERT TMP_1199 to ERC20Custom
+HIGH_LEVEL_CALL, dest:TMP_1200(ERC20Custom), function:burn, arguments:['_balanceShare']  "];
+24->25;
+25[label="Node Type: END_IF 25
+"];
+25->26;
+26[label="Node Type: IF 26
+
+EXPRESSION:
+_balanceCollateral > 0
+
+IRs:
+TMP_1202(bool) = _balanceCollateral > 0
+CONDITION TMP_1202"];
+26->27[label="True"];
+26->28[label="False"];
+27[label="Node Type: EXPRESSION 27
+
+EXPRESSION:
+_transferCollateralToReserve(_balanceCollateral)
+
+IRs:
+INTERNAL_CALL, ZapPool._transferCollateralToReserve(uint256)(_balanceCollateral)"];
+27->28;
+28[label="Node Type: END_IF 28
+"];
+28->29;
+29[label="Node Type: EXPRESSION 29
+
+EXPRESSION:
+dollar.poolMint(msg.sender,_actual_dollar_amount)
+
+IRs:
+HIGH_LEVEL_CALL, dest:dollar(IDollar), function:poolMint, arguments:['msg.sender', '_actual_dollar_amount']  "];
+30[label="Node Type: EXPRESSION 30
+
+EXPRESSION:
+notContract()
+
+IRs:
+MODIFIER_CALL, ZapPool.notContract()()"];
+30->31;
+31[label="Node Type: EXPRESSION 31
+
+EXPRESSION:
+nonReentrant()
+
+IRs:
+MODIFIER_CALL, ReentrancyGuard.nonReentrant()()"];
+31->1;
+}

@@ -1,0 +1,38 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_share != address(0),Invalid address)
+
+IRs:
+TMP_1062 = CONVERT 0 to address
+TMP_1063(bool) = _share != TMP_1062
+TMP_1064(None) = SOLIDITY_CALL require(bool,string)(TMP_1063,Invalid address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+share = _share
+
+IRs:
+share(address) := _share(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+4->1;
+}

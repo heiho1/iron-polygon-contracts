@@ -1,0 +1,20 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+_mint(dst,amt)
+
+IRs:
+INTERNAL_CALL, MockCollateral._mint(address,uint256)(dst,amt)"];
+1->2;
+2[label="Node Type: RETURN 2
+
+EXPRESSION:
+true
+
+IRs:
+RETURN True"];
+}

@@ -1,0 +1,36 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+dollar = _dollar
+
+IRs:
+dollar(address) := _dollar(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+oracleCollateralUsd = _oracleCollateralUsd
+
+IRs:
+oracleCollateralUsd(address) := _oracleCollateralUsd(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+oracleDollarCollateral = _oracleDollarCollateral
+
+IRs:
+oracleDollarCollateral(address) := _oracleDollarCollateral(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+missingDecimals = _missingDecimals
+
+IRs:
+missingDecimals(uint256) := _missingDecimals(uint256)"];
+}

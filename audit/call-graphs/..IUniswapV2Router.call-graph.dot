@@ -1,0 +1,8 @@
+strict digraph {
+subgraph cluster_7276_IUniswapV2Router {
+label = "IUniswapV2Router"
+"7276_swapExactTokensForTokens" [label="swapExactTokensForTokens"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

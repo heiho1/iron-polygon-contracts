@@ -1,0 +1,44 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_balance[src] >= amt,!bal)
+
+IRs:
+REF_0(uint256) -> _balance[src]
+TMP_6(bool) = REF_0 >= amt
+TMP_7(None) = SOLIDITY_CALL require(bool,string)(TMP_6,!bal)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_balance[src] = sub(_balance[src],amt)
+
+IRs:
+REF_1(uint256) -> _balance[src]
+REF_2(uint256) -> _balance[src]
+TMP_8(uint256) = INTERNAL_CALL, MockCollateral.sub(uint256,uint256)(REF_2,amt)
+REF_1 (->_balance) := TMP_8(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_balance[dst] = add(_balance[dst],amt)
+
+IRs:
+REF_3(uint256) -> _balance[dst]
+REF_4(uint256) -> _balance[dst]
+TMP_9(uint256) = INTERNAL_CALL, MockCollateral.add(uint256,uint256)(REF_4,amt)
+REF_3 (->_balance) := TMP_9(uint256)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+Transfer(src,dst,amt)
+
+IRs:
+Emit Transfer(src.dst.amt)"];
+}

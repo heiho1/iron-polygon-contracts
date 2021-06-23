@@ -1,0 +1,45 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+treasuryVault = ITreasuryVault(_treasuryVault)
+
+IRs:
+TMP_1500 = CONVERT _treasuryVault to ITreasuryVault
+treasuryVault(ITreasuryVault) := TMP_1500(ITreasuryVault)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+setAdmin(_admin)
+
+IRs:
+INTERNAL_CALL, VaultController.setAdmin(address)(_admin)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+setCollateralReserve(_collateralReserve)
+
+IRs:
+INTERNAL_CALL, VaultController.setCollateralReserve(address)(_collateralReserve)"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+5->1;
+}

@@ -1,0 +1,62 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_2131_CollateralRatioPolicy {
+label = "CollateralRatioPolicy"
+"2131_setOracleDollar" [label="setOracleDollar"]
+"2131_setRefreshCooldown" [label="setRefreshCooldown"]
+"2131_initialize" [label="initialize"]
+"2131_toggleCollateralRatio" [label="toggleCollateralRatio"]
+"2131_constructor" [label="constructor"]
+"2131_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"2131_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"2131_setDollar" [label="setDollar"]
+"2131_setPriceBand" [label="setPriceBand"]
+"2131_setRatioStep" [label="setRatioStep"]
+"2131_reset" [label="reset"]
+"2131_refreshCollateralRatio" [label="refreshCollateralRatio"]
+"2131_setPriceTarget" [label="setPriceTarget"]
+"2131_setTreasury" [label="setTreasury"]
+"2131_calcEffectiveCollateralRatio" [label="calcEffectiveCollateralRatio"]
+"2131_toggleEffectiveCollateralRatio" [label="toggleEffectiveCollateralRatio"]
+"2131_setPriceTarget" -> "2131_onlyOwner"
+"2131_setTreasury" -> "2131_onlyOwner"
+"2131_setDollar" -> "2131_onlyOwner"
+"2131_toggleEffectiveCollateralRatio" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_initializer"
+"2131_reset" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_setDollar"
+"2131_setOracleDollar" -> "2131_onlyOwner"
+"2131_setRatioStep" -> "2131_onlyOwner"
+"2131_setRefreshCooldown" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_setTreasury"
+"2131_toggleCollateralRatio" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_onlyOwner"
+"2131_setPriceBand" -> "2131_onlyOwner"
+"2131_refreshCollateralRatio" -> "2131_calcEffectiveCollateralRatio"
+}subgraph cluster_7004_ICollateralRatioPolicy {
+label = "ICollateralRatioPolicy"
+"7004_effective_collateral_ratio" [label="effective_collateral_ratio"]
+"7004_target_collateral_ratio" [label="target_collateral_ratio"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"2131_refreshCollateralRatio" -> "require(bool,string)"
+"2131_setOracleDollar" -> "require(bool,string)"
+"2131_setDollar" -> "require(bool,string)"
+"2131_setTreasury" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+"2131_reset" -> "require(bool,string)"
+}
+}

@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+AaveIncentivesController.getUserUnclaimedRewards(address(this))
+
+IRs:
+TMP_1630 = CONVERT this to address
+TMP_1631(uint256) = HIGH_LEVEL_CALL, dest:AaveIncentivesController(IAaveIncentivesController), function:getUserUnclaimedRewards, arguments:['TMP_1630']  
+RETURN TMP_1631"];
+}

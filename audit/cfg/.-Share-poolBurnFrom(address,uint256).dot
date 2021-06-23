@@ -1,0 +1,29 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+super._burnFrom(b_address,b_amount)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._burnFrom(address,uint256)(b_address,b_amount)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+ShareBurned(b_address,address(this),b_amount)
+
+IRs:
+TMP_858 = CONVERT this to address
+Emit ShareBurned(b_address.TMP_858.b_amount)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyPools()
+
+IRs:
+MODIFIER_CALL, Share.onlyPools()()"];
+3->1;
+}

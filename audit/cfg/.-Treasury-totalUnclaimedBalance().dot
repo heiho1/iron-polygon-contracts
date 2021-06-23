@@ -1,0 +1,81 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_totalUnclaimed = 0
+
+IRs:
+_totalUnclaimed(uint256) := 0(uint256)"];
+1->4;
+2[label="Node Type: BEGIN_LOOP 2
+"];
+2->5;
+3[label="Node Type: END_LOOP 3
+"];
+3->10;
+4[label="Node Type: NEW VARIABLE 4
+
+EXPRESSION:
+i = 0
+
+IRs:
+i(uint256) := 0(uint256)"];
+4->2;
+5[label="Node Type: IF_LOOP 5
+
+EXPRESSION:
+i < pools_array.length
+
+IRs:
+REF_304 -> LENGTH pools_array
+TMP_946(bool) = i < REF_304
+CONDITION TMP_946"];
+5->6[label="True"];
+5->3[label="False"];
+6[label="Node Type: IF 6
+
+EXPRESSION:
+pools_array[i] != address(0)
+
+IRs:
+REF_305(address) -> pools_array[i]
+TMP_947 = CONVERT 0 to address
+TMP_948(bool) = REF_305 != TMP_947
+CONDITION TMP_948"];
+6->7[label="True"];
+6->8[label="False"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+_totalUnclaimed = _totalUnclaimed + (IPool(pools_array[i]).unclaimed_pool_collateral())
+
+IRs:
+REF_306(address) -> pools_array[i]
+TMP_949 = CONVERT REF_306 to IPool
+TMP_950(uint256) = HIGH_LEVEL_CALL, dest:TMP_949(IPool), function:unclaimed_pool_collateral, arguments:[]  
+TMP_951(uint256) = _totalUnclaimed (c)+ TMP_950
+_totalUnclaimed(uint256) := TMP_951(uint256)"];
+7->8;
+8[label="Node Type: END_IF 8
+"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+i ++
+
+IRs:
+TMP_952(uint256) := i(uint256)
+i(uint256) = i (c)+ 1"];
+9->5;
+10[label="Node Type: RETURN 10
+
+EXPRESSION:
+_totalUnclaimed
+
+IRs:
+RETURN _totalUnclaimed"];
+}

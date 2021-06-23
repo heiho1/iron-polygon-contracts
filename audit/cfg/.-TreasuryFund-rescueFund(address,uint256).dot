@@ -1,0 +1,22 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->2;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+IERC20(_token).safeTransfer(owner(),_amount)
+
+IRs:
+TMP_1085 = CONVERT _token to IERC20
+TMP_1086(address) = INTERNAL_CALL, Ownable.owner()()
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['TMP_1085', 'TMP_1086', '_amount'] "];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+2->1;
+}

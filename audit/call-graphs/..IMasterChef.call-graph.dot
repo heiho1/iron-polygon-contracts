@@ -1,0 +1,8 @@
+strict digraph {
+subgraph cluster_13_IMasterChef {
+label = "IMasterChef"
+"13_userInfo" [label="userInfo"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

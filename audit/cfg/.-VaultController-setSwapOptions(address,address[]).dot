@@ -1,0 +1,72 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->7;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_router != address(0),Invalid address)
+
+IRs:
+TMP_1536 = CONVERT 0 to address
+TMP_1537(bool) = _router != TMP_1536
+TMP_1538(None) = SOLIDITY_CALL require(bool,string)(TMP_1537,Invalid address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_path.length > 1,Invalid path)
+
+IRs:
+REF_402 -> LENGTH _path
+TMP_1539(bool) = REF_402 > 1
+TMP_1540(None) = SOLIDITY_CALL require(bool,string)(TMP_1539,Invalid path)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+require(bool,string)(_path[0] == address(wmatic),Path must start with wmatic)
+
+IRs:
+REF_403(address) -> _path[0]
+TMP_1541 = CONVERT wmatic to address
+TMP_1542(bool) = REF_403 == TMP_1541
+TMP_1543(None) = SOLIDITY_CALL require(bool,string)(TMP_1542,Path must start with wmatic)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool,string)(_path[_path.length - 1] == address(usdc),Path must end with usdc)
+
+IRs:
+REF_404 -> LENGTH _path
+TMP_1544(uint256) = REF_404 (c)- 1
+REF_405(address) -> _path[TMP_1544]
+TMP_1545 = CONVERT usdc to address
+TMP_1546(bool) = REF_405 == TMP_1545
+TMP_1547(None) = SOLIDITY_CALL require(bool,string)(TMP_1546,Path must end with usdc)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+router = _router
+
+IRs:
+router(address) := _router(address)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+swapPath = _path
+
+IRs:
+swapPath(address[]) := _path(address[])"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+7->1;
+}

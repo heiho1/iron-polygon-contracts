@@ -1,0 +1,175 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)((last_redeemed[msg.sender] + redemption_delay) <= block.number,<redemption_delay)
+
+IRs:
+REF_250(uint256) -> last_redeemed[msg.sender]
+TMP_697(uint256) = REF_250 (c)+ redemption_delay
+TMP_698(bool) = TMP_697 <= block.number
+TMP_699(None) = SOLIDITY_CALL require(bool,string)(TMP_698,<redemption_delay)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+_send_share = false
+
+IRs:
+_send_share(bool) := False(bool)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+_send_collateral = false
+
+IRs:
+_send_collateral(bool) := False(bool)"];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+"];
+4->5;
+5[label="Node Type: NEW VARIABLE 5
+"];
+5->6;
+6[label="Node Type: IF 6
+
+EXPRESSION:
+redeem_share_balances[msg.sender] > 0
+
+IRs:
+REF_251(uint256) -> redeem_share_balances[msg.sender]
+TMP_700(bool) = REF_251 > 0
+CONDITION TMP_700"];
+6->7[label="True"];
+6->11[label="False"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+_share_amount = redeem_share_balances[msg.sender]
+
+IRs:
+REF_252(uint256) -> redeem_share_balances[msg.sender]
+_share_amount(uint256) := REF_252(uint256)"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+redeem_share_balances[msg.sender] = 0
+
+IRs:
+REF_253(uint256) -> redeem_share_balances[msg.sender]
+REF_253 (->redeem_share_balances) := 0(uint256)"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+unclaimed_pool_share = unclaimed_pool_share - _share_amount
+
+IRs:
+TMP_701(uint256) = unclaimed_pool_share (c)- _share_amount
+unclaimed_pool_share(uint256) := TMP_701(uint256)"];
+9->10;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+_send_share = true
+
+IRs:
+_send_share(bool) := True(bool)"];
+10->11;
+11[label="Node Type: END_IF 11
+"];
+11->12;
+12[label="Node Type: IF 12
+
+EXPRESSION:
+redeem_collateral_balances[msg.sender] > 0
+
+IRs:
+REF_254(uint256) -> redeem_collateral_balances[msg.sender]
+TMP_702(bool) = REF_254 > 0
+CONDITION TMP_702"];
+12->13[label="True"];
+12->17[label="False"];
+13[label="Node Type: EXPRESSION 13
+
+EXPRESSION:
+_collateral_amount = redeem_collateral_balances[msg.sender]
+
+IRs:
+REF_255(uint256) -> redeem_collateral_balances[msg.sender]
+_collateral_amount(uint256) := REF_255(uint256)"];
+13->14;
+14[label="Node Type: EXPRESSION 14
+
+EXPRESSION:
+redeem_collateral_balances[msg.sender] = 0
+
+IRs:
+REF_256(uint256) -> redeem_collateral_balances[msg.sender]
+REF_256 (->redeem_collateral_balances) := 0(uint256)"];
+14->15;
+15[label="Node Type: EXPRESSION 15
+
+EXPRESSION:
+unclaimed_pool_collateral = unclaimed_pool_collateral - _collateral_amount
+
+IRs:
+TMP_703(uint256) = unclaimed_pool_collateral (c)- _collateral_amount
+unclaimed_pool_collateral(uint256) := TMP_703(uint256)"];
+15->16;
+16[label="Node Type: EXPRESSION 16
+
+EXPRESSION:
+_send_collateral = true
+
+IRs:
+_send_collateral(bool) := True(bool)"];
+16->17;
+17[label="Node Type: END_IF 17
+"];
+17->18;
+18[label="Node Type: IF 18
+
+EXPRESSION:
+_send_share
+
+IRs:
+CONDITION _send_share"];
+18->19[label="True"];
+18->20[label="False"];
+19[label="Node Type: EXPRESSION 19
+
+EXPRESSION:
+_requestTransferShare(msg.sender,_share_amount)
+
+IRs:
+INTERNAL_CALL, Pool._requestTransferShare(address,uint256)(msg.sender,_share_amount)"];
+19->20;
+20[label="Node Type: END_IF 20
+"];
+20->21;
+21[label="Node Type: IF 21
+
+EXPRESSION:
+_send_collateral
+
+IRs:
+CONDITION _send_collateral"];
+21->22[label="True"];
+21->23[label="False"];
+22[label="Node Type: EXPRESSION 22
+
+EXPRESSION:
+_requestTransferCollateral(msg.sender,_collateral_amount)
+
+IRs:
+INTERNAL_CALL, Pool._requestTransferCollateral(address,uint256)(msg.sender,_collateral_amount)"];
+22->23;
+23[label="Node Type: END_IF 23
+"];
+}

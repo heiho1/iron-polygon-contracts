@@ -1,0 +1,70 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->7;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+treasury = _treasury
+
+IRs:
+treasury(ITreasury) := _treasury(ITreasury)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+dollar = _dollar
+
+IRs:
+dollar(IDollar) := _dollar(IDollar)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+share = _share
+
+IRs:
+share(IShare) := _share(IShare)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+collateral = _collateral
+
+IRs:
+collateral(ERC20) := _collateral(ERC20)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+oracle = _oracleCollateral
+
+IRs:
+oracle(IOracle) := _oracleCollateral(IOracle)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+missing_decimals = 18 - _collateral.decimals()
+
+IRs:
+TMP_1148(uint8) = HIGH_LEVEL_CALL, dest:_collateral(ERC20), function:decimals, arguments:[]  
+TMP_1149(uint256) = 18 (c)- TMP_1148
+missing_decimals(uint256) := TMP_1149(uint256)"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+8->1;
+}

@@ -1,0 +1,61 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_7216_ITreasuryVault {
+label = "ITreasuryVault"
+"7216_vaultBalance" [label="vaultBalance"]
+"7216_withdraw" [label="withdraw"]
+"7216_deposit" [label="deposit"]
+}subgraph cluster_241_ReentrancyGuard {
+label = "ReentrancyGuard"
+"241_constructor" [label="constructor"]
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_9492_TreasuryVaultAave {
+label = "TreasuryVaultAave"
+"9492_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"9492_claimIncetiveRewards" [label="claimIncetiveRewards"]
+"9492_setIncentiveController" [label="setIncentiveController"]
+"9492__getATokenAddress" [label="_getATokenAddress"]
+"9492_withdraw" [label="withdraw"]
+"9492_receive" [label="receive"]
+"9492_balanceOfAToken" [label="balanceOfAToken"]
+"9492_initialize" [label="initialize"]
+"9492_executeTransaction" [label="executeTransaction"]
+"9492_deposit" [label="deposit"]
+"9492_getUnclaimedIncentiveRewardsBalance" [label="getUnclaimedIncentiveRewardsBalance"]
+"9492_setTreasury" [label="setTreasury"]
+"9492_setTreasury" -> "9492_onlyOwner"
+"9492_initialize" -> "9492_onlyOwner"
+"9492_withdraw" -> "9492_balanceOfAToken"
+"9492_setIncentiveController" -> "9492_onlyOwner"
+"9492_executeTransaction" -> "9492_onlyOwner"
+"9492_withdraw" -> "9492_onlyTreasury"
+"9492_claimIncetiveRewards" -> "9492_getUnclaimedIncentiveRewardsBalance"
+"9492_initialize" -> "9492_initializer"
+"9492_initialize" -> "9492__getATokenAddress"
+"9492_deposit" -> "9492_onlyTreasury"
+"9492_claimIncetiveRewards" -> "9492_onlyOwner"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"abi.encodePacked()" 
+"keccak256(bytes)" 
+"9492_setIncentiveController" -> "require(bool,string)"
+"9492_executeTransaction" -> "abi.encodePacked()"
+"9492_deposit" -> "require(bool,string)"
+"9492_executeTransaction" -> "keccak256(bytes)"
+"201_transferOwnership" -> "require(bool,string)"
+"9492_setTreasury" -> "require(bool,string)"
+"9492_executeTransaction" -> "require(bool,string)"
+}
+}

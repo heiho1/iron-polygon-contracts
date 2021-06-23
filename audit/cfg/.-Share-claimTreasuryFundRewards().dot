@@ -1,0 +1,53 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->6;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_pending = unclaimedTreasuryFund()
+
+IRs:
+TMP_865(uint256) = INTERNAL_CALL, Share.unclaimedTreasuryFund()()
+_pending(uint256) := TMP_865(uint256)"];
+1->2;
+2[label="Node Type: IF 2
+
+EXPRESSION:
+_pending > 0 && treasuryFund != address(0)
+
+IRs:
+TMP_866(bool) = _pending > 0
+TMP_867 = CONVERT 0 to address
+TMP_868(bool) = treasuryFund != TMP_867
+TMP_869(bool) = TMP_866 && TMP_868
+CONDITION TMP_869"];
+2->3[label="True"];
+2->5[label="False"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_mint(treasuryFund,_pending)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._mint(address,uint256)(treasuryFund,_pending)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+treasuryFundLastClaimed = block.timestamp
+
+IRs:
+treasuryFundLastClaimed(uint256) := block.timestamp(uint256)"];
+4->5;
+5[label="Node Type: END_IF 5
+"];
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+onlyTreasuryFund()
+
+IRs:
+MODIFIER_CALL, Share.onlyTreasuryFund()()"];
+6->1;
+}

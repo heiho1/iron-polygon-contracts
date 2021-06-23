@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_fund != address(0),Invalid zero address)
+
+IRs:
+TMP_528 = CONVERT 0 to address
+TMP_529(bool) = _fund != TMP_528
+TMP_530(None) = SOLIDITY_CALL require(bool,string)(TMP_529,Invalid zero address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+fund = _fund
+
+IRs:
+fund(address) := _fund(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

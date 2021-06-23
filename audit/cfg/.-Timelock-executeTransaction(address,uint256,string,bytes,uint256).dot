@@ -1,0 +1,140 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == admin,Timelock::executeTransaction: Call must come from admin.)
+
+IRs:
+TMP_34(bool) = msg.sender == admin
+TMP_35(None) = SOLIDITY_CALL require(bool,string)(TMP_34,Timelock::executeTransaction: Call must come from admin.)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+txHash = keccak256(bytes)(abi.encode(target,value,signature,data,eta))
+
+IRs:
+TMP_36(bytes) = SOLIDITY_CALL abi.encode()(target,value,signature,data,eta)
+TMP_37(bytes32) = SOLIDITY_CALL keccak256(bytes)(TMP_36)
+txHash(bytes32) := TMP_37(bytes32)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+require(bool,string)(queuedTransactions[txHash],Timelock::executeTransaction: Transaction hasn't been queued.)
+
+IRs:
+REF_5(bool) -> queuedTransactions[txHash]
+TMP_38(None) = SOLIDITY_CALL require(bool,string)(REF_5,Timelock::executeTransaction: Transaction hasn't been queued.)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool,string)(getBlockTimestamp() >= eta,Timelock::executeTransaction: Transaction hasn't surpassed time lock.)
+
+IRs:
+TMP_39(uint256) = INTERNAL_CALL, Timelock.getBlockTimestamp()()
+TMP_40(bool) = TMP_39 >= eta
+TMP_41(None) = SOLIDITY_CALL require(bool,string)(TMP_40,Timelock::executeTransaction: Transaction hasn't surpassed time lock.)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+require(bool,string)(getBlockTimestamp() <= (eta + GRACE_PERIOD),Timelock::executeTransaction: Transaction is stale.)
+
+IRs:
+TMP_42(uint256) = INTERNAL_CALL, Timelock.getBlockTimestamp()()
+TMP_43(uint256) = eta (c)+ GRACE_PERIOD
+TMP_44(bool) = TMP_42 <= TMP_43
+TMP_45(None) = SOLIDITY_CALL require(bool,string)(TMP_44,Timelock::executeTransaction: Transaction is stale.)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+queuedTransactions[txHash] = false
+
+IRs:
+REF_6(bool) -> queuedTransactions[txHash]
+REF_6 (->queuedTransactions) := False(bool)"];
+6->7;
+7[label="Node Type: NEW VARIABLE 7
+"];
+7->8;
+8[label="Node Type: IF 8
+
+EXPRESSION:
+bytes(signature).length == 0
+
+IRs:
+TMP_46 = CONVERT signature to bytes
+REF_7 -> LENGTH TMP_46
+TMP_47(bool) = REF_7 == 0
+CONDITION TMP_47"];
+8->9[label="True"];
+8->10[label="False"];
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+callData = data
+
+IRs:
+callData(bytes) := data(bytes)"];
+9->11;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+callData = abi.encodePacked(bytes4(keccak256(bytes)(bytes(signature))),data)
+
+IRs:
+TMP_48 = CONVERT signature to bytes
+TMP_49(bytes32) = SOLIDITY_CALL keccak256(bytes)(TMP_48)
+TMP_50 = CONVERT TMP_49 to bytes4
+TMP_51(bytes) = SOLIDITY_CALL abi.encodePacked()(TMP_50,data)
+callData(bytes) := TMP_51(bytes)"];
+10->11;
+11[label="Node Type: END_IF 11
+"];
+11->12;
+12[label="Node Type: NEW VARIABLE 12
+"];
+12->13;
+13[label="Node Type: NEW VARIABLE 13
+"];
+13->14;
+14[label="Node Type: EXPRESSION 14
+
+EXPRESSION:
+(success,returnData) = target.call{value: value}(callData)
+
+IRs:
+TUPLE_0(bool,bytes) = LOW_LEVEL_CALL, dest:target, function:call, arguments:['callData'] value:value 
+success(bool)= UNPACK TUPLE_0 index: 0 
+returnData(bytes)= UNPACK TUPLE_0 index: 1 "];
+14->15;
+15[label="Node Type: EXPRESSION 15
+
+EXPRESSION:
+require(bool,string)(success,Timelock::executeTransaction: Transaction execution reverted.)
+
+IRs:
+TMP_52(None) = SOLIDITY_CALL require(bool,string)(success,Timelock::executeTransaction: Transaction execution reverted.)"];
+15->16;
+16[label="Node Type: EXPRESSION 16
+
+EXPRESSION:
+ExecuteTransaction(txHash,target,value,signature,data,eta)
+
+IRs:
+Emit ExecuteTransaction(txHash.target.value.signature.data.eta)"];
+16->17;
+17[label="Node Type: RETURN 17
+
+EXPRESSION:
+returnData
+
+IRs:
+RETURN returnData"];
+}

@@ -1,0 +1,25 @@
+digraph{
+0[label="Node Type: OTHER_ENTRYPOINT 0
+
+EXPRESSION:
+redemption_delay = 1
+
+IRs:
+redemption_delay(uint256) := 1(uint256)"];
+0->1;
+1[label="Node Type: OTHER_ENTRYPOINT 1
+
+EXPRESSION:
+mint_paused = false
+
+IRs:
+mint_paused(bool) := False(bool)"];
+1->2;
+2[label="Node Type: OTHER_ENTRYPOINT 2
+
+EXPRESSION:
+redeem_paused = false
+
+IRs:
+redeem_paused(bool) := False(bool)"];
+}

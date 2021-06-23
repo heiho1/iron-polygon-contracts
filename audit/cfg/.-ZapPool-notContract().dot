@@ -1,0 +1,17 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(! msg.sender.isContract(),Allow non-contract only)
+
+IRs:
+TMP_1238(bool) = LIBRARY_CALL, dest:Address, function:Address.isContract(address), arguments:['msg.sender'] 
+TMP_1239 = ! TMP_1238 
+TMP_1240(None) = SOLIDITY_CALL require(bool,string)(TMP_1239,Allow non-contract only)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

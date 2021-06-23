@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_treasuryFund != address(0),zero)
+
+IRs:
+TMP_845 = CONVERT 0 to address
+TMP_846(bool) = _treasuryFund != TMP_845
+TMP_847(None) = SOLIDITY_CALL require(bool,string)(TMP_846,zero)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+treasuryFund = _treasuryFund
+
+IRs:
+treasuryFund(address) := _treasuryFund(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyTreasuryFund()
+
+IRs:
+MODIFIER_CALL, Share.onlyTreasuryFund()()"];
+3->1;
+}

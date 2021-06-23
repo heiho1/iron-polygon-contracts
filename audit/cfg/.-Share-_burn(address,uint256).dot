@@ -1,0 +1,52 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(account != address(0),ERC20: burn from the zero address)
+
+IRs:
+TMP_804 = CONVERT 0 to address
+TMP_805(bool) = account != TMP_804
+TMP_806(None) = SOLIDITY_CALL require(bool,string)(TMP_805,ERC20: burn from the zero address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_beforeTokenTransfer(account,address(0),amount)
+
+IRs:
+TMP_807 = CONVERT 0 to address
+INTERNAL_CALL, ERC20Custom._beforeTokenTransfer(address,address,uint256)(account,TMP_807,amount)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_balances[account] = _balances[account].sub(amount,ERC20: burn amount exceeds balance)
+
+IRs:
+REF_284(uint256) -> _balances[account]
+REF_285(uint256) -> _balances[account]
+TMP_809(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256,string), arguments:['REF_285', 'amount', 'ERC20: burn amount exceeds balance'] 
+REF_284 (->_balances) := TMP_809(uint256)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+_totalSupply = _totalSupply.sub(amount)
+
+IRs:
+TMP_810(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256), arguments:['_totalSupply', 'amount'] 
+_totalSupply(uint256) := TMP_810(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+Transfer(account,address(0),amount)
+
+IRs:
+TMP_811 = CONVERT 0 to address
+Emit Transfer(account.TMP_811.amount)"];
+}

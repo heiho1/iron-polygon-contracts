@@ -1,0 +1,10 @@
+digraph{
+0[label="Node Type: OTHER_ENTRYPOINT 0
+
+EXPRESSION:
+Q112 = 2 ** 112
+
+IRs:
+TMP_1349(uint256) = 2 (c)** 112
+Q112(uint224) := TMP_1349(uint256)"];
+}

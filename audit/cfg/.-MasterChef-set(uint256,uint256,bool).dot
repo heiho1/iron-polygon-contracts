@@ -1,0 +1,54 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->6;
+1[label="Node Type: IF 1
+
+EXPRESSION:
+_withUpdate
+
+IRs:
+CONDITION _withUpdate"];
+1->2[label="True"];
+1->3[label="False"];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+massUpdatePools()
+
+IRs:
+INTERNAL_CALL, MasterChef.massUpdatePools()()"];
+2->3;
+3[label="Node Type: END_IF 3
+"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+totalAllocPoint = totalAllocPoint.sub(poolInfo[_pid].allocPoint).add(_allocPoint)
+
+IRs:
+REF_142(MasterChef.PoolInfo) -> poolInfo[_pid]
+REF_143(uint256) -> REF_142.allocPoint
+TMP_525(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256), arguments:['totalAllocPoint', 'REF_143'] 
+TMP_526(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['TMP_525', '_allocPoint'] 
+totalAllocPoint(uint256) := TMP_526(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+poolInfo[_pid].allocPoint = _allocPoint
+
+IRs:
+REF_145(MasterChef.PoolInfo) -> poolInfo[_pid]
+REF_146(uint256) -> REF_145.allocPoint
+REF_146 (->poolInfo) := _allocPoint(uint256)"];
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+6->1;
+}

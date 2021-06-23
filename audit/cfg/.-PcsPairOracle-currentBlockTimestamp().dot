@@ -1,0 +1,15 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+uint32(block.timestamp % 2 ** 32)
+
+IRs:
+TMP_1440(uint256) = 2 (c)** 32
+TMP_1441(uint256) = block.timestamp (c)% TMP_1440
+TMP_1442 = CONVERT TMP_1441 to uint32
+RETURN TMP_1442"];
+}

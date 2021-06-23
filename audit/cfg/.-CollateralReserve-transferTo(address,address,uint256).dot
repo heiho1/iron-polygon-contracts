@@ -1,0 +1,40 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_receiver != address(0),Invalid address)
+
+IRs:
+TMP_255 = CONVERT 0 to address
+TMP_256(bool) = _receiver != TMP_255
+TMP_257(None) = SOLIDITY_CALL require(bool,string)(TMP_256,Invalid address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_amount > 0,Cannot transfer zero amount)
+
+IRs:
+TMP_258(bool) = _amount > 0
+TMP_259(None) = SOLIDITY_CALL require(bool,string)(TMP_258,Cannot transfer zero amount)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+IERC20(_token).safeTransfer(_receiver,_amount)
+
+IRs:
+TMP_260 = CONVERT _token to IERC20
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['TMP_260', '_receiver', '_amount'] "];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+onlyTreasury()
+
+IRs:
+MODIFIER_CALL, CollateralReserve.onlyTreasury()()"];
+4->1;
+}

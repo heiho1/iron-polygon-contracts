@@ -1,0 +1,39 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_router != address(0),Invalid router)
+
+IRs:
+TMP_1223 = CONVERT 0 to address
+TMP_1224(bool) = _router != TMP_1223
+TMP_1225(None) = SOLIDITY_CALL require(bool,string)(TMP_1224,Invalid router)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+router = IUniswapV2Router(_router)
+
+IRs:
+TMP_1226 = CONVERT _router to IUniswapV2Router
+router(IUniswapV2Router) := TMP_1226(IUniswapV2Router)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+router_path = _path
+
+IRs:
+router_path(address[]) := _path(address[])"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+4->1;
+}

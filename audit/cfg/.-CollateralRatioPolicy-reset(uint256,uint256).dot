@@ -1,0 +1,39 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_target_collateral_ratio <= COLLATERAL_RATIO_MAX && _effective_collateral_ratio <= COLLATERAL_RATIO_MAX,invalidRatio)
+
+IRs:
+TMP_214(bool) = _target_collateral_ratio <= COLLATERAL_RATIO_MAX
+TMP_215(bool) = _effective_collateral_ratio <= COLLATERAL_RATIO_MAX
+TMP_216(bool) = TMP_214 && TMP_215
+TMP_217(None) = SOLIDITY_CALL require(bool,string)(TMP_216,invalidRatio)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+target_collateral_ratio = _target_collateral_ratio
+
+IRs:
+target_collateral_ratio(uint256) := _target_collateral_ratio(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+effective_collateral_ratio = _effective_collateral_ratio
+
+IRs:
+effective_collateral_ratio(uint256) := _effective_collateral_ratio(uint256)"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+4->1;
+}

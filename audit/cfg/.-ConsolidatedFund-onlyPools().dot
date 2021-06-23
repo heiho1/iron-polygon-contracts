@@ -1,0 +1,18 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(pools[msg.sender] != address(0),Only pool can request transfer)
+
+IRs:
+REF_69(address) -> pools[msg.sender]
+TMP_331 = CONVERT 0 to address
+TMP_332(bool) = REF_69 != TMP_331
+TMP_333(None) = SOLIDITY_CALL require(bool,string)(TMP_332,Only pool can request transfer)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

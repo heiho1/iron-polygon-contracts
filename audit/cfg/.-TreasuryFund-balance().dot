@@ -1,0 +1,15 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+IERC20(share).balanceOf(address(this))
+
+IRs:
+TMP_1081 = CONVERT share to IERC20
+TMP_1082 = CONVERT this to address
+TMP_1083(uint256) = HIGH_LEVEL_CALL, dest:TMP_1081(IERC20), function:balanceOf, arguments:['TMP_1082']  
+RETURN TMP_1083"];
+}

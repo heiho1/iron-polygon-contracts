@@ -1,0 +1,62 @@
+strict digraph {
+subgraph cluster_826_IERC20 {
+label = "IERC20"
+"826_transfer" [label="transfer"]
+"826_approve" [label="approve"]
+"826_totalSupply" [label="totalSupply"]
+"826_transferFrom" [label="transferFrom"]
+"826_balanceOf" [label="balanceOf"]
+"826_allowance" [label="allowance"]
+}subgraph cluster_851_IERC20Metadata {
+label = "IERC20Metadata"
+"851_symbol" [label="symbol"]
+"851_name" [label="name"]
+"851_decimals" [label="decimals"]
+}subgraph cluster_748_ERC20 {
+label = "ERC20"
+"748_decreaseAllowance" [label="decreaseAllowance"]
+"748_increaseAllowance" [label="increaseAllowance"]
+"748_constructor" [label="constructor"]
+"748_transferFrom" [label="transferFrom"]
+"748__beforeTokenTransfer" [label="_beforeTokenTransfer"]
+"748__transfer" [label="_transfer"]
+"748_allowance" [label="allowance"]
+"748__mint" [label="_mint"]
+"748__burn" [label="_burn"]
+"748_decimals" [label="decimals"]
+"748_balanceOf" [label="balanceOf"]
+"748_symbol" [label="symbol"]
+"748_totalSupply" [label="totalSupply"]
+"748__approve" [label="_approve"]
+"748_name" [label="name"]
+"748_transfer" [label="transfer"]
+"748_approve" [label="approve"]
+"748_approve" -> "748__approve"
+"748_approve" -> "748__msgSender"
+"748_decreaseAllowance" -> "748__approve"
+"748_transfer" -> "748__transfer"
+"748_increaseAllowance" -> "748__approve"
+"748_transferFrom" -> "748__msgSender"
+"748_decreaseAllowance" -> "748__msgSender"
+"748__burn" -> "748__beforeTokenTransfer"
+"748_increaseAllowance" -> "748__msgSender"
+"748_transferFrom" -> "748__transfer"
+"748__mint" -> "748__beforeTokenTransfer"
+"748_transfer" -> "748__msgSender"
+"748__transfer" -> "748__beforeTokenTransfer"
+"748_transferFrom" -> "748__approve"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"748_transferFrom" -> "require(bool,string)"
+"748__transfer" -> "require(bool,string)"
+"748__burn" -> "require(bool,string)"
+"748__approve" -> "require(bool,string)"
+"748__mint" -> "require(bool,string)"
+"748_decreaseAllowance" -> "require(bool,string)"
+}
+}

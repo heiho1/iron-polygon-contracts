@@ -1,0 +1,73 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == src || amt <= _allowance[src][msg.sender],!spender)
+
+IRs:
+TMP_32(bool) = msg.sender == src
+REF_15(mapping(address => uint256)) -> _allowance[src]
+REF_16(uint256) -> REF_15[msg.sender]
+TMP_33(bool) = amt <= REF_16
+TMP_34(bool) = TMP_32 || TMP_33
+TMP_35(None) = SOLIDITY_CALL require(bool,string)(TMP_34,!spender)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_move(src,dst,amt)
+
+IRs:
+INTERNAL_CALL, MockCollateral._move(address,address,uint256)(src,dst,amt)"];
+2->3;
+3[label="Node Type: IF 3
+
+EXPRESSION:
+msg.sender != src && _allowance[src][msg.sender] != 0
+
+IRs:
+TMP_37(bool) = msg.sender != src
+REF_17(mapping(address => uint256)) -> _allowance[src]
+REF_18(uint256) -> REF_17[msg.sender]
+TMP_38(bool) = REF_18 != 0
+TMP_39(bool) = TMP_37 && TMP_38
+CONDITION TMP_39"];
+3->4[label="True"];
+3->6[label="False"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+_allowance[src][msg.sender] = sub(_allowance[src][msg.sender],amt)
+
+IRs:
+REF_19(mapping(address => uint256)) -> _allowance[src]
+REF_20(uint256) -> REF_19[msg.sender]
+REF_21(mapping(address => uint256)) -> _allowance[src]
+REF_22(uint256) -> REF_21[msg.sender]
+TMP_40(uint256) = INTERNAL_CALL, MockCollateral.sub(uint256,uint256)(REF_22,amt)
+REF_20 (->_allowance) := TMP_40(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+Approval(msg.sender,dst,_allowance[src][msg.sender])
+
+IRs:
+REF_23(mapping(address => uint256)) -> _allowance[src]
+REF_24(uint256) -> REF_23[msg.sender]
+Emit Approval(msg.sender.dst.REF_24)"];
+5->6;
+6[label="Node Type: END_IF 6
+"];
+6->7;
+7[label="Node Type: RETURN 7
+
+EXPRESSION:
+true
+
+IRs:
+RETURN True"];
+}

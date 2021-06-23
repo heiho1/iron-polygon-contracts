@@ -1,0 +1,19 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == admin || msg.sender == owner(),Only admin or owner can trigger this function)
+
+IRs:
+TMP_1570(bool) = msg.sender == admin
+TMP_1571(address) = INTERNAL_CALL, Ownable.owner()()
+TMP_1572(bool) = msg.sender == TMP_1571
+TMP_1573(bool) = TMP_1570 || TMP_1572
+TMP_1574(None) = SOLIDITY_CALL require(bool,string)(TMP_1573,Only admin or owner can trigger this function)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

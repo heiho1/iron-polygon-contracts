@@ -1,0 +1,63 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->6;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+dollar = _dollar
+
+IRs:
+dollar(address) := _dollar(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+share = _share
+
+IRs:
+share(address) := _share(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+collateral = _collateral
+
+IRs:
+collateral(address) := _collateral(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+treasury = _treasury
+
+IRs:
+treasury(address) := _treasury(address)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+missing_decimals = 18 - ERC20(_collateral).decimals()
+
+IRs:
+TMP_612 = CONVERT _collateral to ERC20
+TMP_613(uint8) = HIGH_LEVEL_CALL, dest:TMP_612(ERC20), function:decimals, arguments:[]  
+TMP_614(uint256) = 18 (c)- TMP_613
+missing_decimals(uint256) := TMP_614(uint256)"];
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+7->1;
+}

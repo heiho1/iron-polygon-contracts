@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+ICollateralRatioPolicy(collateralRatioPolicy).target_collateral_ratio()
+
+IRs:
+TMP_919 = CONVERT collateralRatioPolicy to ICollateralRatioPolicy
+TMP_920(uint256) = HIGH_LEVEL_CALL, dest:TMP_919(ICollateralRatioPolicy), function:target_collateral_ratio, arguments:[]  
+RETURN TMP_920"];
+}

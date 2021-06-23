@@ -1,0 +1,20 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+(a / 2) + (b / 2) + (((a % 2) + (b % 2)) / 2)
+
+IRs:
+TMP_2(uint256) = a (c)/ 2
+TMP_3(uint256) = b (c)/ 2
+TMP_4(uint256) = TMP_2 (c)+ TMP_3
+TMP_5(uint256) = a (c)% 2
+TMP_6(uint256) = b (c)% 2
+TMP_7(uint256) = TMP_5 (c)+ TMP_6
+TMP_8(uint256) = TMP_7 (c)/ 2
+TMP_9(uint256) = TMP_4 (c)+ TMP_8
+RETURN TMP_9"];
+}

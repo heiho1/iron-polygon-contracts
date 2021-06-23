@@ -1,0 +1,39 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_8346_PcsPairOracle {
+label = "PcsPairOracle"
+"8346_currentBlockTimestamp" [label="currentBlockTimestamp"]
+"8346_consult" [label="consult"]
+"8346_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"8346_constructor" [label="constructor"]
+"8346_update" [label="update"]
+"8346_currentCumulativePrices" [label="currentCumulativePrices"]
+"8346_setPeriod" [label="setPeriod"]
+"8346_setPeriod" -> "8346_onlyOwner"
+"8346_update" -> "8346_currentCumulativePrices"
+"8346_currentCumulativePrices" -> "8346_currentBlockTimestamp"
+}subgraph cluster_7079_IPairOracle {
+label = "IPairOracle"
+"7079_consult" [label="consult"]
+"7079_update" [label="update"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"8346_update" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+"8346_consult" -> "require(bool,string)"
+"8346_constructor" -> "require(bool,string)"
+}
+}

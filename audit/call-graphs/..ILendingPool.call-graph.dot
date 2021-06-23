@@ -1,0 +1,10 @@
+strict digraph {
+subgraph cluster_9003_ILendingPool {
+label = "ILendingPool"
+"9003_deposit" [label="deposit"]
+"9003_getReserveData" [label="getReserveData"]
+"9003_withdraw" [label="withdraw"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

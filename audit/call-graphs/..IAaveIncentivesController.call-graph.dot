@@ -1,0 +1,11 @@
+strict digraph {
+subgraph cluster_8966_IAaveIncentivesController {
+label = "IAaveIncentivesController"
+"8966_getRewardsBalance" [label="getRewardsBalance"]
+"8966_claimRewards" [label="claimRewards"]
+"8966_getUserUnclaimedRewards" [label="getUserUnclaimedRewards"]
+"8966_REWARD_TOKEN" [label="REWARD_TOKEN"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

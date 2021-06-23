@@ -1,0 +1,29 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_minting_fee <= MINTING_FEE_MAX,>MINTING_FEE_MAX)
+
+IRs:
+TMP_1122(bool) = _minting_fee <= MINTING_FEE_MAX
+TMP_1123(None) = SOLIDITY_CALL require(bool,string)(TMP_1122,>MINTING_FEE_MAX)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+minting_fee = _minting_fee
+
+IRs:
+minting_fee(uint256) := _minting_fee(uint256)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

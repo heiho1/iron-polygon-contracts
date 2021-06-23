@@ -1,0 +1,32 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_reserve = collateralReserve()
+
+IRs:
+TMP_712(address) = INTERNAL_CALL, Pool.collateralReserve()()
+_reserve(address) := TMP_712(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_reserve != address(0),Invalid reserve address)
+
+IRs:
+TMP_713 = CONVERT 0 to address
+TMP_714(bool) = _reserve != TMP_713
+TMP_715(None) = SOLIDITY_CALL require(bool,string)(TMP_714,Invalid reserve address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+IShare(share).poolMint(_reserve,_amount)
+
+IRs:
+TMP_716 = CONVERT share to IShare
+HIGH_LEVEL_CALL, dest:TMP_716(IShare), function:poolMint, arguments:['_reserve', '_amount']  "];
+}

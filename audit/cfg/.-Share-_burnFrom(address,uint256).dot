@@ -1,0 +1,25 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+_burn(account,amount)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._burn(address,uint256)(account,amount)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_approve(account,_msgSender(),_allowances[account][_msgSender()].sub(amount,ERC20: burn amount exceeds allowance))
+
+IRs:
+TMP_821(address) = INTERNAL_CALL, Context._msgSender()()
+REF_290(mapping(address => uint256)) -> _allowances[account]
+TMP_822(address) = INTERNAL_CALL, Context._msgSender()()
+REF_291(uint256) -> REF_290[TMP_822]
+TMP_823(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256,string), arguments:['REF_291', 'amount', 'ERC20: burn amount exceeds allowance'] 
+INTERNAL_CALL, ERC20Custom._approve(address,address,uint256)(account,TMP_821,TMP_823)"];
+}

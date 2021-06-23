@@ -1,0 +1,56 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_price = consult(_token,_refLpPair)
+
+IRs:
+TMP_1337(uint256) = INTERNAL_CALL, SpotPriceGetter.consult(address,address)(_token,_refLpPair)
+_price(uint256) := TMP_1337(uint256)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+_priceFeed = AggregatorV3Interface(_chainlinkPriceFeed)
+
+IRs:
+TMP_1338 = CONVERT _chainlinkPriceFeed to AggregatorV3Interface
+_priceFeed(AggregatorV3Interface) := TMP_1338(AggregatorV3Interface)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+(_priceToUsd) = _priceFeed.latestRoundData()
+
+IRs:
+TUPLE_8(uint80,int256,uint256,uint256,uint80) = HIGH_LEVEL_CALL, dest:_priceFeed(AggregatorV3Interface), function:latestRoundData, arguments:[]  
+_priceToUsd(int256)= UNPACK TUPLE_8 index: 1 "];
+4->5;
+5[label="Node Type: NEW VARIABLE 5
+
+EXPRESSION:
+_decimals = _priceFeed.decimals()
+
+IRs:
+TMP_1339(uint8) = HIGH_LEVEL_CALL, dest:_priceFeed(AggregatorV3Interface), function:decimals, arguments:[]  
+_decimals(uint8) := TMP_1339(uint8)"];
+5->6;
+6[label="Node Type: RETURN 6
+
+EXPRESSION:
+_price.mul(uint256(_priceToUsd)).div(uint256(10) ** _decimals)
+
+IRs:
+TMP_1340 = CONVERT _priceToUsd to uint256
+TMP_1341(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['_price', 'TMP_1340'] 
+TMP_1342 = CONVERT 10 to uint256
+TMP_1343(uint256) = TMP_1342 (c)** _decimals
+TMP_1344(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.div(uint256,uint256), arguments:['TMP_1341', 'TMP_1343'] 
+RETURN TMP_1344"];
+}

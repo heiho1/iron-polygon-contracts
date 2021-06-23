@@ -1,0 +1,41 @@
+strict digraph {
+subgraph cluster_500_MockCollateral {
+label = "MockCollateral"
+"500_symbol" [label="symbol"]
+"500_burn" [label="burn"]
+"500_balanceOf" [label="balanceOf"]
+"500_add" [label="add"]
+"500_totalSupply" [label="totalSupply"]
+"500_sub" [label="sub"]
+"500__push" [label="_push"]
+"500__mint" [label="_mint"]
+"500_constructor" [label="constructor"]
+"500_allowance" [label="allowance"]
+"500_decimals" [label="decimals"]
+"500_transferFrom" [label="transferFrom"]
+"500_approve" [label="approve"]
+"500__move" [label="_move"]
+"500_mint" [label="mint"]
+"500__pull" [label="_pull"]
+"500_transfer" [label="transfer"]
+"500_name" [label="name"]
+"500__move" -> "500_add"
+"500_transferFrom" -> "500__move"
+"500__push" -> "500__move"
+"500__move" -> "500_sub"
+"500_transfer" -> "500__move"
+"500_burn" -> "500_sub"
+"500__mint" -> "500_add"
+"500_mint" -> "500__mint"
+"500__pull" -> "500__move"
+"500_transferFrom" -> "500_sub"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"500__move" -> "require(bool,string)"
+"500_add" -> "require(bool,string)"
+"500_transferFrom" -> "require(bool,string)"
+"500_sub" -> "require(bool,string)"
+"500_burn" -> "require(bool,string)"
+}
+}

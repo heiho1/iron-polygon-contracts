@@ -1,0 +1,15 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+uq112x112(uint224(x) << RESOLUTION)
+
+IRs:
+TMP_1268 = CONVERT x to uint224
+TMP_1269(uint224) = TMP_1268 << RESOLUTION
+TMP_1270 = new uq112x112(TMP_1269)
+RETURN TMP_1270"];
+}

@@ -1,0 +1,28 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+share = _share
+
+IRs:
+share(address) := _share(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+chainlinkToUsd = _chainlinkToUsd
+
+IRs:
+chainlinkToUsd(address) := _chainlinkToUsd(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+oracleShare = _oracleShare
+
+IRs:
+oracleShare(address) := _oracleShare(address)"];
+}

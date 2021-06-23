@@ -1,0 +1,69 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->7;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(collateralReserve != address(0),No collateral reserve defined)
+
+IRs:
+TMP_1505 = CONVERT 0 to address
+TMP_1506(bool) = collateralReserve != TMP_1505
+TMP_1507(None) = SOLIDITY_CALL require(bool,string)(TMP_1506,No collateral reserve defined)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+_incentiveBalance = IERC20(wmatic).balanceOf(address(this))
+
+IRs:
+TMP_1508 = CONVERT wmatic to IERC20
+TMP_1509 = CONVERT this to address
+TMP_1510(uint256) = HIGH_LEVEL_CALL, dest:TMP_1508(IERC20), function:balanceOf, arguments:['TMP_1509']  
+_incentiveBalance(uint256) := TMP_1510(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_swap(wmatic,usdc,_incentiveBalance)
+
+IRs:
+INTERNAL_CALL, VaultController._swap(address,address,uint256)(wmatic,usdc,_incentiveBalance)"];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+
+EXPRESSION:
+_collateralBalance = IERC20(usdc).balanceOf(address(this))
+
+IRs:
+TMP_1512 = CONVERT usdc to IERC20
+TMP_1513 = CONVERT this to address
+TMP_1514(uint256) = HIGH_LEVEL_CALL, dest:TMP_1512(IERC20), function:balanceOf, arguments:['TMP_1513']  
+_collateralBalance(uint256) := TMP_1514(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+IERC20(usdc).safeTransfer(collateralReserve,_collateralBalance)
+
+IRs:
+TMP_1515 = CONVERT usdc to IERC20
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['TMP_1515', 'collateralReserve', '_collateralBalance'] "];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+TreasuryHarvested(usdc,_collateralBalance)
+
+IRs:
+Emit TreasuryHarvested(usdc._collateralBalance)"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyAdmin()
+
+IRs:
+MODIFIER_CALL, VaultController.onlyAdmin()()"];
+7->1;
+}

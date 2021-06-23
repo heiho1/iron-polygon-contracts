@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+(unclaimed_pool_collateral,unclaimed_pool_share,getCollateralPrice(),mint_paused,redeem_paused)
+
+IRs:
+TMP_617(uint256) = INTERNAL_CALL, Pool.getCollateralPrice()()
+RETURN unclaimed_pool_collateral,unclaimed_pool_share,TMP_617,mint_paused,redeem_paused"];
+}

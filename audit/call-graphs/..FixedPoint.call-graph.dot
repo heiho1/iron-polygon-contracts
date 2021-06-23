@@ -1,0 +1,22 @@
+strict digraph {
+subgraph cluster_7587_FixedPoint {
+label = "FixedPoint"
+"7587_mul" [label="mul"]
+"7587_encode144" [label="encode144"]
+"7587_fraction" [label="fraction"]
+"7587_sqrt" [label="sqrt"]
+"7587_decode" [label="decode"]
+"7587_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"7587_encode" [label="encode"]
+"7587_reciprocal" [label="reciprocal"]
+"7587_div" [label="div"]
+"7587_decode144" [label="decode144"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"7587_mul" -> "require(bool,string)"
+"7587_fraction" -> "require(bool,string)"
+"7587_div" -> "require(bool,string)"
+"7587_reciprocal" -> "require(bool,string)"
+}
+}

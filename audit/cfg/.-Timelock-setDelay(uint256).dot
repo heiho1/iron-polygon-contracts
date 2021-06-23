@@ -1,0 +1,48 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == address(this),Timelock::setDelay: Call must come from Timelock.)
+
+IRs:
+TMP_4 = CONVERT this to address
+TMP_5(bool) = msg.sender == TMP_4
+TMP_6(None) = SOLIDITY_CALL require(bool,string)(TMP_5,Timelock::setDelay: Call must come from Timelock.)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(delay_ >= MINIMUM_DELAY,Timelock::setDelay: Delay must exceed minimum delay.)
+
+IRs:
+TMP_7(bool) = delay_ >= MINIMUM_DELAY
+TMP_8(None) = SOLIDITY_CALL require(bool,string)(TMP_7,Timelock::setDelay: Delay must exceed minimum delay.)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+require(bool,string)(delay_ <= MAXIMUM_DELAY,Timelock::setDelay: Delay must not exceed maximum delay.)
+
+IRs:
+TMP_9(bool) = delay_ <= MAXIMUM_DELAY
+TMP_10(None) = SOLIDITY_CALL require(bool,string)(TMP_9,Timelock::setDelay: Delay must not exceed maximum delay.)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+delay = delay_
+
+IRs:
+delay(uint256) := delay_(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+NewDelay(delay)
+
+IRs:
+Emit NewDelay(delay)"];
+}

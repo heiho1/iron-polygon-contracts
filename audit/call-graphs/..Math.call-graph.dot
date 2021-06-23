@@ -1,0 +1,11 @@
+strict digraph {
+subgraph cluster_128_Math {
+label = "Math"
+"128_average" [label="average"]
+"128_max" [label="max"]
+"128_min" [label="min"]
+"128_sqrt" [label="sqrt"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

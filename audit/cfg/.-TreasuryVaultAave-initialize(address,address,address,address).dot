@@ -1,0 +1,65 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->6;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+asset = IERC20(_asset)
+
+IRs:
+TMP_1587 = CONVERT _asset to IERC20
+asset(IERC20) := TMP_1587(IERC20)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+treasury = _treasury
+
+IRs:
+treasury(address) := _treasury(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+AaveLendingPool = ILendingPool(_aaveLendingPool)
+
+IRs:
+TMP_1588 = CONVERT _aaveLendingPool to ILendingPool
+AaveLendingPool(ILendingPool) := TMP_1588(ILendingPool)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+AaveIncentivesController = IAaveIncentivesController(_aaveIncentivesController)
+
+IRs:
+TMP_1589 = CONVERT _aaveIncentivesController to IAaveIncentivesController
+AaveIncentivesController(IAaveIncentivesController) := TMP_1589(IAaveIncentivesController)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+aToken = IERC20(_getATokenAddress(_asset))
+
+IRs:
+TMP_1590(address) = INTERNAL_CALL, TreasuryVaultAave._getATokenAddress(address)(_asset)
+TMP_1591 = CONVERT TMP_1590 to IERC20
+aToken(IERC20) := TMP_1591(IERC20)"];
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+7->1;
+}

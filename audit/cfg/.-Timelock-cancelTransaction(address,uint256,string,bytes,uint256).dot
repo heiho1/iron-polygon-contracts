@@ -1,0 +1,40 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == admin,Timelock::cancelTransaction: Call must come from admin.)
+
+IRs:
+TMP_29(bool) = msg.sender == admin
+TMP_30(None) = SOLIDITY_CALL require(bool,string)(TMP_29,Timelock::cancelTransaction: Call must come from admin.)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+txHash = keccak256(bytes)(abi.encode(target,value,signature,data,eta))
+
+IRs:
+TMP_31(bytes) = SOLIDITY_CALL abi.encode()(target,value,signature,data,eta)
+TMP_32(bytes32) = SOLIDITY_CALL keccak256(bytes)(TMP_31)
+txHash(bytes32) := TMP_32(bytes32)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+queuedTransactions[txHash] = false
+
+IRs:
+REF_3(bool) -> queuedTransactions[txHash]
+REF_3 (->queuedTransactions) := False(bool)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+CancelTransaction(txHash,target,value,signature,data,eta)
+
+IRs:
+Emit CancelTransaction(txHash.target.value.signature.data.eta)"];
+}

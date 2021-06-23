@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_oracleDollar != address(0),invalidAddress)
+
+IRs:
+TMP_1003 = CONVERT 0 to address
+TMP_1004(bool) = _oracleDollar != TMP_1003
+TMP_1005(None) = SOLIDITY_CALL require(bool,string)(TMP_1004,invalidAddress)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+oracleDollar = _oracleDollar
+
+IRs:
+oracleDollar(address) := _oracleDollar(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

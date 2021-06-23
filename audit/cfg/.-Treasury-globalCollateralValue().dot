@@ -1,0 +1,18 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+(globalCollateralBalance() * collateralPrice() * (10 ** missing_decimals)) / PRICE_PRECISION
+
+IRs:
+TMP_940(uint256) = INTERNAL_CALL, Treasury.globalCollateralBalance()()
+TMP_941(uint256) = INTERNAL_CALL, Treasury.collateralPrice()()
+TMP_942(uint256) = TMP_940 (c)* TMP_941
+TMP_943(uint256) = 10 (c)** missing_decimals
+TMP_944(uint256) = TMP_942 (c)* TMP_943
+TMP_945(uint256) = TMP_944 (c)/ PRICE_PRECISION
+RETURN TMP_945"];
+}

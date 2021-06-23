@@ -1,0 +1,104 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->11;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_dollar != address(0),invalidAddress)
+
+IRs:
+TMP_898 = CONVERT 0 to address
+TMP_899(bool) = _dollar != TMP_898
+TMP_900(None) = SOLIDITY_CALL require(bool,string)(TMP_899,invalidAddress)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_share != address(0),invalidAddress)
+
+IRs:
+TMP_901 = CONVERT 0 to address
+TMP_902(bool) = _share != TMP_901
+TMP_903(None) = SOLIDITY_CALL require(bool,string)(TMP_902,invalidAddress)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+dollar = _dollar
+
+IRs:
+dollar(address) := _dollar(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+share = _share
+
+IRs:
+share(address) := _share(address)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+setCollateralAddress(_collateral)
+
+IRs:
+INTERNAL_CALL, Treasury.setCollateralAddress(address)(_collateral)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+setTreasuryPolicy(_treasuryPolicy)
+
+IRs:
+INTERNAL_CALL, Treasury.setTreasuryPolicy(address)(_treasuryPolicy)"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+setCollateralRatioPolicy(_collateralRatioPolicy)
+
+IRs:
+INTERNAL_CALL, Treasury.setCollateralRatioPolicy(address)(_collateralRatioPolicy)"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+setCollateralReserve(_collateralReserve)
+
+IRs:
+INTERNAL_CALL, Treasury.setCollateralReserve(address)(_collateralReserve)"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+setProfitSharingFund(_profitSharingFund)
+
+IRs:
+INTERNAL_CALL, Treasury.setProfitSharingFund(address)(_profitSharingFund)"];
+9->10;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+setProfitController(_profitController)
+
+IRs:
+INTERNAL_CALL, Treasury.setProfitController(address)(_profitController)"];
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+11->12;
+12[label="Node Type: EXPRESSION 12
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+12->1;
+}

@@ -1,0 +1,36 @@
+strict digraph {
+subgraph cluster_7017_ICollateralReserve {
+label = "ICollateralReserve"
+"7017_transferTo" [label="transferTo"]
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_2273_CollateralReserve {
+label = "CollateralReserve"
+"2273_setTreasury" [label="setTreasury"]
+"2273_transferTo" [label="transferTo"]
+"2273_fundBalance" [label="fundBalance"]
+"2273_initialize" [label="initialize"]
+"2273_transferTo" -> "2273_onlyTreasury"
+"2273_initialize" -> "2273_onlyOwner"
+"2273_setTreasury" -> "2273_onlyOwner"
+"2273_initialize" -> "2273_initializer"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"2273_initialize" -> "require(bool,string)"
+"2273_setTreasury" -> "require(bool,string)"
+"2273_transferTo" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+}
+}

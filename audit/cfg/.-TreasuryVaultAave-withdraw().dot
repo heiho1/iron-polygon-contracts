@@ -1,0 +1,97 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->11;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+AaveLendingPool.withdraw(address(asset),balanceOfAToken(),address(this))
+
+IRs:
+TMP_1609 = CONVERT asset to address
+TMP_1610(uint256) = INTERNAL_CALL, TreasuryVaultAave.balanceOfAToken()()
+TMP_1611 = CONVERT this to address
+TMP_1612(uint256) = HIGH_LEVEL_CALL, dest:AaveLendingPool(ILendingPool), function:withdraw, arguments:['TMP_1609', 'TMP_1610', 'TMP_1611']  "];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+newBalance = asset.balanceOf(address(this))
+
+IRs:
+TMP_1613 = CONVERT this to address
+TMP_1614(uint256) = HIGH_LEVEL_CALL, dest:asset(IERC20), function:balanceOf, arguments:['TMP_1613']  
+newBalance(uint256) := TMP_1614(uint256)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+profit = 0
+
+IRs:
+profit(uint256) := 0(uint256)"];
+3->4;
+4[label="Node Type: IF 4
+
+EXPRESSION:
+newBalance > vaultBalance
+
+IRs:
+TMP_1615(bool) = newBalance > vaultBalance
+CONDITION TMP_1615"];
+4->5[label="True"];
+4->6[label="False"];
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+profit = newBalance - vaultBalance
+
+IRs:
+TMP_1616(uint256) = newBalance (c)- vaultBalance
+profit(uint256) := TMP_1616(uint256)"];
+5->6;
+6[label="Node Type: END_IF 6
+"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+asset.safeTransfer(treasury,newBalance)
+
+IRs:
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['asset', 'treasury', 'newBalance'] "];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+vaultBalance = asset.balanceOf(address(this))
+
+IRs:
+TMP_1618 = CONVERT this to address
+TMP_1619(uint256) = HIGH_LEVEL_CALL, dest:asset(IERC20), function:balanceOf, arguments:['TMP_1618']  
+vaultBalance(uint256) := TMP_1619(uint256)"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+Withdrawn(newBalance)
+
+IRs:
+Emit Withdrawn(newBalance)"];
+9->10;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+Profited(profit)
+
+IRs:
+Emit Profited(profit)"];
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+onlyTreasury()
+
+IRs:
+MODIFIER_CALL, TreasuryVaultAave.onlyTreasury()()"];
+11->1;
+}

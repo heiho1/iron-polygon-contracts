@@ -1,0 +1,10 @@
+strict digraph {
+subgraph cluster_7128_IShareTreasuryFund {
+label = "IShareTreasuryFund"
+"7128_claimTreasuryFundRewards" [label="claimTreasuryFundRewards"]
+"7128_setTreasuryFund" [label="setTreasuryFund"]
+"7128_unclaimedTreasuryFund" [label="unclaimedTreasuryFund"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

@@ -1,0 +1,21 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->2;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+IShareTreasuryFund(share).setTreasuryFund(_newFund)
+
+IRs:
+TMP_1078 = CONVERT share to IShareTreasuryFund
+HIGH_LEVEL_CALL, dest:TMP_1078(IShareTreasuryFund), function:setTreasuryFund, arguments:['_newFund']  "];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+2->1;
+}

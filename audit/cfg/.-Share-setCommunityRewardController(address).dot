@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_communityRewardController != address(0),zero)
+
+IRs:
+TMP_849 = CONVERT 0 to address
+TMP_850(bool) = _communityRewardController != TMP_849
+TMP_851(None) = SOLIDITY_CALL require(bool,string)(TMP_850,zero)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+communityRewardController = _communityRewardController
+
+IRs:
+communityRewardController(address) := _communityRewardController(address)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

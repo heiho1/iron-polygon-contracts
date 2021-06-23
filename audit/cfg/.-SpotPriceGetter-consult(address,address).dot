@@ -1,0 +1,144 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_lpPair = IUniswapLP(_refLpPair)
+
+IRs:
+TMP_1311 = CONVERT _refLpPair to IUniswapLP
+_lpPair(IUniswapLP) := TMP_1311(IUniswapLP)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+_token0 = _lpPair.token0()
+
+IRs:
+TMP_1312(address) = HIGH_LEVEL_CALL, dest:_lpPair(IUniswapLP), function:token0, arguments:[]  
+_token0(address) := TMP_1312(address)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+_token1 = _lpPair.token1()
+
+IRs:
+TMP_1313(address) = HIGH_LEVEL_CALL, dest:_lpPair(IUniswapLP), function:token1, arguments:[]  
+_token1(address) := TMP_1313(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool,string)(_token0 == _token || _token1 == _token,Invalid pair)
+
+IRs:
+TMP_1314(bool) = _token0 == _token
+TMP_1315(bool) = _token1 == _token
+TMP_1316(bool) = TMP_1314 || TMP_1315
+TMP_1317(None) = SOLIDITY_CALL require(bool,string)(TMP_1316,Invalid pair)"];
+4->5;
+5[label="Node Type: NEW VARIABLE 5
+"];
+5->6;
+6[label="Node Type: NEW VARIABLE 6
+"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+(_reserve0,_reserve1) = _lpPair.getReserves()
+
+IRs:
+TUPLE_7(uint112,uint112,uint32) = HIGH_LEVEL_CALL, dest:_lpPair(IUniswapLP), function:getReserves, arguments:[]  
+_reserve0(uint256)= UNPACK TUPLE_7 index: 0 
+_reserve1(uint256)= UNPACK TUPLE_7 index: 1 "];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+require(bool,string)(_reserve0 > 0 && _reserve1 > 0,No reserves)
+
+IRs:
+TMP_1318(bool) = _reserve0 > 0
+TMP_1319(bool) = _reserve1 > 0
+TMP_1320(bool) = TMP_1318 && TMP_1319
+TMP_1321(None) = SOLIDITY_CALL require(bool,string)(TMP_1320,No reserves)"];
+8->9;
+9[label="Node Type: NEW VARIABLE 9
+
+EXPRESSION:
+_token0MissingDecimals = 18 - (ERC20(_token0).decimals())
+
+IRs:
+TMP_1322 = CONVERT _token0 to ERC20
+TMP_1323(uint8) = HIGH_LEVEL_CALL, dest:TMP_1322(ERC20), function:decimals, arguments:[]  
+TMP_1324(uint256) = 18 (c)- TMP_1323
+_token0MissingDecimals(uint8) := TMP_1324(uint256)"];
+9->10;
+10[label="Node Type: NEW VARIABLE 10
+
+EXPRESSION:
+_token1MissingDecimals = 18 - (ERC20(_token1).decimals())
+
+IRs:
+TMP_1325 = CONVERT _token1 to ERC20
+TMP_1326(uint8) = HIGH_LEVEL_CALL, dest:TMP_1325(ERC20), function:decimals, arguments:[]  
+TMP_1327(uint256) = 18 (c)- TMP_1326
+_token1MissingDecimals(uint8) := TMP_1327(uint256)"];
+10->11;
+11[label="Node Type: NEW VARIABLE 11
+
+EXPRESSION:
+_price = 0
+
+IRs:
+_price(uint256) := 0(uint256)"];
+11->12;
+12[label="Node Type: IF 12
+
+EXPRESSION:
+_token == _token0
+
+IRs:
+TMP_1328(bool) = _token == _token0
+CONDITION TMP_1328"];
+12->13[label="True"];
+12->14[label="False"];
+13[label="Node Type: EXPRESSION 13
+
+EXPRESSION:
+_price = _reserve1.mul(10 ** _token1MissingDecimals).mul(PRICE_PRECISION).div(_reserve0)
+
+IRs:
+TMP_1329(uint256) = 10 (c)** _token1MissingDecimals
+TMP_1330(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['_reserve1', 'TMP_1329'] 
+TMP_1331(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['TMP_1330', 'PRICE_PRECISION'] 
+TMP_1332(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.div(uint256,uint256), arguments:['TMP_1331', '_reserve0'] 
+_price(uint256) := TMP_1332(uint256)"];
+13->15;
+14[label="Node Type: EXPRESSION 14
+
+EXPRESSION:
+_price = _reserve0.mul(10 ** _token0MissingDecimals).mul(PRICE_PRECISION).div(_reserve1)
+
+IRs:
+TMP_1333(uint256) = 10 (c)** _token0MissingDecimals
+TMP_1334(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['_reserve0', 'TMP_1333'] 
+TMP_1335(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['TMP_1334', 'PRICE_PRECISION'] 
+TMP_1336(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.div(uint256,uint256), arguments:['TMP_1335', '_reserve1'] 
+_price(uint256) := TMP_1336(uint256)"];
+14->15;
+15[label="Node Type: END_IF 15
+"];
+15->16;
+16[label="Node Type: RETURN 16
+
+EXPRESSION:
+_price
+
+IRs:
+RETURN _price"];
+}

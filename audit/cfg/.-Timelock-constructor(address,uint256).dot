@@ -1,0 +1,38 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(delay_ >= MINIMUM_DELAY,Timelock::constructor: Delay must exceed minimum delay.)
+
+IRs:
+TMP_0(bool) = delay_ >= MINIMUM_DELAY
+TMP_1(None) = SOLIDITY_CALL require(bool,string)(TMP_0,Timelock::constructor: Delay must exceed minimum delay.)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(delay_ <= MAXIMUM_DELAY,Timelock::setDelay: Delay must not exceed maximum delay.)
+
+IRs:
+TMP_2(bool) = delay_ <= MAXIMUM_DELAY
+TMP_3(None) = SOLIDITY_CALL require(bool,string)(TMP_2,Timelock::setDelay: Delay must not exceed maximum delay.)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+admin = admin_
+
+IRs:
+admin(address) := admin_(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+delay = delay_
+
+IRs:
+delay(uint256) := delay_(uint256)"];
+}

@@ -1,0 +1,67 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->7;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_receiver != address(0),Invalid address)
+
+IRs:
+TMP_293 = CONVERT 0 to address
+TMP_294(bool) = _receiver != TMP_293
+TMP_295(None) = SOLIDITY_CALL require(bool,string)(TMP_294,Invalid address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(pools[msg.sender] == _token,Invalid request token)
+
+IRs:
+REF_59(address) -> pools[msg.sender]
+TMP_296(bool) = REF_59 == _token
+TMP_297(None) = SOLIDITY_CALL require(bool,string)(TMP_296,Invalid request token)"];
+2->3;
+3[label="Node Type: IF 3
+
+EXPRESSION:
+_amount > 0
+
+IRs:
+TMP_298(bool) = _amount > 0
+CONDITION TMP_298"];
+3->4[label="True"];
+3->6[label="False"];
+4[label="Node Type: NEW VARIABLE 4
+
+EXPRESSION:
+missing_decimals = 18 - ERC20(_token).decimals()
+
+IRs:
+TMP_299 = CONVERT _token to ERC20
+TMP_300(uint8) = HIGH_LEVEL_CALL, dest:TMP_299(ERC20), function:decimals, arguments:[]  
+TMP_301(uint256) = 18 (c)- TMP_300
+missing_decimals(uint8) := TMP_301(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+IERC20(_token).safeTransfer(_receiver,_amount.div(10 ** missing_decimals))
+
+IRs:
+TMP_302 = CONVERT _token to IERC20
+TMP_303(uint256) = 10 (c)** missing_decimals
+TMP_304(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.div(uint256,uint256), arguments:['_amount', 'TMP_303'] 
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['TMP_302', '_receiver', 'TMP_304'] "];
+5->6;
+6[label="Node Type: END_IF 6
+"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyPools()
+
+IRs:
+MODIFIER_CALL, ConsolidatedFund.onlyPools()()"];
+7->1;
+}

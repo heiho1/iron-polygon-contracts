@@ -1,0 +1,15 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+uint144(self._x >> RESOLUTION)
+
+IRs:
+REF_350(uint256) -> self._x
+TMP_1296(uint256) = REF_350 >> RESOLUTION
+TMP_1297 = CONVERT TMP_1296 to uint144
+RETURN TMP_1297"];
+}

@@ -1,0 +1,52 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->5;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+treasury = _treasury
+
+IRs:
+treasury(address) := _treasury(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+setMintingFee(_minting_fee)
+
+IRs:
+INTERNAL_CALL, TreasuryPolicy.setMintingFee(uint256)(_minting_fee)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+setRedemptionFee(_redemption_fee)
+
+IRs:
+INTERNAL_CALL, TreasuryPolicy.setRedemptionFee(uint256)(_redemption_fee)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+setExcessCollateralSafetyMargin(_excess_collateral_safety_margin)
+
+IRs:
+INTERNAL_CALL, TreasuryPolicy.setExcessCollateralSafetyMargin(uint256)(_excess_collateral_safety_margin)"];
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+6->1;
+}

@@ -1,0 +1,46 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_priceFeed = AggregatorV3Interface(chainlinkCollateralUsd)
+
+IRs:
+TMP_1362 = CONVERT chainlinkCollateralUsd to AggregatorV3Interface
+_priceFeed(AggregatorV3Interface) := TMP_1362(AggregatorV3Interface)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+(_price) = _priceFeed.latestRoundData()
+
+IRs:
+TUPLE_9(uint80,int256,uint256,uint256,uint80) = HIGH_LEVEL_CALL, dest:_priceFeed(AggregatorV3Interface), function:latestRoundData, arguments:[]  
+_price(int256)= UNPACK TUPLE_9 index: 1 "];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+
+EXPRESSION:
+_decimals = _priceFeed.decimals()
+
+IRs:
+TMP_1363(uint8) = HIGH_LEVEL_CALL, dest:_priceFeed(AggregatorV3Interface), function:decimals, arguments:[]  
+_decimals(uint8) := TMP_1363(uint8)"];
+4->5;
+5[label="Node Type: RETURN 5
+
+EXPRESSION:
+(uint256(_price) * PRICE_PRECISION) / (10 ** _decimals)
+
+IRs:
+TMP_1364 = CONVERT _price to uint256
+TMP_1365(uint256) = TMP_1364 (c)* PRICE_PRECISION
+TMP_1366(uint256) = 10 (c)** _decimals
+TMP_1367(uint256) = TMP_1365 (c)/ TMP_1366
+RETURN TMP_1367"];
+}

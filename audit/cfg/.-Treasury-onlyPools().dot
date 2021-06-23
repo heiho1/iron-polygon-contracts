@@ -1,0 +1,16 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(pools[msg.sender],Only pools can use this function)
+
+IRs:
+REF_322(bool) -> pools[msg.sender]
+TMP_1044(None) = SOLIDITY_CALL require(bool,string)(REF_322,Only pools can use this function)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

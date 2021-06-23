@@ -1,0 +1,9 @@
+strict digraph {
+subgraph cluster_14_IMasterChefFund {
+label = "IMasterChefFund"
+"14_transferTo" [label="transferTo"]
+"14_balance" [label="balance"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

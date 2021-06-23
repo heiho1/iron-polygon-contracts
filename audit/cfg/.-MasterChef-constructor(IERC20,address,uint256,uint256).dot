@@ -1,0 +1,36 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+rewardToken = _rewardToken
+
+IRs:
+rewardToken(IERC20) := _rewardToken(IERC20)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+rewardPerBlock = _rewardPerBlock
+
+IRs:
+rewardPerBlock(uint256) := _rewardPerBlock(uint256)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+startBlock = _startBlock
+
+IRs:
+startBlock(uint256) := _startBlock(uint256)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+fund = _fund
+
+IRs:
+fund(address) := _fund(address)"];
+}

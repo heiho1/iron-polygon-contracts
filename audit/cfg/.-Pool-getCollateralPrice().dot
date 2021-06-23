@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+IOracle(oracle).consult()
+
+IRs:
+TMP_620 = CONVERT oracle to IOracle
+TMP_621(uint256) = HIGH_LEVEL_CALL, dest:TMP_620(IOracle), function:consult, arguments:[]  
+RETURN TMP_621"];
+}

@@ -1,0 +1,85 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_pair = IUniswapLP(pairAddress)
+
+IRs:
+TMP_1411 = CONVERT pairAddress to IUniswapLP
+_pair(IUniswapLP) := TMP_1411(IUniswapLP)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+pair = _pair
+
+IRs:
+pair(IUniswapLP) := _pair(IUniswapLP)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+token0 = _pair.token0()
+
+IRs:
+TMP_1412(address) = HIGH_LEVEL_CALL, dest:_pair(IUniswapLP), function:token0, arguments:[]  
+token0(address) := TMP_1412(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+token1 = _pair.token1()
+
+IRs:
+TMP_1413(address) = HIGH_LEVEL_CALL, dest:_pair(IUniswapLP), function:token1, arguments:[]  
+token1(address) := TMP_1413(address)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+price0CumulativeLast = _pair.price0CumulativeLast()
+
+IRs:
+TMP_1414(uint256) = HIGH_LEVEL_CALL, dest:_pair(IUniswapLP), function:price0CumulativeLast, arguments:[]  
+price0CumulativeLast(uint256) := TMP_1414(uint256)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+price1CumulativeLast = _pair.price1CumulativeLast()
+
+IRs:
+TMP_1415(uint256) = HIGH_LEVEL_CALL, dest:_pair(IUniswapLP), function:price1CumulativeLast, arguments:[]  
+price1CumulativeLast(uint256) := TMP_1415(uint256)"];
+6->7;
+7[label="Node Type: NEW VARIABLE 7
+"];
+7->8;
+8[label="Node Type: NEW VARIABLE 8
+"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+(reserve0,reserve1,blockTimestampLast) = _pair.getReserves()
+
+IRs:
+TUPLE_10(uint112,uint112,uint32) = HIGH_LEVEL_CALL, dest:_pair(IUniswapLP), function:getReserves, arguments:[]  
+reserve0(uint112)= UNPACK TUPLE_10 index: 0 
+reserve1(uint112)= UNPACK TUPLE_10 index: 1 
+blockTimestampLast(uint32)= UNPACK TUPLE_10 index: 2 "];
+9->10;
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+require(bool,string)(reserve0 != 0 && reserve1 != 0,PairOracle: NO_RESERVES)
+
+IRs:
+TMP_1416(bool) = reserve0 != 0
+TMP_1417(bool) = reserve1 != 0
+TMP_1418(bool) = TMP_1416 && TMP_1417
+TMP_1419(None) = SOLIDITY_CALL require(bool,string)(TMP_1418,PairOracle: NO_RESERVES)"];
+}

@@ -1,0 +1,68 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: IF 1
+
+EXPRESSION:
+_inputAmount == 0
+
+IRs:
+TMP_1519(bool) = _inputAmount == 0
+CONDITION TMP_1519"];
+1->2[label="True"];
+1->3[label="False"];
+2[label="Node Type: RETURN 2
+"];
+3[label="Node Type: END_IF 3
+"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool,string)(router != address(0),invalid route)
+
+IRs:
+TMP_1520 = CONVERT 0 to address
+TMP_1521(bool) = router != TMP_1520
+TMP_1522(None) = SOLIDITY_CALL require(bool,string)(TMP_1521,invalid route)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+require(bool,string)(swapPath[swapPath.length - 1] == _outputToken,invalid path)
+
+IRs:
+REF_398 -> LENGTH swapPath
+TMP_1523(uint256) = REF_398 (c)- 1
+REF_399(address) -> swapPath[TMP_1523]
+TMP_1524(bool) = REF_399 == _outputToken
+TMP_1525(None) = SOLIDITY_CALL require(bool,string)(TMP_1524,invalid path)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+IERC20(_inputToken).safeApprove(router,0)
+
+IRs:
+TMP_1526 = CONVERT _inputToken to IERC20
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeApprove(IERC20,address,uint256), arguments:['TMP_1526', 'router', '0'] "];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+IERC20(_inputToken).safeApprove(router,_inputAmount)
+
+IRs:
+TMP_1528 = CONVERT _inputToken to IERC20
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeApprove(IERC20,address,uint256), arguments:['TMP_1528', 'router', '_inputAmount'] "];
+7->8;
+8[label="Node Type: NEW VARIABLE 8
+
+EXPRESSION:
+_swapRouter = IUniswapV2Router(router)
+
+IRs:
+TMP_1530 = CONVERT router to IUniswapV2Router
+_swapRouter(IUniswapV2Router) := TMP_1530(IUniswapV2Router)"];
+}

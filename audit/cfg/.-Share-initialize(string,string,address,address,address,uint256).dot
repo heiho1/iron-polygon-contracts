@@ -1,0 +1,93 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->10;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+name = _name
+
+IRs:
+name(string) := _name(string)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+symbol = _symbol
+
+IRs:
+symbol(string) := _symbol(string)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+treasury = _treasury
+
+IRs:
+treasury(address) := _treasury(address)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+treasuryFund = _treasuryFund
+
+IRs:
+treasuryFund(address) := _treasuryFund(address)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+communityRewardController = _communityRewardController
+
+IRs:
+communityRewardController(address) := _communityRewardController(address)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+startTime = _startTime
+
+IRs:
+startTime(uint256) := _startTime(uint256)"];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+endTime = _startTime + TREASURY_FUND_VESTING_DURATION
+
+IRs:
+TMP_825(uint256) = _startTime (c)+ TREASURY_FUND_VESTING_DURATION
+endTime(uint256) := TMP_825(uint256)"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+treasuryFundLastClaimed = _startTime
+
+IRs:
+treasuryFundLastClaimed(uint256) := _startTime(uint256)"];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+_mint(msg.sender,genesis_supply)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._mint(address,uint256)(msg.sender,genesis_supply)"];
+10[label="Node Type: EXPRESSION 10
+
+EXPRESSION:
+initializer()
+
+IRs:
+MODIFIER_CALL, Initializable.initializer()()"];
+10->11;
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+11->1;
+}

@@ -1,0 +1,21 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+(dollarPrice(),sharePrice(),IERC20(dollar).totalSupply(),target_collateral_ratio(),effective_collateral_ratio(),globalCollateralValue(),minting_fee(),redemption_fee())
+
+IRs:
+TMP_927(uint256) = INTERNAL_CALL, Treasury.dollarPrice()()
+TMP_928(uint256) = INTERNAL_CALL, Treasury.sharePrice()()
+TMP_929 = CONVERT dollar to IERC20
+TMP_930(uint256) = HIGH_LEVEL_CALL, dest:TMP_929(IERC20), function:totalSupply, arguments:[]  
+TMP_931(uint256) = INTERNAL_CALL, Treasury.target_collateral_ratio()()
+TMP_932(uint256) = INTERNAL_CALL, Treasury.effective_collateral_ratio()()
+TMP_933(uint256) = INTERNAL_CALL, Treasury.globalCollateralValue()()
+TMP_934(uint256) = INTERNAL_CALL, Treasury.minting_fee()()
+TMP_935(uint256) = INTERNAL_CALL, Treasury.redemption_fee()()
+RETURN TMP_927,TMP_928,TMP_930,TMP_931,TMP_932,TMP_933,TMP_934,TMP_935"];
+}

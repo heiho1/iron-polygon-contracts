@@ -1,0 +1,9 @@
+strict digraph {
+subgraph cluster_7036_IConsolidatedFund {
+label = "IConsolidatedFund"
+"7036_transferTo" [label="transferTo"]
+"7036_balance" [label="balance"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

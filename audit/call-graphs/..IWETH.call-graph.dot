@@ -1,0 +1,11 @@
+strict digraph {
+subgraph cluster_30_IWETH {
+label = "IWETH"
+"30_deposit" [label="deposit"]
+"30_withdraw" [label="withdraw"]
+"30_transfer" [label="transfer"]
+"30_transferFrom" [label="transferFrom"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

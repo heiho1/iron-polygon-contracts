@@ -1,0 +1,62 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(sender != address(0),ERC20: transfer from the zero address)
+
+IRs:
+TMP_453 = CONVERT 0 to address
+TMP_454(bool) = sender != TMP_453
+TMP_455(None) = SOLIDITY_CALL require(bool,string)(TMP_454,ERC20: transfer from the zero address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(recipient != address(0),ERC20: transfer to the zero address)
+
+IRs:
+TMP_456 = CONVERT 0 to address
+TMP_457(bool) = recipient != TMP_456
+TMP_458(None) = SOLIDITY_CALL require(bool,string)(TMP_457,ERC20: transfer to the zero address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_beforeTokenTransfer(sender,recipient,amount)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._beforeTokenTransfer(address,address,uint256)(sender,recipient,amount)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+_balances[sender] = _balances[sender].sub(amount,ERC20: transfer amount exceeds balance)
+
+IRs:
+REF_115(uint256) -> _balances[sender]
+REF_116(uint256) -> _balances[sender]
+TMP_460(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256,string), arguments:['REF_116', 'amount', 'ERC20: transfer amount exceeds balance'] 
+REF_115 (->_balances) := TMP_460(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+_balances[recipient] = _balances[recipient].add(amount)
+
+IRs:
+REF_118(uint256) -> _balances[recipient]
+REF_119(uint256) -> _balances[recipient]
+TMP_461(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['REF_119', 'amount'] 
+REF_118 (->_balances) := TMP_461(uint256)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+Transfer(sender,recipient,amount)
+
+IRs:
+Emit Transfer(sender.recipient.amount)"];
+}

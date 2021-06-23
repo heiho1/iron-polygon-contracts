@@ -1,0 +1,17 @@
+digraph{
+0[label="Node Type: OTHER_ENTRYPOINT 0
+
+EXPRESSION:
+collateral_ratio_paused = false
+
+IRs:
+collateral_ratio_paused(bool) := False(bool)"];
+0->1;
+1[label="Node Type: OTHER_ENTRYPOINT 1
+
+EXPRESSION:
+using_effective_collateral_ratio = true
+
+IRs:
+using_effective_collateral_ratio(bool) := True(bool)"];
+}

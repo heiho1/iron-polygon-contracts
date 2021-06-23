@@ -1,0 +1,41 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_collateral != address(0),invalidAddress)
+
+IRs:
+TMP_1015 = CONVERT 0 to address
+TMP_1016(bool) = _collateral != TMP_1015
+TMP_1017(None) = SOLIDITY_CALL require(bool,string)(TMP_1016,invalidAddress)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+collateral = _collateral
+
+IRs:
+collateral(address) := _collateral(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+missing_decimals = 18 - ERC20(_collateral).decimals()
+
+IRs:
+TMP_1018 = CONVERT _collateral to ERC20
+TMP_1019(uint8) = HIGH_LEVEL_CALL, dest:TMP_1018(ERC20), function:decimals, arguments:[]  
+TMP_1020(uint256) = 18 (c)- TMP_1019
+missing_decimals(uint256) := TMP_1020(uint256)"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+4->1;
+}

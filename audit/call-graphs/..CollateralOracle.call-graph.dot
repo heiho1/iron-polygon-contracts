@@ -1,0 +1,30 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_7898_CollateralOracle {
+label = "CollateralOracle"
+"7898_consult" [label="consult"]
+"7898_constructor" [label="constructor"]
+"7898_setChainlinkCollateralUsd" [label="setChainlinkCollateralUsd"]
+"7898_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"7898_setChainlinkCollateralUsd" -> "7898_onlyOwner"
+}subgraph cluster_7063_IOracle {
+label = "IOracle"
+"7063_consult" [label="consult"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"201_transferOwnership" -> "require(bool,string)"
+}
+}

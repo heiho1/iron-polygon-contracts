@@ -1,0 +1,21 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->2;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+ICollateralReserve(collateralReserve).transferTo(_token,_receiver,_amount)
+
+IRs:
+TMP_960 = CONVERT collateralReserve to ICollateralReserve
+HIGH_LEVEL_CALL, dest:TMP_960(ICollateralReserve), function:transferTo, arguments:['_token', '_receiver', '_amount']  "];
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+onlyPools()
+
+IRs:
+MODIFIER_CALL, Treasury.onlyPools()()"];
+2->1;
+}

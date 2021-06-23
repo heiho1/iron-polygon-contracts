@@ -1,0 +1,28 @@
+digraph{
+0[label="Node Type: OTHER_ENTRYPOINT 0
+
+EXPRESSION:
+RESOLUTION = 112
+
+IRs:
+RESOLUTION(uint8) := 112(uint256)"];
+0->1;
+1[label="Node Type: OTHER_ENTRYPOINT 1
+
+EXPRESSION:
+Q112 = uint256(1) << RESOLUTION
+
+IRs:
+TMP_1308 = CONVERT 1 to uint256
+TMP_1309(uint256) = TMP_1308 << RESOLUTION
+Q112(uint256) := TMP_1309(uint256)"];
+1->2;
+2[label="Node Type: OTHER_ENTRYPOINT 2
+
+EXPRESSION:
+Q224 = Q112 << RESOLUTION
+
+IRs:
+TMP_1310(uint256) = Q112 << RESOLUTION
+Q224(uint256) := TMP_1310(uint256)"];
+}

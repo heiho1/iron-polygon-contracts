@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+ITreasuryPolicy(treasuryPolicy).minting_fee()
+
+IRs:
+TMP_923 = CONVERT treasuryPolicy to ITreasuryPolicy
+TMP_924(uint256) = HIGH_LEVEL_CALL, dest:TMP_923(ITreasuryPolicy), function:minting_fee, arguments:[]  
+RETURN TMP_924"];
+}

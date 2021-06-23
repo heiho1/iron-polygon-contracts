@@ -48,7 +48,7 @@ contract VaultController is Ownable, Initializable {
 
     function claimIncentiveRewards() external onlyAdmin {
         require(collateralReserve != address(0), "No collateral reserve defined");
-        treasuryVault.claimIncetiveRewards();
+        // treasuryVault.claimIncetiveRewards();
         // swap incentive to collateral
         uint256 _incentiveBalance = IERC20(wmatic).balanceOf(address(this));
         _swap(wmatic, usdc, _incentiveBalance);
@@ -71,16 +71,16 @@ contract VaultController is Ownable, Initializable {
         IERC20(_inputToken).safeApprove(router, _inputAmount);
 
         IUniswapV2Router _swapRouter = IUniswapV2Router(router);
-        uint256[] memory _amounts = _swapRouter.getAmountsOut(_inputAmount, swapPath);
-        uint256 _minAmountOut = (_amounts[_amounts.length - 1] * (RATIO_PRECISION - slippage)) / RATIO_PRECISION;
+        // uint256[] memory _amounts = _swapRouter.getAmountsOut(_inputAmount, swapPath);
+        // uint256 _minAmountOut = (_amounts[_amounts.length - 1] * (RATIO_PRECISION - slippage)) / RATIO_PRECISION;
 
-        _swapRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
-            _inputAmount,
-            _minAmountOut,
-            swapPath,
-            address(this),
-            block.timestamp + swapTimeout
-        );
+        // _swapRouter.swapExactTokensForTokensSupportingFeeOnTransferTokens(
+        //     _inputAmount,
+        //     _minAmountOut,
+        //     swapPath,
+        //     address(this),
+        //     block.timestamp + swapTimeout
+        // );
     }
 
     // ===== OWNERS FUNCTIONS ===============

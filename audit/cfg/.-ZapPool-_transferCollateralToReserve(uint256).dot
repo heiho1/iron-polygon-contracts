@@ -1,0 +1,39 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_reserve = collateralReserve()
+
+IRs:
+TMP_1207(address) = INTERNAL_CALL, ZapPool.collateralReserve()()
+_reserve(address) := TMP_1207(address)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(_reserve != address(0),Invalid reserve address)
+
+IRs:
+TMP_1208 = CONVERT 0 to address
+TMP_1209(bool) = _reserve != TMP_1208
+TMP_1210(None) = SOLIDITY_CALL require(bool,string)(TMP_1209,Invalid reserve address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+collateral.safeTransfer(_reserve,_amount)
+
+IRs:
+LIBRARY_CALL, dest:SafeERC20, function:SafeERC20.safeTransfer(IERC20,address,uint256), arguments:['collateral', '_reserve', '_amount'] "];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+TransferedCollateral(_amount)
+
+IRs:
+Emit TransferedCollateral(_amount)"];
+}

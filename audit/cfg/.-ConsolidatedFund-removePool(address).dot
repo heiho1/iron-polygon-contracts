@@ -1,0 +1,40 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->4;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(pools[pool_address] != address(0),!pool)
+
+IRs:
+REF_65(address) -> pools[pool_address]
+TMP_315 = CONVERT 0 to address
+TMP_316(bool) = REF_65 != TMP_315
+TMP_317(None) = SOLIDITY_CALL require(bool,string)(TMP_316,!pool)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+delete pools[pool_address]
+
+IRs:
+REF_66(address) -> pools[pool_address]
+pools = delete REF_66 "];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+PoolRemoved(pool_address)
+
+IRs:
+Emit PoolRemoved(pool_address)"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+4->1;
+}

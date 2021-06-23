@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+_move(from,address(this),amt)
+
+IRs:
+TMP_13 = CONVERT this to address
+INTERNAL_CALL, MockCollateral._move(address,address,uint256)(from,TMP_13,amt)"];
+}

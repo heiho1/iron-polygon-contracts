@@ -1,0 +1,25 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+_approve(_msgSender(),spender,_allowances[_msgSender()][spender].add(addedValue))
+
+IRs:
+TMP_769(address) = INTERNAL_CALL, Context._msgSender()()
+TMP_770(address) = INTERNAL_CALL, Context._msgSender()()
+REF_267(mapping(address => uint256)) -> _allowances[TMP_770]
+REF_268(uint256) -> REF_267[spender]
+TMP_771(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['REF_268', 'addedValue'] 
+INTERNAL_CALL, ERC20Custom._approve(address,address,uint256)(TMP_769,spender,TMP_771)"];
+1->2;
+2[label="Node Type: RETURN 2
+
+EXPRESSION:
+true
+
+IRs:
+RETURN True"];
+}

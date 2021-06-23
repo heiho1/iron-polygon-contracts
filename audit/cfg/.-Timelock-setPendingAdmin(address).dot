@@ -1,0 +1,30 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == address(this),Timelock::setPendingAdmin: Call must come from Timelock.)
+
+IRs:
+TMP_16 = CONVERT this to address
+TMP_17(bool) = msg.sender == TMP_16
+TMP_18(None) = SOLIDITY_CALL require(bool,string)(TMP_17,Timelock::setPendingAdmin: Call must come from Timelock.)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+pendingAdmin = pendingAdmin_
+
+IRs:
+pendingAdmin(address) := pendingAdmin_(address)"];
+2->3;
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+NewPendingAdmin(pendingAdmin)
+
+IRs:
+Emit NewPendingAdmin(pendingAdmin)"];
+}

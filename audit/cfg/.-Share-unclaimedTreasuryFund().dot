@@ -1,0 +1,63 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: NEW VARIABLE 1
+
+EXPRESSION:
+_now = block.timestamp
+
+IRs:
+_now(uint256) := block.timestamp(uint256)"];
+1->2;
+2[label="Node Type: IF 2
+
+EXPRESSION:
+_now > endTime
+
+IRs:
+TMP_861(bool) = _now > endTime
+CONDITION TMP_861"];
+2->3[label="True"];
+2->4[label="False"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+_now = endTime
+
+IRs:
+_now(uint256) := endTime(uint256)"];
+3->4;
+4[label="Node Type: END_IF 4
+"];
+4->5;
+5[label="Node Type: IF 5
+
+EXPRESSION:
+treasuryFundLastClaimed >= _now
+
+IRs:
+TMP_862(bool) = treasuryFundLastClaimed >= _now
+CONDITION TMP_862"];
+5->6[label="True"];
+5->7[label="False"];
+6[label="Node Type: RETURN 6
+
+EXPRESSION:
+0
+
+IRs:
+RETURN 0"];
+7[label="Node Type: END_IF 7
+"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+_pending = (_now - treasuryFundLastClaimed) * treasuryFundEmissionRate
+
+IRs:
+TMP_863(uint256) = _now (c)- treasuryFundLastClaimed
+TMP_864(uint256) = TMP_863 (c)* treasuryFundEmissionRate
+_pending(uint256) := TMP_864(uint256)"];
+}

@@ -1,0 +1,74 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_initializing || ! _initialized,Initializable: contract is already initialized)
+
+IRs:
+TMP_425 = ! _initialized 
+TMP_426(bool) = _initializing || TMP_425
+TMP_427(None) = SOLIDITY_CALL require(bool,string)(TMP_426,Initializable: contract is already initialized)"];
+1->2;
+2[label="Node Type: NEW VARIABLE 2
+
+EXPRESSION:
+isTopLevelCall = ! _initializing
+
+IRs:
+TMP_428 = ! _initializing 
+isTopLevelCall(bool) := TMP_428(bool)"];
+2->3;
+3[label="Node Type: IF 3
+
+EXPRESSION:
+isTopLevelCall
+
+IRs:
+CONDITION isTopLevelCall"];
+3->4[label="True"];
+3->6[label="False"];
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+_initializing = true
+
+IRs:
+_initializing(bool) := True(bool)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+_initialized = true
+
+IRs:
+_initialized(bool) := True(bool)"];
+5->6;
+6[label="Node Type: END_IF 6
+"];
+6->7;
+7[label="Node Type: _ 7
+"];
+7->8;
+8[label="Node Type: IF 8
+
+EXPRESSION:
+isTopLevelCall
+
+IRs:
+CONDITION isTopLevelCall"];
+8->9[label="True"];
+8->10[label="False"];
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+_initializing = false
+
+IRs:
+_initializing(bool) := False(bool)"];
+9->10;
+10[label="Node Type: END_IF 10
+"];
+}

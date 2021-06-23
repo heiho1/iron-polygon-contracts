@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+(mockPrice * amountIn) / PRICE_PRECISION
+
+IRs:
+TMP_1253(uint256) = mockPrice (c)* amountIn
+TMP_1254(uint256) = TMP_1253 (c)/ PRICE_PRECISION
+RETURN TMP_1254"];
+}

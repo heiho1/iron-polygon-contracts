@@ -1,0 +1,13 @@
+strict digraph {
+subgraph cluster_7777_SpotPriceGetter {
+label = "SpotPriceGetter"
+"7777_consult" [label="consult"]
+"7777_consultToUsdChainlink" [label="consultToUsdChainlink"]
+"7777_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"7777_consultToUsdChainlink" -> "7777_consult"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"7777_consult" -> "require(bool,string)"
+}
+}

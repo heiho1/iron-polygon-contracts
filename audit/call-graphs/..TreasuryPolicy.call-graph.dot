@@ -1,0 +1,46 @@
+strict digraph {
+subgraph cluster_7200_ITreasuryPolicy {
+label = "ITreasuryPolicy"
+"7200_minting_fee" [label="minting_fee"]
+"7200_excess_collateral_safety_margin" [label="excess_collateral_safety_margin"]
+"7200_redemption_fee" [label="redemption_fee"]
+}subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_6384_TreasuryPolicy {
+label = "TreasuryPolicy"
+"6384_setMintingFee" [label="setMintingFee"]
+"6384_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"6384_setExcessCollateralSafetyMargin" [label="setExcessCollateralSafetyMargin"]
+"6384_setTreasury" [label="setTreasury"]
+"6384_initialize" [label="initialize"]
+"6384_setRedemptionFee" [label="setRedemptionFee"]
+"6384_initialize" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_setExcessCollateralSafetyMargin"
+"6384_setTreasury" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_setRedemptionFee"
+"6384_initialize" -> "6384_setMintingFee"
+"6384_setMintingFee" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_initializer"
+"6384_setExcessCollateralSafetyMargin" -> "6384_onlyOwner"
+"6384_setRedemptionFee" -> "6384_onlyOwner"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"6384_setExcessCollateralSafetyMargin" -> "require(bool,string)"
+"6384_setTreasury" -> "require(bool,string)"
+"6384_setMintingFee" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+"6384_setRedemptionFee" -> "require(bool,string)"
+}
+}

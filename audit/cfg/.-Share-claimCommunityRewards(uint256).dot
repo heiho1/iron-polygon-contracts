@@ -1,0 +1,66 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->7;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(amount > 0,invalidAmount)
+
+IRs:
+TMP_829(bool) = amount > 0
+TMP_830(None) = SOLIDITY_CALL require(bool,string)(TMP_829,invalidAmount)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(communityRewardController != address(0),!rewardController)
+
+IRs:
+TMP_831 = CONVERT 0 to address
+TMP_832(bool) = communityRewardController != TMP_831
+TMP_833(None) = SOLIDITY_CALL require(bool,string)(TMP_832,!rewardController)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+_remainingRewards = COMMUNITY_REWARD_ALLOCATION - communityRewardClaimed
+
+IRs:
+TMP_834(uint256) = COMMUNITY_REWARD_ALLOCATION (c)- communityRewardClaimed
+_remainingRewards(uint256) := TMP_834(uint256)"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+require(bool,string)(amount <= _remainingRewards,exceedRewards)
+
+IRs:
+TMP_835(bool) = amount <= _remainingRewards
+TMP_836(None) = SOLIDITY_CALL require(bool,string)(TMP_835,exceedRewards)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+communityRewardClaimed = communityRewardClaimed + amount
+
+IRs:
+TMP_837(uint256) = communityRewardClaimed (c)+ amount
+communityRewardClaimed(uint256) := TMP_837(uint256)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+_mint(communityRewardController,amount)
+
+IRs:
+INTERNAL_CALL, ERC20Custom._mint(address,uint256)(communityRewardController,amount)"];
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+7->1;
+}

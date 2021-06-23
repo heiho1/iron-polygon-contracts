@@ -1,0 +1,975 @@
+strict digraph {
+subgraph cluster_128_Math {
+label = "Math"
+"128_average" [label="average"]
+"128_max" [label="max"]
+"128_min" [label="min"]
+"128_sqrt" [label="sqrt"]
+}subgraph cluster_8966_IAaveIncentivesController {
+label = "IAaveIncentivesController"
+"8966_getRewardsBalance" [label="getRewardsBalance"]
+"8966_claimRewards" [label="claimRewards"]
+"8966_getUserUnclaimedRewards" [label="getUserUnclaimedRewards"]
+"8966_REWARD_TOKEN" [label="REWARD_TOKEN"]
+}subgraph cluster_6918_ZapPool {
+label = "ZapPool"
+"6918_toggleMinting" [label="toggleMinting"]
+"6918_getCollateralPrice" [label="getCollateralPrice"]
+"6918_collateralReserve" [label="collateralReserve"]
+"6918_setRouter" [label="setRouter"]
+"6918_zapMint" [label="zapMint"]
+"6918_unclaimed_pool_collateral" [label="unclaimed_pool_collateral"]
+"6918__transferCollateralToReserve" [label="_transferCollateralToReserve"]
+"6918_setOracle" [label="setOracle"]
+"6918_initialize" [label="initialize"]
+"6918_setSlippage" [label="setSlippage"]
+"6918_zapMint" -> "6918_nonReentrant"
+"6918_zapMint" -> "6918_notContract"
+"6918_initialize" -> "6918_initializer"
+"6918_setOracle" -> "6918_onlyOwner"
+"6918_zapMint" -> "6918_getCollateralPrice"
+"6918_setSlippage" -> "6918_onlyOwner"
+"6918_setRouter" -> "6918_onlyOwner"
+"6918__transferCollateralToReserve" -> "6918_collateralReserve"
+"6918_zapMint" -> "6918__transferCollateralToReserve"
+"6918_toggleMinting" -> "6918_onlyOwner"
+"6918_initialize" -> "6918_onlyOwner"
+}subgraph cluster_7181_ITreasury {
+label = "ITreasury"
+"7181_requestTransfer" [label="requestTransfer"]
+"7181_globalCollateralBalance" [label="globalCollateralBalance"]
+"7181_hasPool" [label="hasPool"]
+"7181_info" [label="info"]
+"7181_globalCollateralValue" [label="globalCollateralValue"]
+"7181_collateralReserve" [label="collateralReserve"]
+}subgraph cluster_7054_IDollar {
+label = "IDollar"
+"7054_poolBurnFrom" [label="poolBurnFrom"]
+"7054_poolMint" [label="poolMint"]
+}subgraph cluster_7821_UQ112x112 {
+label = "UQ112x112"
+"7821_encode" [label="encode"]
+"7821_uqdiv" [label="uqdiv"]
+}subgraph cluster_13_IMasterChef {
+label = "IMasterChef"
+"13_userInfo" [label="userInfo"]
+}subgraph cluster_14_IMasterChefFund {
+label = "IMasterChefFund"
+"14_transferTo" [label="transferTo"]
+"14_balance" [label="balance"]
+}subgraph cluster_9492_TreasuryVaultAave {
+label = "TreasuryVaultAave"
+"9492_claimIncetiveRewards" [label="claimIncetiveRewards"]
+"9492_setIncentiveController" [label="setIncentiveController"]
+"9492__getATokenAddress" [label="_getATokenAddress"]
+"9492_withdraw" [label="withdraw"]
+"9492_receive" [label="receive"]
+"9492_balanceOfAToken" [label="balanceOfAToken"]
+"9492_initialize" [label="initialize"]
+"9492_executeTransaction" [label="executeTransaction"]
+"9492_deposit" [label="deposit"]
+"9492_getUnclaimedIncentiveRewardsBalance" [label="getUnclaimedIncentiveRewardsBalance"]
+"9492_setTreasury" [label="setTreasury"]
+"9492_setTreasury" -> "9492_onlyOwner"
+"9492_initialize" -> "9492_onlyOwner"
+"9492_withdraw" -> "9492_balanceOfAToken"
+"9492_setIncentiveController" -> "9492_onlyOwner"
+"9492_executeTransaction" -> "9492_onlyOwner"
+"9492_withdraw" -> "9492_onlyTreasury"
+"9492_claimIncetiveRewards" -> "9492_getUnclaimedIncentiveRewardsBalance"
+"9492_initialize" -> "9492_initializer"
+"9492_initialize" -> "9492__getATokenAddress"
+"9492_deposit" -> "9492_onlyTreasury"
+"9492_claimIncetiveRewards" -> "9492_onlyOwner"
+}subgraph cluster_7063_IOracle {
+label = "IOracle"
+"7063_consult" [label="consult"]
+}subgraph cluster_8346_PcsPairOracle {
+label = "PcsPairOracle"
+"8346_currentBlockTimestamp" [label="currentBlockTimestamp"]
+"8346_consult" [label="consult"]
+"8346_constructor" [label="constructor"]
+"8346_update" [label="update"]
+"8346_currentCumulativePrices" [label="currentCumulativePrices"]
+"8346_setPeriod" [label="setPeriod"]
+"8346_setPeriod" -> "8346_onlyOwner"
+"8346_update" -> "8346_currentCumulativePrices"
+"8346_currentCumulativePrices" -> "8346_currentBlockTimestamp"
+}subgraph cluster_30_IWETH {
+label = "IWETH"
+"30_deposit" [label="deposit"]
+"30_withdraw" [label="withdraw"]
+"30_transfer" [label="transfer"]
+"30_transferFrom" [label="transferFrom"]
+}subgraph cluster_159_Multicall {
+label = "Multicall"
+"159_getCurrentBlockDifficulty" [label="getCurrentBlockDifficulty"]
+"159_getBlockHash" [label="getBlockHash"]
+"159_getCurrentBlockCoinbase" [label="getCurrentBlockCoinbase"]
+"159_getCurrentBlockGasLimit" [label="getCurrentBlockGasLimit"]
+"159_getCurrentBlockTimestamp" [label="getCurrentBlockTimestamp"]
+"159_aggregate" [label="aggregate"]
+"159_getLastBlockHash" [label="getLastBlockHash"]
+"159_getEthBalance" [label="getEthBalance"]
+}subgraph cluster_7200_ITreasuryPolicy {
+label = "ITreasuryPolicy"
+"7200_minting_fee" [label="minting_fee"]
+"7200_excess_collateral_safety_margin" [label="excess_collateral_safety_margin"]
+"7200_redemption_fee" [label="redemption_fee"]
+}subgraph cluster_8480_ShareOracle {
+label = "ShareOracle"
+"8480_priceTokenToUsd" [label="priceTokenToUsd"]
+"8480_setOracleShare" [label="setOracleShare"]
+"8480_constructor" [label="constructor"]
+"8480_consult" [label="consult"]
+"8480_setChainlinkToUsd" [label="setChainlinkToUsd"]
+"8480_consult" -> "8480_priceTokenToUsd"
+"8480_setOracleShare" -> "8480_onlyOwner"
+"8480_setChainlinkToUsd" -> "8480_onlyOwner"
+}subgraph cluster_7587_FixedPoint {
+label = "FixedPoint"
+"7587_mul" [label="mul"]
+"7587_encode144" [label="encode144"]
+"7587_fraction" [label="fraction"]
+"7587_sqrt" [label="sqrt"]
+"7587_decode" [label="decode"]
+"7587_encode" [label="encode"]
+"7587_reciprocal" [label="reciprocal"]
+"7587_div" [label="div"]
+"7587_decode144" [label="decode144"]
+}subgraph cluster_7333_Babylonian {
+label = "Babylonian"
+"7333_sqrt" [label="sqrt"]
+}subgraph cluster_7079_IPairOracle {
+label = "IPairOracle"
+"7079_consult" [label="consult"]
+"7079_update" [label="update"]
+}subgraph cluster_6056_Treasury {
+label = "Treasury"
+"6056_setCollateralReserve" [label="setCollateralReserve"]
+"6056_effective_collateral_ratio" [label="effective_collateral_ratio"]
+"6056_globalCollateralValue" [label="globalCollateralValue"]
+"6056_excessCollateralBalance" [label="excessCollateralBalance"]
+"6056_setProfitSharingFund" [label="setProfitSharingFund"]
+"6056_setTreasuryPolicy" [label="setTreasuryPolicy"]
+"6056_collateralPrice" [label="collateralPrice"]
+"6056_setOracleShare" [label="setOracleShare"]
+"6056_setCollateralAddress" [label="setCollateralAddress"]
+"6056_initialize" [label="initialize"]
+"6056_info" [label="info"]
+"6056_target_collateral_ratio" [label="target_collateral_ratio"]
+"6056_sharePrice" [label="sharePrice"]
+"6056_minting_fee" [label="minting_fee"]
+"6056_dollarPrice" [label="dollarPrice"]
+"6056_setCollateralRatioPolicy" [label="setCollateralRatioPolicy"]
+"6056_totalUnclaimedBalance" [label="totalUnclaimedBalance"]
+"6056_globalCollateralBalance" [label="globalCollateralBalance"]
+"6056_setOracleCollateral" [label="setOracleCollateral"]
+"6056_extractProfit" [label="extractProfit"]
+"6056_setOracleDollar" [label="setOracleDollar"]
+"6056_addPool" [label="addPool"]
+"6056_setProfitController" [label="setProfitController"]
+"6056_redemption_fee" [label="redemption_fee"]
+"6056_requestTransfer" [label="requestTransfer"]
+"6056_removePool" [label="removePool"]
+"6056_hasPool" [label="hasPool"]
+"6056_setOracleShare" -> "6056_onlyOwner"
+"6056_setCollateralRatioPolicy" -> "6056_onlyOwner"
+"6056_initialize" -> "6056_setTreasuryPolicy"
+"6056_extractProfit" -> "6056_onlyProfitController"
+"6056_initialize" -> "6056_setProfitSharingFund"
+"6056_setCollateralReserve" -> "6056_onlyOwner"
+"6056_setProfitSharingFund" -> "6056_onlyOwner"
+"6056_globalCollateralValue" -> "6056_globalCollateralBalance"
+"6056_excessCollateralBalance" -> "6056_effective_collateral_ratio"
+"6056_excessCollateralBalance" -> "6056_globalCollateralBalance"
+"6056_setOracleDollar" -> "6056_onlyOwner"
+"6056_initialize" -> "6056_setCollateralAddress"
+"6056_info" -> "6056_dollarPrice"
+"6056_initialize" -> "6056_initializer"
+"6056_info" -> "6056_target_collateral_ratio"
+"6056_globalCollateralBalance" -> "6056_totalUnclaimedBalance"
+"6056_removePool" -> "6056_onlyOwner"
+"6056_initialize" -> "6056_setCollateralRatioPolicy"
+"6056_info" -> "6056_globalCollateralValue"
+"6056_setOracleCollateral" -> "6056_onlyOwner"
+"6056_initialize" -> "6056_setProfitController"
+"6056_setTreasuryPolicy" -> "6056_onlyOwner"
+"6056_info" -> "6056_minting_fee"
+"6056_setProfitController" -> "6056_onlyOwner"
+"6056_globalCollateralValue" -> "6056_collateralPrice"
+"6056_setCollateralAddress" -> "6056_onlyOwner"
+"6056_initialize" -> "6056_onlyOwner"
+"6056_requestTransfer" -> "6056_onlyPools"
+"6056_extractProfit" -> "6056_excessCollateralBalance"
+"6056_info" -> "6056_effective_collateral_ratio"
+"6056_excessCollateralBalance" -> "6056_target_collateral_ratio"
+"6056_initialize" -> "6056_setCollateralReserve"
+"6056_info" -> "6056_redemption_fee"
+"6056_info" -> "6056_sharePrice"
+"6056_addPool" -> "6056_onlyOwner"
+}subgraph cluster_1706_SafeMath {
+label = "SafeMath"
+"1706_trySub" [label="trySub"]
+"1706_mod" [label="mod"]
+"1706_tryDiv" [label="tryDiv"]
+"1706_mul" [label="mul"]
+"1706_tryMod" [label="tryMod"]
+"1706_div" [label="div"]
+"1706_tryAdd" [label="tryAdd"]
+"1706_add" [label="add"]
+"1706_tryMul" [label="tryMul"]
+"1706_sub" [label="sub"]
+}subgraph cluster_9003_ILendingPool {
+label = "ILendingPool"
+"9003_deposit" [label="deposit"]
+"9003_getReserveData" [label="getReserveData"]
+"9003_withdraw" [label="withdraw"]
+}subgraph cluster_45_AggregatorV3Interface {
+label = "AggregatorV3Interface"
+"45_getRoundData" [label="getRoundData"]
+"45_latestRoundData" [label="latestRoundData"]
+"45_decimals" [label="decimals"]
+"45_version" [label="version"]
+"45_description" [label="description"]
+}subgraph cluster_7216_ITreasuryVault {
+label = "ITreasuryVault"
+"7216_vaultBalance" [label="vaultBalance"]
+"7216_withdraw" [label="withdraw"]
+"7216_deposit" [label="deposit"]
+}subgraph cluster_1075_SafeERC20 {
+label = "SafeERC20"
+"1075_safeDecreaseAllowance" [label="safeDecreaseAllowance"]
+"1075__callOptionalReturn" [label="_callOptionalReturn"]
+"1075_safeTransferFrom" [label="safeTransferFrom"]
+"1075_safeApprove" [label="safeApprove"]
+"1075_safeTransfer" [label="safeTransfer"]
+"1075_safeIncreaseAllowance" [label="safeIncreaseAllowance"]
+"1075_safeDecreaseAllowance" -> "1075__callOptionalReturn"
+"1075_safeIncreaseAllowance" -> "1075__callOptionalReturn"
+"1075_safeTransfer" -> "1075__callOptionalReturn"
+"1075_safeApprove" -> "1075__callOptionalReturn"
+"1075_safeTransferFrom" -> "1075__callOptionalReturn"
+}subgraph cluster_7093_IPool {
+label = "IPool"
+"7093_unclaimed_pool_collateral" [label="unclaimed_pool_collateral"]
+"7093_getCollateralPrice" [label="getCollateralPrice"]
+}subgraph cluster_8886_VaultController {
+label = "VaultController"
+"8886_claimIncentiveRewards" [label="claimIncentiveRewards"]
+"8886_setSwapOptions" [label="setSwapOptions"]
+"8886_initialize" [label="initialize"]
+"8886_executeTransaction" [label="executeTransaction"]
+"8886_receive" [label="receive"]
+"8886__swap" [label="_swap"]
+"8886_setCollateralReserve" [label="setCollateralReserve"]
+"8886_setAdmin" [label="setAdmin"]
+"8886_initialize" -> "8886_setCollateralReserve"
+"8886_initialize" -> "8886_setAdmin"
+"8886_initialize" -> "8886_onlyOwner"
+"8886_claimIncentiveRewards" -> "8886__swap"
+"8886_executeTransaction" -> "8886_onlyOwner"
+"8886_setCollateralReserve" -> "8886_onlyOwner"
+"8886_setSwapOptions" -> "8886_onlyOwner"
+"8886_setAdmin" -> "8886_onlyOwner"
+"8886_initialize" -> "8886_initializer"
+"8886_claimIncentiveRewards" -> "8886_onlyAdmin"
+}subgraph cluster_826_IERC20 {
+label = "IERC20"
+"826_transfer" [label="transfer"]
+"826_approve" [label="approve"]
+"826_totalSupply" [label="totalSupply"]
+"826_transferFrom" [label="transferFrom"]
+"826_balanceOf" [label="balanceOf"]
+"826_allowance" [label="allowance"]
+}subgraph cluster_2493_ConsolidatedFund {
+label = "ConsolidatedFund"
+"2493_removePool" [label="removePool"]
+"2493_transferTo" [label="transferTo"]
+"2493_balance" [label="balance"]
+"2493_addPool" [label="addPool"]
+"2493_rescueFund" [label="rescueFund"]
+"2493_addPool" -> "2493_onlyOwner"
+"2493_rescueFund" -> "2493_onlyOwner"
+"2493_rescueFund" -> "2493_owner"
+"2493_transferTo" -> "2493_onlyPools"
+"2493_removePool" -> "2493_onlyOwner"
+}subgraph cluster_449_Timelock {
+label = "Timelock"
+"449_setDelay" [label="setDelay"]
+"449_getBlockTimestamp" [label="getBlockTimestamp"]
+"449_cancelTransaction" [label="cancelTransaction"]
+"449_queueTransaction" [label="queueTransaction"]
+"449_executeTransaction" [label="executeTransaction"]
+"449_constructor" [label="constructor"]
+"449_acceptAdmin" [label="acceptAdmin"]
+"449_setPendingAdmin" [label="setPendingAdmin"]
+"449_executeTransaction" -> "449_getBlockTimestamp"
+"449_queueTransaction" -> "449_getBlockTimestamp"
+}subgraph cluster_68_MockChainlinkAggregator {
+label = "MockChainlinkAggregator"
+"68_setDecimals" [label="setDecimals"]
+"68_latestRoundData" [label="latestRoundData"]
+"68_setLatestPrice" [label="setLatestPrice"]
+"68_constructor" [label="constructor"]
+"68_decimals" [label="decimals"]
+}subgraph cluster_7111_IShare {
+label = "IShare"
+"7111_poolBurnFrom" [label="poolBurnFrom"]
+"7111_poolMint" [label="poolMint"]
+}subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_8010_DollarOracle {
+label = "DollarOracle"
+"8010_consult" [label="consult"]
+"8010_setOracleCollateralUsd" [label="setOracleCollateralUsd"]
+"8010_setOracleDollarCollateral" [label="setOracleDollarCollateral"]
+"8010_constructor" [label="constructor"]
+"8010_setOracleCollateralUsd" -> "8010_onlyOwner"
+"8010_setOracleDollarCollateral" -> "8010_onlyOwner"
+}subgraph cluster_6990_MockPairOracle {
+label = "MockPairOracle"
+"6990_setPeriod" [label="setPeriod"]
+"6990_consult" [label="consult"]
+"6990_constructor" [label="constructor"]
+"6990_update" [label="update"]
+"6990_mock" [label="mock"]
+"6990_setPeriod" -> "6990_onlyOwner"
+}subgraph cluster_6226_TreasuryFund {
+label = "TreasuryFund"
+"6226_claim" [label="claim"]
+"6226_balance" [label="balance"]
+"6226_transfer" [label="transfer"]
+"6226_setShareAddress" [label="setShareAddress"]
+"6226_initialize" [label="initialize"]
+"6226_rescueFund" [label="rescueFund"]
+"6226_transferDevFundOwnership" [label="transferDevFundOwnership"]
+"6226_transfer" -> "6226_onlyOwner"
+"6226_initialize" -> "6226_initializer"
+"6226_setShareAddress" -> "6226_onlyOwner"
+"6226_claim" -> "6226_onlyOwner"
+"6226_rescueFund" -> "6226_owner"
+"6226_initialize" -> "6226_onlyOwner"
+"6226_rescueFund" -> "6226_onlyOwner"
+"6226_transferDevFundOwnership" -> "6226_onlyOwner"
+}subgraph cluster_851_IERC20Metadata {
+label = "IERC20Metadata"
+"851_symbol" [label="symbol"]
+"851_name" [label="name"]
+"851_decimals" [label="decimals"]
+}subgraph cluster_4819_Pool {
+label = "Pool"
+"4819_mint" [label="mint"]
+"4819__mintShareToCollateralReserve" [label="_mintShareToCollateralReserve"]
+"4819__requestTransferCollateral" [label="_requestTransferCollateral"]
+"4819_getCollateralPrice" [label="getCollateralPrice"]
+"4819_info" [label="info"]
+"4819_collateralReserve" [label="collateralReserve"]
+"4819__requestTransferShare" [label="_requestTransferShare"]
+"4819_toggleMinting" [label="toggleMinting"]
+"4819_toggleRedeeming" [label="toggleRedeeming"]
+"4819_setTreasury" [label="setTreasury"]
+"4819__transferCollateralToReserve" [label="_transferCollateralToReserve"]
+"4819_setRedemptionDelay" [label="setRedemptionDelay"]
+"4819_collectRedemption" [label="collectRedemption"]
+"4819_redeem" [label="redeem"]
+"4819_initialize" [label="initialize"]
+"4819_setOracle" [label="setOracle"]
+"4819_info" -> "4819_getCollateralPrice"
+"4819_redeem" -> "4819_getCollateralPrice"
+"4819__mintShareToCollateralReserve" -> "4819_collateralReserve"
+"4819__transferCollateralToReserve" -> "4819_collateralReserve"
+"4819_mint" -> "4819__transferCollateralToReserve"
+"4819_initialize" -> "4819_initializer"
+"4819_setRedemptionDelay" -> "4819_onlyOwner"
+"4819_setTreasury" -> "4819_onlyOwner"
+"4819_collectRedemption" -> "4819__requestTransferShare"
+"4819_collectRedemption" -> "4819__requestTransferCollateral"
+"4819_setOracle" -> "4819_onlyOwner"
+"4819_mint" -> "4819_getCollateralPrice"
+"4819_redeem" -> "4819__mintShareToCollateralReserve"
+"4819_toggleRedeeming" -> "4819_onlyOwner"
+"4819_toggleMinting" -> "4819_onlyOwner"
+"4819_initialize" -> "4819_onlyOwner"
+}subgraph cluster_2131_CollateralRatioPolicy {
+label = "CollateralRatioPolicy"
+"2131_setOracleDollar" [label="setOracleDollar"]
+"2131_setRefreshCooldown" [label="setRefreshCooldown"]
+"2131_initialize" [label="initialize"]
+"2131_toggleCollateralRatio" [label="toggleCollateralRatio"]
+"2131_constructor" [label="constructor"]
+"2131_setDollar" [label="setDollar"]
+"2131_setPriceBand" [label="setPriceBand"]
+"2131_setRatioStep" [label="setRatioStep"]
+"2131_reset" [label="reset"]
+"2131_refreshCollateralRatio" [label="refreshCollateralRatio"]
+"2131_setPriceTarget" [label="setPriceTarget"]
+"2131_setTreasury" [label="setTreasury"]
+"2131_calcEffectiveCollateralRatio" [label="calcEffectiveCollateralRatio"]
+"2131_toggleEffectiveCollateralRatio" [label="toggleEffectiveCollateralRatio"]
+"2131_setPriceTarget" -> "2131_onlyOwner"
+"2131_setTreasury" -> "2131_onlyOwner"
+"2131_setDollar" -> "2131_onlyOwner"
+"2131_toggleEffectiveCollateralRatio" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_initializer"
+"2131_reset" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_setDollar"
+"2131_setOracleDollar" -> "2131_onlyOwner"
+"2131_setRatioStep" -> "2131_onlyOwner"
+"2131_setRefreshCooldown" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_setTreasury"
+"2131_toggleCollateralRatio" -> "2131_onlyOwner"
+"2131_initialize" -> "2131_onlyOwner"
+"2131_setPriceBand" -> "2131_onlyOwner"
+"2131_refreshCollateralRatio" -> "2131_calcEffectiveCollateralRatio"
+}subgraph cluster_7256_IUniswapLP {
+label = "IUniswapLP"
+"7256_price0CumulativeLast" [label="price0CumulativeLast"]
+"7256_token0" [label="token0"]
+"7256_getReserves" [label="getReserves"]
+"7256_price1CumulativeLast" [label="price1CumulativeLast"]
+"7256_getTokenWeights" [label="getTokenWeights"]
+"7256_token1" [label="token1"]
+}subgraph cluster_7128_IShareTreasuryFund {
+label = "IShareTreasuryFund"
+"7128_claimTreasuryFundRewards" [label="claimTreasuryFundRewards"]
+"7128_setTreasuryFund" [label="setTreasuryFund"]
+"7128_unclaimedTreasuryFund" [label="unclaimedTreasuryFund"]
+}subgraph cluster_7898_CollateralOracle {
+label = "CollateralOracle"
+"7898_consult" [label="consult"]
+"7898_constructor" [label="constructor"]
+"7898_setChainlinkCollateralUsd" [label="setChainlinkCollateralUsd"]
+"7898_setChainlinkCollateralUsd" -> "7898_onlyOwner"
+}subgraph cluster_1371_Address {
+label = "Address"
+"1371_sendValue" [label="sendValue"]
+"1371_functionCall" [label="functionCall"]
+"1371__verifyCallResult" [label="_verifyCallResult"]
+"1371_isContract" [label="isContract"]
+"1371_functionStaticCall" [label="functionStaticCall"]
+"1371_functionCallWithValue" [label="functionCallWithValue"]
+"1371_functionDelegateCall" [label="functionDelegateCall"]
+"1371_functionCallWithValue" -> "1371__verifyCallResult"
+"1371_functionCall" -> "1371_functionCallWithValue"
+"1371_functionCallWithValue" -> "1371_functionCallWithValue"
+"1371_functionDelegateCall" -> "1371_functionDelegateCall"
+"1371_functionStaticCall" -> "1371_functionStaticCall"
+"1371_functionDelegateCall" -> "1371__verifyCallResult"
+"1371_functionStaticCall" -> "1371_isContract"
+"1371_functionDelegateCall" -> "1371_isContract"
+"1371_functionCallWithValue" -> "1371_isContract"
+"1371_functionStaticCall" -> "1371__verifyCallResult"
+"1371_functionCall" -> "1371_functionCall"
+}subgraph cluster_7004_ICollateralRatioPolicy {
+label = "ICollateralRatioPolicy"
+"7004_effective_collateral_ratio" [label="effective_collateral_ratio"]
+"7004_target_collateral_ratio" [label="target_collateral_ratio"]
+}subgraph cluster_2273_CollateralReserve {
+label = "CollateralReserve"
+"2273_setTreasury" [label="setTreasury"]
+"2273_transferTo" [label="transferTo"]
+"2273_fundBalance" [label="fundBalance"]
+"2273_initialize" [label="initialize"]
+"2273_transferTo" -> "2273_onlyTreasury"
+"2273_initialize" -> "2273_onlyOwner"
+"2273_setTreasury" -> "2273_onlyOwner"
+"2273_initialize" -> "2273_initializer"
+}subgraph cluster_7777_SpotPriceGetter {
+label = "SpotPriceGetter"
+"7777_consult" [label="consult"]
+"7777_consultToUsdChainlink" [label="consultToUsdChainlink"]
+"7777_consultToUsdChainlink" -> "7777_consult"
+}subgraph cluster_5217_Share {
+label = "Share"
+"5217_initialize" [label="initialize"]
+"5217_setTreasuryFund" [label="setTreasuryFund"]
+"5217_setCommunityRewardController" [label="setCommunityRewardController"]
+"5217_poolMint" [label="poolMint"]
+"5217_unclaimedTreasuryFund" [label="unclaimedTreasuryFund"]
+"5217_poolBurnFrom" [label="poolBurnFrom"]
+"5217_setTreasuryAddress" [label="setTreasuryAddress"]
+"5217_claimCommunityRewards" [label="claimCommunityRewards"]
+"5217_claimTreasuryFundRewards" [label="claimTreasuryFundRewards"]
+"5217_poolBurnFrom" -> "5217_onlyPools"
+"5217_claimTreasuryFundRewards" -> "5217_onlyTreasuryFund"
+"5217_initialize" -> "5217__mint"
+"5217_setTreasuryFund" -> "5217_onlyTreasuryFund"
+"5217_initialize" -> "5217_initializer"
+"5217_claimCommunityRewards" -> "5217__mint"
+"5217_poolMint" -> "5217_onlyPools"
+"5217_setCommunityRewardController" -> "5217_onlyOwner"
+"5217_claimTreasuryFundRewards" -> "5217_unclaimedTreasuryFund"
+"5217_poolMint" -> "5217__mint"
+"5217_setTreasuryAddress" -> "5217_onlyOwner"
+"5217_claimTreasuryFundRewards" -> "5217__mint"
+"5217_initialize" -> "5217_onlyOwner"
+"5217_poolBurnFrom" -> "5217__burnFrom"
+"5217_claimCommunityRewards" -> "5217_onlyOwner"
+}subgraph cluster_7017_ICollateralReserve {
+label = "ICollateralReserve"
+"7017_transferTo" [label="transferTo"]
+}subgraph cluster_2666_Dollar {
+label = "Dollar"
+"2666_initialize" [label="initialize"]
+"2666_poolMint" [label="poolMint"]
+"2666_poolBurnFrom" [label="poolBurnFrom"]
+"2666_setTreasuryAddress" [label="setTreasuryAddress"]
+"2666_poolMint" -> "2666__mint"
+"2666_initialize" -> "2666_initializer"
+"2666_poolBurnFrom" -> "2666__burnFrom"
+"2666_poolMint" -> "2666_onlyPools"
+"2666_setTreasuryAddress" -> "2666_onlyOwner"
+"2666_initialize" -> "2666_onlyOwner"
+"2666_poolBurnFrom" -> "2666_onlyPools"
+"2666_initialize" -> "2666__mint"
+}subgraph cluster_7276_IUniswapV2Router {
+label = "IUniswapV2Router"
+"7276_swapExactTokensForTokens" [label="swapExactTokensForTokens"]
+}subgraph cluster_3181_ERC20Custom {
+label = "ERC20Custom"
+"3181__transfer" [label="_transfer"]
+"3181_allowance" [label="allowance"]
+"3181_increaseAllowance" [label="increaseAllowance"]
+"3181__mint" [label="_mint"]
+"3181_decreaseAllowance" [label="decreaseAllowance"]
+"3181__burn" [label="_burn"]
+"3181_burnFrom" [label="burnFrom"]
+"3181__beforeTokenTransfer" [label="_beforeTokenTransfer"]
+"3181_transfer" [label="transfer"]
+"3181_transferFrom" [label="transferFrom"]
+"3181_balanceOf" [label="balanceOf"]
+"3181_burn" [label="burn"]
+"3181__burnFrom" [label="_burnFrom"]
+"3181__approve" [label="_approve"]
+"3181_totalSupply" [label="totalSupply"]
+"3181_approve" [label="approve"]
+"3181_increaseAllowance" -> "3181__approve"
+"3181__burnFrom" -> "3181__burn"
+"3181_increaseAllowance" -> "3181__msgSender"
+"3181_transferFrom" -> "3181__approve"
+"3181__burnFrom" -> "3181__msgSender"
+"3181_transfer" -> "3181__msgSender"
+"3181_burn" -> "3181__burn"
+"3181_burn" -> "3181__msgSender"
+"3181_burnFrom" -> "3181__burn"
+"3181_decreaseAllowance" -> "3181__msgSender"
+"3181__mint" -> "3181__beforeTokenTransfer"
+"3181_transfer" -> "3181__transfer"
+"3181_burnFrom" -> "3181__approve"
+"3181_transferFrom" -> "3181__msgSender"
+"3181__burnFrom" -> "3181__approve"
+"3181_burnFrom" -> "3181_allowance"
+"3181_transferFrom" -> "3181__transfer"
+"3181__burn" -> "3181__beforeTokenTransfer"
+"3181_approve" -> "3181__msgSender"
+"3181_decreaseAllowance" -> "3181__approve"
+"3181_burnFrom" -> "3181__msgSender"
+"3181_approve" -> "3181__approve"
+"3181__transfer" -> "3181__beforeTokenTransfer"
+}subgraph cluster_748_ERC20 {
+label = "ERC20"
+"748_decreaseAllowance" [label="decreaseAllowance"]
+"748_increaseAllowance" [label="increaseAllowance"]
+"748_constructor" [label="constructor"]
+"748_transferFrom" [label="transferFrom"]
+"748__beforeTokenTransfer" [label="_beforeTokenTransfer"]
+"748__transfer" [label="_transfer"]
+"748_allowance" [label="allowance"]
+"748__mint" [label="_mint"]
+"748__burn" [label="_burn"]
+"748_decimals" [label="decimals"]
+"748_balanceOf" [label="balanceOf"]
+"748_symbol" [label="symbol"]
+"748_totalSupply" [label="totalSupply"]
+"748__approve" [label="_approve"]
+"748_name" [label="name"]
+"748_transfer" [label="transfer"]
+"748_approve" [label="approve"]
+"748_approve" -> "748__approve"
+"748_approve" -> "748__msgSender"
+"748_decreaseAllowance" -> "748__approve"
+"748_transfer" -> "748__transfer"
+"748_increaseAllowance" -> "748__approve"
+"748_transferFrom" -> "748__msgSender"
+"748_decreaseAllowance" -> "748__msgSender"
+"748__burn" -> "748__beforeTokenTransfer"
+"748_increaseAllowance" -> "748__msgSender"
+"748_transferFrom" -> "748__transfer"
+"748__mint" -> "748__beforeTokenTransfer"
+"748_transfer" -> "748__msgSender"
+"748__transfer" -> "748__beforeTokenTransfer"
+"748_transferFrom" -> "748__approve"
+}subgraph cluster_6384_TreasuryPolicy {
+label = "TreasuryPolicy"
+"6384_setMintingFee" [label="setMintingFee"]
+"6384_setExcessCollateralSafetyMargin" [label="setExcessCollateralSafetyMargin"]
+"6384_setTreasury" [label="setTreasury"]
+"6384_initialize" [label="initialize"]
+"6384_setRedemptionFee" [label="setRedemptionFee"]
+"6384_initialize" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_setExcessCollateralSafetyMargin"
+"6384_setTreasury" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_setRedemptionFee"
+"6384_initialize" -> "6384_setMintingFee"
+"6384_setMintingFee" -> "6384_onlyOwner"
+"6384_initialize" -> "6384_initializer"
+"6384_setExcessCollateralSafetyMargin" -> "6384_onlyOwner"
+"6384_setRedemptionFee" -> "6384_onlyOwner"
+}subgraph cluster_241_ReentrancyGuard {
+label = "ReentrancyGuard"
+"241_constructor" [label="constructor"]
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_500_MockCollateral {
+label = "MockCollateral"
+"500_symbol" [label="symbol"]
+"500_burn" [label="burn"]
+"500_balanceOf" [label="balanceOf"]
+"500_add" [label="add"]
+"500_totalSupply" [label="totalSupply"]
+"500__push" [label="_push"]
+"500_sub" [label="sub"]
+"500__mint" [label="_mint"]
+"500_constructor" [label="constructor"]
+"500_allowance" [label="allowance"]
+"500_decimals" [label="decimals"]
+"500_transferFrom" [label="transferFrom"]
+"500_approve" [label="approve"]
+"500_mint" [label="mint"]
+"500__move" [label="_move"]
+"500__pull" [label="_pull"]
+"500_transfer" [label="transfer"]
+"500_name" [label="name"]
+"500__move" -> "500_add"
+"500_transferFrom" -> "500__move"
+"500__push" -> "500__move"
+"500_transfer" -> "500__move"
+"500__move" -> "500_sub"
+"500_burn" -> "500_sub"
+"500__mint" -> "500_add"
+"500_mint" -> "500__mint"
+"500__pull" -> "500__move"
+"500_transferFrom" -> "500_sub"
+}subgraph cluster_3961_MasterChef {
+label = "MasterChef"
+"3961_emergencyWithdraw" [label="emergencyWithdraw"]
+"3961_getMultiplier" [label="getMultiplier"]
+"3961_constructor" [label="constructor"]
+"3961_set" [label="set"]
+"3961_withdraw" [label="withdraw"]
+"3961_safeRewardTransfer" [label="safeRewardTransfer"]
+"3961_deposit" [label="deposit"]
+"3961_poolLength" [label="poolLength"]
+"3961_add" [label="add"]
+"3961_setfund" [label="setfund"]
+"3961_fundBalance" [label="fundBalance"]
+"3961_updatePool" [label="updatePool"]
+"3961_massUpdatePools" [label="massUpdatePools"]
+"3961_setRewardPerBlock" [label="setRewardPerBlock"]
+"3961_pendingReward" [label="pendingReward"]
+"3961_add" -> "3961_massUpdatePools"
+"3961_updatePool" -> "3961_getMultiplier"
+"3961_add" -> "3961_onlyOwner"
+"3961_setfund" -> "3961_onlyOwner"
+"3961_deposit" -> "3961_updatePool"
+"3961_withdraw" -> "3961_safeRewardTransfer"
+"3961_withdraw" -> "3961_updatePool"
+"3961_set" -> "3961_onlyOwner"
+"3961_pendingReward" -> "3961_getMultiplier"
+"3961_massUpdatePools" -> "3961_updatePool"
+"3961_setRewardPerBlock" -> "3961_massUpdatePools"
+"3961_deposit" -> "3961_safeRewardTransfer"
+"3961_setRewardPerBlock" -> "3961_onlyOwner"
+"3961_set" -> "3961_massUpdatePools"
+}subgraph cluster_7036_IConsolidatedFund {
+label = "IConsolidatedFund"
+"7036_transferTo" [label="transferTo"]
+"7036_balance" [label="balance"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"revert(uint256,uint256)" 
+"abi.encodePacked()" 
+"blockhash(uint256)" 
+"abi.encode()" 
+"keccak256(bytes)" 
+"revert(string)" 
+"abi.encodeWithSelector()" 
+"abi.decode()" 
+"require(bool,string)" 
+"mload(uint256)" 
+"2493_removePool" -> "require(bool,string)"
+"5217_setTreasuryFund" -> "require(bool,string)"
+"8886__swap" -> "require(bool,string)"
+"2131_setTreasury" -> "require(bool,string)"
+"449_executeTransaction" -> "keccak256(bytes)"
+"1075_safeApprove" -> "require(bool,string)"
+"2131_refreshCollateralRatio" -> "require(bool,string)"
+"7587_reciprocal" -> "require(bool,string)"
+"8886_executeTransaction" -> "require(bool,string)"
+"3181__mint" -> "require(bool,string)"
+"6384_setTreasury" -> "require(bool,string)"
+"9492_executeTransaction" -> "abi.encodePacked()"
+"6918_setSlippage" -> "require(bool,string)"
+"500_transferFrom" -> "require(bool,string)"
+"8886_setCollateralReserve" -> "require(bool,string)"
+"6056_initialize" -> "require(bool,string)"
+"748__burn" -> "require(bool,string)"
+"748_decreaseAllowance" -> "require(bool,string)"
+"1371_functionCallWithValue" -> "require(bool,string)"
+"6056_removePool" -> "require(bool,string)"
+"5217_setTreasuryAddress" -> "require(bool,string)"
+"6056_setProfitSharingFund" -> "require(bool,string)"
+"1075_safeTransferFrom" -> "abi.encodeWithSelector()"
+"201_transferOwnership" -> "require(bool,string)"
+"6918_setRouter" -> "require(bool,string)"
+"6056_setOracleShare" -> "require(bool,string)"
+"8886_claimIncentiveRewards" -> "require(bool,string)"
+"3961_setfund" -> "require(bool,string)"
+"1075_safeDecreaseAllowance" -> "abi.encodeWithSelector()"
+"449_setPendingAdmin" -> "require(bool,string)"
+"1371_functionDelegateCall" -> "require(bool,string)"
+"1075_safeIncreaseAllowance" -> "abi.encodeWithSelector()"
+"449_cancelTransaction" -> "abi.encode()"
+"449_queueTransaction" -> "keccak256(bytes)"
+"7587_div" -> "require(bool,string)"
+"6918_zapMint" -> "require(bool,string)"
+"6056_setTreasuryPolicy" -> "require(bool,string)"
+"1706_sub" -> "require(bool,string)"
+"748_transferFrom" -> "require(bool,string)"
+"1371_sendValue" -> "require(bool,string)"
+"2493_addPool" -> "require(bool,string)"
+"449_executeTransaction" -> "abi.encode()"
+"6384_setMintingFee" -> "require(bool,string)"
+"2273_setTreasury" -> "require(bool,string)"
+"500_burn" -> "require(bool,string)"
+"1075__callOptionalReturn" -> "abi.decode()"
+"9492_setIncentiveController" -> "require(bool,string)"
+"1075_safeDecreaseAllowance" -> "require(bool,string)"
+"4819_setTreasury" -> "require(bool,string)"
+"6056_setCollateralReserve" -> "require(bool,string)"
+"1371_functionStaticCall" -> "require(bool,string)"
+"5217_setCommunityRewardController" -> "require(bool,string)"
+"159_getLastBlockHash" -> "blockhash(uint256)"
+"1371__verifyCallResult" -> "mload(uint256)"
+"6056_extractProfit" -> "require(bool,string)"
+"7587_fraction" -> "require(bool,string)"
+"2131_reset" -> "require(bool,string)"
+"500_add" -> "require(bool,string)"
+"449_executeTransaction" -> "abi.encodePacked()"
+"449_cancelTransaction" -> "require(bool,string)"
+"449_cancelTransaction" -> "keccak256(bytes)"
+"8346_consult" -> "require(bool,string)"
+"4819__mintShareToCollateralReserve" -> "require(bool,string)"
+"9492_setTreasury" -> "require(bool,string)"
+"6056_addPool" -> "require(bool,string)"
+"500__move" -> "require(bool,string)"
+"2273_transferTo" -> "require(bool,string)"
+"2131_setOracleDollar" -> "require(bool,string)"
+"6056_setProfitController" -> "require(bool,string)"
+"2273_initialize" -> "require(bool,string)"
+"159_aggregate" -> "require(bool)"
+"748__mint" -> "require(bool,string)"
+"8346_update" -> "require(bool,string)"
+"2493_transferTo" -> "require(bool,string)"
+"1706_div" -> "require(bool,string)"
+"9492_executeTransaction" -> "require(bool,string)"
+"4819_mint" -> "require(bool,string)"
+"1075_safeTransfer" -> "abi.encodeWithSelector()"
+"449_executeTransaction" -> "require(bool,string)"
+"2666_setTreasuryAddress" -> "require(bool,string)"
+"9492_executeTransaction" -> "keccak256(bytes)"
+"8346_constructor" -> "require(bool,string)"
+"7587_mul" -> "require(bool,string)"
+"8886_setAdmin" -> "require(bool,string)"
+"6384_setExcessCollateralSafetyMargin" -> "require(bool,string)"
+"6226_initialize" -> "require(bool,string)"
+"3181__burn" -> "require(bool,string)"
+"4819_redeem" -> "require(bool,string)"
+"748__transfer" -> "require(bool,string)"
+"2131_setDollar" -> "require(bool,string)"
+"6384_setRedemptionFee" -> "require(bool,string)"
+"7777_consult" -> "require(bool,string)"
+"1706_mod" -> "require(bool,string)"
+"3181__transfer" -> "require(bool,string)"
+"8886_setSwapOptions" -> "require(bool,string)"
+"3961_withdraw" -> "require(bool,string)"
+"6918_setOracle" -> "require(bool,string)"
+"6056_setOracleCollateral" -> "require(bool,string)"
+"500_sub" -> "require(bool,string)"
+"9492_deposit" -> "require(bool,string)"
+"5217_claimCommunityRewards" -> "require(bool,string)"
+"6056_setCollateralAddress" -> "require(bool,string)"
+"8886_executeTransaction" -> "keccak256(bytes)"
+"449_queueTransaction" -> "require(bool,string)"
+"6918__transferCollateralToReserve" -> "require(bool,string)"
+"1075_safeApprove" -> "abi.encodeWithSelector()"
+"1371__verifyCallResult" -> "revert(uint256,uint256)"
+"748__approve" -> "require(bool,string)"
+"449_acceptAdmin" -> "require(bool,string)"
+"449_queueTransaction" -> "abi.encode()"
+"4819_collectRedemption" -> "require(bool,string)"
+"159_getBlockHash" -> "blockhash(uint256)"
+"4819_setOracle" -> "require(bool,string)"
+"6056_setCollateralRatioPolicy" -> "require(bool,string)"
+"3181__approve" -> "require(bool,string)"
+"1371__verifyCallResult" -> "revert(string)"
+"1075__callOptionalReturn" -> "require(bool,string)"
+"449_setDelay" -> "require(bool,string)"
+"6056_setOracleDollar" -> "require(bool,string)"
+"449_constructor" -> "require(bool,string)"
+"4819__transferCollateralToReserve" -> "require(bool,string)"
+"8886_executeTransaction" -> "abi.encodePacked()"
+}"4819__transferCollateralToReserve" -> "1075_safeTransferFrom"
+"6056_sharePrice" -> "7063_consult"
+"3181__transfer" -> "1706_sub"
+"4819__requestTransferShare" -> "7181_requestTransfer"
+"8010_consult" -> "7079_consult"
+"6226_claim" -> "3181_burn"
+"2493_rescueFund" -> "1075_safeTransfer"
+"8346_constructor" -> "7256_token0"
+"3181__transfer" -> "1706_add"
+"6918_zapMint" -> "1075_safeApprove"
+"8346_consult" -> "7587_mul"
+"2273_transferTo" -> "1075_safeTransfer"
+"7777_consultToUsdChainlink" -> "1706_mul"
+"2273_fundBalance" -> "826_balanceOf"
+"6918_collateralReserve" -> "7181_collateralReserve"
+"3961_set" -> "1706_add"
+"3961_deposit" -> "1706_add"
+"6056_totalUnclaimedBalance" -> "7093_unclaimed_pool_collateral"
+"2493_transferTo" -> "1075_safeTransfer"
+"3181__burn" -> "1706_sub"
+"6056_info" -> "826_totalSupply"
+"9492_deposit" -> "1075_safeTransferFrom"
+"7777_consult" -> "1706_div"
+"3961_deposit" -> "1706_sub"
+"1075_safeIncreaseAllowance" -> "826_allowance"
+"3961_set" -> "1706_sub"
+"6918_zapMint" -> "7181_info"
+"7777_consultToUsdChainlink" -> "1706_div"
+"9492_balanceOfAToken" -> "826_balanceOf"
+"7898_consult" -> "45_latestRoundData"
+"8346_constructor" -> "7256_price0CumulativeLast"
+"3181__mint" -> "1706_add"
+"8346_constructor" -> "7256_price1CumulativeLast"
+"8346_consult" -> "7587_decode144"
+"2131_calcEffectiveCollateralRatio" -> "1706_div"
+"6056_minting_fee" -> "7200_minting_fee"
+"2493_rescueFund" -> "826_balanceOf"
+"6918_zapMint" -> "1075_safeTransferFrom"
+"3961_add" -> "1706_add"
+"3961_pendingReward" -> "1706_mul"
+"3961_updatePool" -> "826_balanceOf"
+"6056_globalCollateralBalance" -> "826_balanceOf"
+"3961_updatePool" -> "1706_div"
+"3961_deposit" -> "1075_safeTransferFrom"
+"6226_transfer" -> "826_transfer"
+"7587_sqrt" -> "7333_sqrt"
+"4819_collateralReserve" -> "7181_collateralReserve"
+"6056_target_collateral_ratio" -> "7004_target_collateral_ratio"
+"8346_currentCumulativePrices" -> "7256_price0CumulativeLast"
+"9492_deposit" -> "1075_safeApprove"
+"4819_redeem" -> "7181_info"
+"8886_claimIncentiveRewards" -> "826_balanceOf"
+"6918_zapMint" -> "7054_poolMint"
+"6918_zapMint" -> "7276_swapExactTokensForTokens"
+"9492_withdraw" -> "826_balanceOf"
+"6226_claim" -> "7128_claimTreasuryFundRewards"
+"7777_consult" -> "7256_token0"
+"6056_effective_collateral_ratio" -> "7004_effective_collateral_ratio"
+"4819_redeem" -> "7181_globalCollateralBalance"
+"6226_transferDevFundOwnership" -> "7128_setTreasuryFund"
+"3961_fundBalance" -> "7036_balance"
+"8346_currentCumulativePrices" -> "7587_fraction"
+"4819__requestTransferCollateral" -> "7181_requestTransfer"
+"4819_mint" -> "7054_poolMint"
+"3961_updatePool" -> "1706_add"
+"3181_transferFrom" -> "1706_sub"
+"6056_dollarPrice" -> "7063_consult"
+"3961_emergencyWithdraw" -> "1075_safeTransfer"
+"4819__mintShareToCollateralReserve" -> "7111_poolMint"
+"9492_withdraw" -> "1075_safeTransfer"
+"1075_safeDecreaseAllowance" -> "826_allowance"
+"6056_setCollateralAddress" -> "748_decimals"
+"9492__getATokenAddress" -> "9003_getReserveData"
+"3181_decreaseAllowance" -> "1706_sub"
+"3961_pendingReward" -> "1706_div"
+"3961_deposit" -> "1706_div"
+"3961_getMultiplier" -> "1706_mul"
+"2131_calcEffectiveCollateralRatio" -> "1706_mul"
+"8346_constructor" -> "7256_getReserves"
+"3961_getMultiplier" -> "1706_sub"
+"2131_calcEffectiveCollateralRatio" -> "7181_globalCollateralValue"
+"7777_consultToUsdChainlink" -> "45_decimals"
+"3961_withdraw" -> "1706_sub"
+"4819_mint" -> "7181_info"
+"1075__callOptionalReturn" -> "1371_functionCall"
+"4819_mint" -> "7111_poolBurnFrom"
+"6056_extractProfit" -> "7017_transferTo"
+"8886_claimIncentiveRewards" -> "1075_safeTransfer"
+"4819_getCollateralPrice" -> "7063_consult"
+"4819_redeem" -> "7054_poolBurnFrom"
+"6056_collateralPrice" -> "7063_consult"
+"3961_withdraw" -> "1706_mul"
+"3181_burnFrom" -> "1706_sub"
+"3961_withdraw" -> "1075_safeTransfer"
+"3961_pendingReward" -> "1706_sub"
+"7777_consult" -> "7256_token1"
+"2493_transferTo" -> "748_decimals"
+"3961_pendingReward" -> "1706_add"
+"2131_refreshCollateralRatio" -> "1706_add"
+"8346_currentCumulativePrices" -> "7256_getReserves"
+"8480_priceTokenToUsd" -> "45_decimals"
+"9492_deposit" -> "826_balanceOf"
+"8010_consult" -> "7063_consult"
+"3961_safeRewardTransfer" -> "7036_transferTo"
+"8480_consult" -> "7079_consult"
+"6226_claim" -> "7128_unclaimedTreasuryFund"
+"9492_withdraw" -> "9003_withdraw"
+"6918_zapMint" -> "748_balanceOf"
+"6056_requestTransfer" -> "7017_transferTo"
+"2493_balance" -> "826_balanceOf"
+"6918_getCollateralPrice" -> "7063_consult"
+"6226_rescueFund" -> "1075_safeTransfer"
+"3961_updatePool" -> "1706_mul"
+"3961_withdraw" -> "1706_div"
+"2493_transferTo" -> "1706_div"
+"3181__burnFrom" -> "1706_sub"
+"2131_refreshCollateralRatio" -> "1706_sub"
+"6226_balance" -> "826_balanceOf"
+"2131_refreshCollateralRatio" -> "7063_consult"
+"7777_consultToUsdChainlink" -> "45_latestRoundData"
+"8346_constructor" -> "7256_token1"
+"6056_extractProfit" -> "7200_excess_collateral_safety_margin"
+"4819_initialize" -> "748_decimals"
+"3181_increaseAllowance" -> "1706_add"
+"3961_deposit" -> "1706_mul"
+"7777_consult" -> "1706_mul"
+"9492_deposit" -> "9003_deposit"
+"7777_consult" -> "748_decimals"
+"7777_consult" -> "7256_getReserves"
+"7898_consult" -> "45_decimals"
+"6918__transferCollateralToReserve" -> "1075_safeTransfer"
+"6056_redemption_fee" -> "7200_redemption_fee"
+"9492_claimIncetiveRewards" -> "8966_claimRewards"
+"3961_pendingReward" -> "826_balanceOf"
+"6918_initialize" -> "748_decimals"
+"9492_getUnclaimedIncentiveRewardsBalance" -> "8966_getUserUnclaimedRewards"
+"1075_safeApprove" -> "826_allowance"
+"8886__swap" -> "1075_safeApprove"
+"2131_calcEffectiveCollateralRatio" -> "826_totalSupply"
+"8346_currentCumulativePrices" -> "7256_price1CumulativeLast"
+"8480_priceTokenToUsd" -> "45_latestRoundData"
+"6918_zapMint" -> "3181_burn"
+}

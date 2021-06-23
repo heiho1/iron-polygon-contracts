@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+ITreasury(treasury).collateralReserve()
+
+IRs:
+TMP_618 = CONVERT treasury to ITreasury
+TMP_619(address) = HIGH_LEVEL_CALL, dest:TMP_618(ITreasury), function:collateralReserve, arguments:[]  
+RETURN TMP_619"];
+}

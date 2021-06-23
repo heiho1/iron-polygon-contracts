@@ -1,0 +1,16 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == treasuryFund,Only treasury fund address can trigger)
+
+IRs:
+TMP_884(bool) = msg.sender == treasuryFund
+TMP_885(None) = SOLIDITY_CALL require(bool,string)(TMP_884,Only treasury fund address can trigger)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

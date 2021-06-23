@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+ITreasury(treasury).requestTransfer(share,_receiver,_amount)
+
+IRs:
+TMP_720 = CONVERT treasury to ITreasury
+HIGH_LEVEL_CALL, dest:TMP_720(ITreasury), function:requestTransfer, arguments:['share', '_receiver', '_amount']  "];
+}

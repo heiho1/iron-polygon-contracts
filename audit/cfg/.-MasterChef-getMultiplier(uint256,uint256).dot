@@ -1,0 +1,14 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: RETURN 1
+
+EXPRESSION:
+_to.sub(_from).mul(BONUS_MULTIPLIER)
+
+IRs:
+TMP_547(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256), arguments:['_to', '_from'] 
+TMP_548(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.mul(uint256,uint256), arguments:['TMP_547', 'BONUS_MULTIPLIER'] 
+RETURN TMP_548"];
+}

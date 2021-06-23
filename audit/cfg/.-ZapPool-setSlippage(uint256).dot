@@ -1,0 +1,29 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->3;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_slippage <= SLIPPAGE_MAX,SLIPPAGE TOO HIGH)
+
+IRs:
+TMP_1215(bool) = _slippage <= SLIPPAGE_MAX
+TMP_1216(None) = SOLIDITY_CALL require(bool,string)(TMP_1215,SLIPPAGE TOO HIGH)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+slippage = _slippage
+
+IRs:
+slippage(uint256) := _slippage(uint256)"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+3->1;
+}

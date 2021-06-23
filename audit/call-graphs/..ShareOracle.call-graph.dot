@@ -1,0 +1,34 @@
+strict digraph {
+subgraph cluster_8480_ShareOracle {
+label = "ShareOracle"
+"8480_priceTokenToUsd" [label="priceTokenToUsd"]
+"8480_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"8480_setOracleShare" [label="setOracleShare"]
+"8480_constructor" [label="constructor"]
+"8480_consult" [label="consult"]
+"8480_setChainlinkToUsd" [label="setChainlinkToUsd"]
+"8480_consult" -> "8480_priceTokenToUsd"
+"8480_setOracleShare" -> "8480_onlyOwner"
+"8480_setChainlinkToUsd" -> "8480_onlyOwner"
+}subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_7063_IOracle {
+label = "IOracle"
+"7063_consult" [label="consult"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"201_transferOwnership" -> "require(bool,string)"
+}
+}

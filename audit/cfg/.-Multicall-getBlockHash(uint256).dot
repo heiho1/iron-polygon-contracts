@@ -1,0 +1,13 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+blockHash = blockhash(uint256)(blockNumber)
+
+IRs:
+TMP_5(uint256) = SOLIDITY_CALL blockhash(uint256)(blockNumber)
+blockHash(bytes32) := TMP_5(uint256)"];
+}

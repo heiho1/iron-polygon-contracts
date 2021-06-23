@@ -1,0 +1,54 @@
+strict digraph {
+subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_3961_MasterChef {
+label = "MasterChef"
+"3961_emergencyWithdraw" [label="emergencyWithdraw"]
+"3961_getMultiplier" [label="getMultiplier"]
+"3961_constructor" [label="constructor"]
+"3961_set" [label="set"]
+"3961_withdraw" [label="withdraw"]
+"3961_safeRewardTransfer" [label="safeRewardTransfer"]
+"3961_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"3961_deposit" [label="deposit"]
+"3961_poolLength" [label="poolLength"]
+"3961_add" [label="add"]
+"3961_setfund" [label="setfund"]
+"3961_fundBalance" [label="fundBalance"]
+"3961_updatePool" [label="updatePool"]
+"3961_massUpdatePools" [label="massUpdatePools"]
+"3961_setRewardPerBlock" [label="setRewardPerBlock"]
+"3961_pendingReward" [label="pendingReward"]
+"3961_add" -> "3961_massUpdatePools"
+"3961_updatePool" -> "3961_getMultiplier"
+"3961_add" -> "3961_onlyOwner"
+"3961_setfund" -> "3961_onlyOwner"
+"3961_deposit" -> "3961_updatePool"
+"3961_withdraw" -> "3961_safeRewardTransfer"
+"3961_withdraw" -> "3961_updatePool"
+"3961_set" -> "3961_onlyOwner"
+"3961_pendingReward" -> "3961_getMultiplier"
+"3961_massUpdatePools" -> "3961_updatePool"
+"3961_setRewardPerBlock" -> "3961_massUpdatePools"
+"3961_deposit" -> "3961_safeRewardTransfer"
+"3961_setRewardPerBlock" -> "3961_onlyOwner"
+"3961_set" -> "3961_massUpdatePools"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"3961_setfund" -> "require(bool,string)"
+"3961_withdraw" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+}
+}

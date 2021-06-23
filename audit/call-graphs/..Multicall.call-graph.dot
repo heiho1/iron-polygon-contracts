@@ -1,0 +1,20 @@
+strict digraph {
+subgraph cluster_159_Multicall {
+label = "Multicall"
+"159_getCurrentBlockDifficulty" [label="getCurrentBlockDifficulty"]
+"159_getBlockHash" [label="getBlockHash"]
+"159_getCurrentBlockCoinbase" [label="getCurrentBlockCoinbase"]
+"159_getCurrentBlockTimestamp" [label="getCurrentBlockTimestamp"]
+"159_getCurrentBlockGasLimit" [label="getCurrentBlockGasLimit"]
+"159_aggregate" [label="aggregate"]
+"159_getLastBlockHash" [label="getLastBlockHash"]
+"159_getEthBalance" [label="getEthBalance"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool)" 
+"blockhash(uint256)" 
+"159_aggregate" -> "require(bool)"
+"159_getLastBlockHash" -> "blockhash(uint256)"
+"159_getBlockHash" -> "blockhash(uint256)"
+}
+}

@@ -1,0 +1,83 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->11;
+1[label="Node Type: NEW VARIABLE 1
+"];
+1->2;
+2[label="Node Type: IF 2
+
+EXPRESSION:
+bytes(signature).length == 0
+
+IRs:
+TMP_1553 = CONVERT signature to bytes
+REF_406 -> LENGTH TMP_1553
+TMP_1554(bool) = REF_406 == 0
+CONDITION TMP_1554"];
+2->3[label="True"];
+2->4[label="False"];
+3[label="Node Type: EXPRESSION 3
+
+EXPRESSION:
+callData = data
+
+IRs:
+callData(bytes) := data(bytes)"];
+3->5;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+callData = abi.encodePacked(bytes4(keccak256(bytes)(bytes(signature))),data)
+
+IRs:
+TMP_1555 = CONVERT signature to bytes
+TMP_1556(bytes32) = SOLIDITY_CALL keccak256(bytes)(TMP_1555)
+TMP_1557 = CONVERT TMP_1556 to bytes4
+TMP_1558(bytes) = SOLIDITY_CALL abi.encodePacked()(TMP_1557,data)
+callData(bytes) := TMP_1558(bytes)"];
+4->5;
+5[label="Node Type: END_IF 5
+"];
+5->6;
+6[label="Node Type: NEW VARIABLE 6
+"];
+6->7;
+7[label="Node Type: NEW VARIABLE 7
+"];
+7->8;
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+(success,returnData) = target.call{value: value}(callData)
+
+IRs:
+TUPLE_14(bool,bytes) = LOW_LEVEL_CALL, dest:target, function:call, arguments:['callData'] value:value 
+success(bool)= UNPACK TUPLE_14 index: 0 
+returnData(bytes)= UNPACK TUPLE_14 index: 1 "];
+8->9;
+9[label="Node Type: EXPRESSION 9
+
+EXPRESSION:
+require(bool,string)(success,string(VaultController::executeTransaction: Transaction execution reverted.))
+
+IRs:
+TMP_1559 = CONVERT VaultController::executeTransaction: Transaction execution reverted. to string
+TMP_1560(None) = SOLIDITY_CALL require(bool,string)(success,TMP_1559)"];
+9->10;
+10[label="Node Type: RETURN 10
+
+EXPRESSION:
+returnData
+
+IRs:
+RETURN returnData"];
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+11->1;
+}

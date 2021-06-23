@@ -1,0 +1,159 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(collateral_ratio_paused == false,Collateral Ratio has been paused)
+
+IRs:
+TMP_184(bool) = collateral_ratio_paused == False
+TMP_185(None) = SOLIDITY_CALL require(bool,string)(TMP_184,Collateral Ratio has been paused)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(block.timestamp - last_refresh_cr_timestamp >= refresh_cooldown,Must wait for the refresh cooldown since last refresh)
+
+IRs:
+TMP_186(uint256) = block.timestamp (c)- last_refresh_cr_timestamp
+TMP_187(bool) = TMP_186 >= refresh_cooldown
+TMP_188(None) = SOLIDITY_CALL require(bool,string)(TMP_187,Must wait for the refresh cooldown since last refresh)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+current_dollar_price = IOracle(oracleDollar).consult()
+
+IRs:
+TMP_189 = CONVERT oracleDollar to IOracle
+TMP_190(uint256) = HIGH_LEVEL_CALL, dest:TMP_189(IOracle), function:consult, arguments:[]  
+current_dollar_price(uint256) := TMP_190(uint256)"];
+3->4;
+4[label="Node Type: IF 4
+
+EXPRESSION:
+current_dollar_price > price_target.add(price_band)
+
+IRs:
+TMP_191(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['price_target', 'price_band'] 
+TMP_192(bool) = current_dollar_price > TMP_191
+CONDITION TMP_192"];
+4->5[label="True"];
+4->9[label="False"];
+5[label="Node Type: IF 5
+
+EXPRESSION:
+target_collateral_ratio <= ratio_step
+
+IRs:
+TMP_193(bool) = target_collateral_ratio <= ratio_step
+CONDITION TMP_193"];
+5->6[label="True"];
+5->7[label="False"];
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+target_collateral_ratio = 0
+
+IRs:
+target_collateral_ratio(uint256) := 0(uint256)"];
+6->8;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+target_collateral_ratio = target_collateral_ratio.sub(ratio_step)
+
+IRs:
+TMP_194(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256), arguments:['target_collateral_ratio', 'ratio_step'] 
+target_collateral_ratio(uint256) := TMP_194(uint256)"];
+7->8;
+8[label="Node Type: END_IF 8
+"];
+8->15;
+9[label="Node Type: IF 9
+
+EXPRESSION:
+current_dollar_price < price_target.sub(price_band)
+
+IRs:
+TMP_195(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.sub(uint256,uint256), arguments:['price_target', 'price_band'] 
+TMP_196(bool) = current_dollar_price < TMP_195
+CONDITION TMP_196"];
+9->10[label="True"];
+9->14[label="False"];
+10[label="Node Type: IF 10
+
+EXPRESSION:
+target_collateral_ratio.add(ratio_step) >= COLLATERAL_RATIO_MAX
+
+IRs:
+TMP_197(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['target_collateral_ratio', 'ratio_step'] 
+TMP_198(bool) = TMP_197 >= COLLATERAL_RATIO_MAX
+CONDITION TMP_198"];
+10->11[label="True"];
+10->12[label="False"];
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+target_collateral_ratio = COLLATERAL_RATIO_MAX
+
+IRs:
+target_collateral_ratio(uint256) := COLLATERAL_RATIO_MAX(uint256)"];
+11->13;
+12[label="Node Type: EXPRESSION 12
+
+EXPRESSION:
+target_collateral_ratio = target_collateral_ratio.add(ratio_step)
+
+IRs:
+TMP_199(uint256) = LIBRARY_CALL, dest:SafeMath, function:SafeMath.add(uint256,uint256), arguments:['target_collateral_ratio', 'ratio_step'] 
+target_collateral_ratio(uint256) := TMP_199(uint256)"];
+12->13;
+13[label="Node Type: END_IF 13
+"];
+13->14;
+14[label="Node Type: END_IF 14
+"];
+14->15;
+15[label="Node Type: END_IF 15
+"];
+15->16;
+16[label="Node Type: IF 16
+
+EXPRESSION:
+using_effective_collateral_ratio
+
+IRs:
+CONDITION using_effective_collateral_ratio"];
+16->17[label="True"];
+16->18[label="False"];
+17[label="Node Type: EXPRESSION 17
+
+EXPRESSION:
+effective_collateral_ratio = calcEffectiveCollateralRatio()
+
+IRs:
+TMP_200(uint256) = INTERNAL_CALL, CollateralRatioPolicy.calcEffectiveCollateralRatio()()
+effective_collateral_ratio(uint256) := TMP_200(uint256)"];
+17->19;
+18[label="Node Type: EXPRESSION 18
+
+EXPRESSION:
+effective_collateral_ratio = target_collateral_ratio
+
+IRs:
+effective_collateral_ratio(uint256) := target_collateral_ratio(uint256)"];
+18->19;
+19[label="Node Type: END_IF 19
+"];
+19->20;
+20[label="Node Type: EXPRESSION 20
+
+EXPRESSION:
+last_refresh_cr_timestamp = block.timestamp
+
+IRs:
+last_refresh_cr_timestamp(uint256) := block.timestamp(uint256)"];
+}

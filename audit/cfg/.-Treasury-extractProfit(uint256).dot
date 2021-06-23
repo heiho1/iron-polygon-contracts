@@ -1,0 +1,79 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->8;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_amount > 0,zero amount)
+
+IRs:
+TMP_963(bool) = _amount > 0
+TMP_964(None) = SOLIDITY_CALL require(bool,string)(TMP_963,zero amount)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+require(bool,string)(profitSharingFund != address(0),Invalid profitSharingFund)
+
+IRs:
+TMP_965 = CONVERT 0 to address
+TMP_966(bool) = profitSharingFund != TMP_965
+TMP_967(None) = SOLIDITY_CALL require(bool,string)(TMP_966,Invalid profitSharingFund)"];
+2->3;
+3[label="Node Type: NEW VARIABLE 3
+
+EXPRESSION:
+_maxExcess = excessCollateralBalance()
+
+IRs:
+TMP_968(uint256) = INTERNAL_CALL, Treasury.excessCollateralBalance()()
+_maxExcess(uint256) := TMP_968(uint256)"];
+3->4;
+4[label="Node Type: NEW VARIABLE 4
+
+EXPRESSION:
+_maxAllowableAmount = _maxExcess - ((_maxExcess * ITreasuryPolicy(treasuryPolicy).excess_collateral_safety_margin()) / RATIO_PRECISION)
+
+IRs:
+TMP_969 = CONVERT treasuryPolicy to ITreasuryPolicy
+TMP_970(uint256) = HIGH_LEVEL_CALL, dest:TMP_969(ITreasuryPolicy), function:excess_collateral_safety_margin, arguments:[]  
+TMP_971(uint256) = _maxExcess (c)* TMP_970
+TMP_972(uint256) = TMP_971 (c)/ RATIO_PRECISION
+TMP_973(uint256) = _maxExcess (c)- TMP_972
+_maxAllowableAmount(uint256) := TMP_973(uint256)"];
+4->5;
+5[label="Node Type: EXPRESSION 5
+
+EXPRESSION:
+require(bool,string)(_amount <= _maxAllowableAmount,Excess allowable amount)
+
+IRs:
+TMP_974(bool) = _amount <= _maxAllowableAmount
+TMP_975(None) = SOLIDITY_CALL require(bool,string)(TMP_974,Excess allowable amount)"];
+5->6;
+6[label="Node Type: EXPRESSION 6
+
+EXPRESSION:
+ICollateralReserve(collateralReserve).transferTo(collateral,profitSharingFund,_amount)
+
+IRs:
+TMP_976 = CONVERT collateralReserve to ICollateralReserve
+HIGH_LEVEL_CALL, dest:TMP_976(ICollateralReserve), function:transferTo, arguments:['collateral', 'profitSharingFund', '_amount']  "];
+6->7;
+7[label="Node Type: EXPRESSION 7
+
+EXPRESSION:
+ProfitExtracted(_amount)
+
+IRs:
+Emit ProfitExtracted(_amount)"];
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+onlyProfitController()
+
+IRs:
+MODIFIER_CALL, Treasury.onlyProfitController()()"];
+8->1;
+}

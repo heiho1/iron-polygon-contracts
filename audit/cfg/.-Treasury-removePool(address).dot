@@ -1,0 +1,100 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->13;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(pools[pool_address] == true,!pool)
+
+IRs:
+REF_316(bool) -> pools[pool_address]
+TMP_987(bool) = REF_316 == True
+TMP_988(None) = SOLIDITY_CALL require(bool,string)(TMP_987,!pool)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+delete pools[pool_address]
+
+IRs:
+REF_317(bool) -> pools[pool_address]
+pools = delete REF_317 "];
+2->5;
+3[label="Node Type: BEGIN_LOOP 3
+"];
+3->6;
+4[label="Node Type: END_LOOP 4
+"];
+4->12;
+5[label="Node Type: NEW VARIABLE 5
+
+EXPRESSION:
+i = 0
+
+IRs:
+i(uint256) := 0(uint256)"];
+5->3;
+6[label="Node Type: IF_LOOP 6
+
+EXPRESSION:
+i < pools_array.length
+
+IRs:
+REF_318 -> LENGTH pools_array
+TMP_989(bool) = i < REF_318
+CONDITION TMP_989"];
+6->7[label="True"];
+6->4[label="False"];
+7[label="Node Type: IF 7
+
+EXPRESSION:
+pools_array[i] == pool_address
+
+IRs:
+REF_319(address) -> pools_array[i]
+TMP_990(bool) = REF_319 == pool_address
+CONDITION TMP_990"];
+7->8[label="True"];
+7->10[label="False"];
+8[label="Node Type: EXPRESSION 8
+
+EXPRESSION:
+pools_array[i] = address(0)
+
+IRs:
+REF_320(address) -> pools_array[i]
+TMP_991 = CONVERT 0 to address
+REF_320 (->pools_array) := TMP_991(address)"];
+8->9;
+9[label="Node Type: BREAK 9
+"];
+9->4;
+10[label="Node Type: END_IF 10
+"];
+10->11;
+11[label="Node Type: EXPRESSION 11
+
+EXPRESSION:
+i ++
+
+IRs:
+TMP_992(uint256) := i(uint256)
+i(uint256) = i (c)+ 1"];
+11->6;
+12[label="Node Type: EXPRESSION 12
+
+EXPRESSION:
+PoolRemoved(pool_address)
+
+IRs:
+Emit PoolRemoved(pool_address)"];
+13[label="Node Type: EXPRESSION 13
+
+EXPRESSION:
+onlyOwner()
+
+IRs:
+MODIFIER_CALL, Ownable.onlyOwner()()"];
+13->1;
+}

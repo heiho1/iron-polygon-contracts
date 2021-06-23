@@ -1,0 +1,32 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(_status != _ENTERED,ReentrancyGuard: reentrant call)
+
+IRs:
+TMP_20(bool) = _status != _ENTERED
+TMP_21(None) = SOLIDITY_CALL require(bool,string)(TMP_20,ReentrancyGuard: reentrant call)"];
+1->2;
+2[label="Node Type: EXPRESSION 2
+
+EXPRESSION:
+_status = _ENTERED
+
+IRs:
+_status(uint256) := _ENTERED(uint256)"];
+2->3;
+3[label="Node Type: _ 3
+"];
+3->4;
+4[label="Node Type: EXPRESSION 4
+
+EXPRESSION:
+_status = _NOT_ENTERED
+
+IRs:
+_status(uint256) := _NOT_ENTERED(uint256)"];
+}

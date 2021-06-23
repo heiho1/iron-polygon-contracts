@@ -1,0 +1,53 @@
+strict digraph {
+subgraph cluster_241_ReentrancyGuard {
+label = "ReentrancyGuard"
+"241_constructor" [label="constructor"]
+}subgraph cluster_1394_Context {
+label = "Context"
+"1394__msgData" [label="_msgData"]
+"1394__msgSender" [label="_msgSender"]
+}subgraph cluster_201_Ownable {
+label = "Ownable"
+"201_owner" [label="owner"]
+"201_constructor" [label="constructor"]
+"201_renounceOwnership" [label="renounceOwnership"]
+"201_transferOwnership" [label="transferOwnership"]
+"201_transferOwnership" -> "201_onlyOwner"
+"201_renounceOwnership" -> "201_onlyOwner"
+"201_constructor" -> "201__msgSender"
+}subgraph cluster_6918_ZapPool {
+label = "ZapPool"
+"6918_toggleMinting" [label="toggleMinting"]
+"6918_getCollateralPrice" [label="getCollateralPrice"]
+"6918_collateralReserve" [label="collateralReserve"]
+"6918_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"6918_setRouter" [label="setRouter"]
+"6918_zapMint" [label="zapMint"]
+"6918_unclaimed_pool_collateral" [label="unclaimed_pool_collateral"]
+"6918__transferCollateralToReserve" [label="_transferCollateralToReserve"]
+"6918_setOracle" [label="setOracle"]
+"6918_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"6918_initialize" [label="initialize"]
+"6918_setSlippage" [label="setSlippage"]
+"6918_zapMint" -> "6918_nonReentrant"
+"6918_zapMint" -> "6918_notContract"
+"6918_initialize" -> "6918_initializer"
+"6918_setOracle" -> "6918_onlyOwner"
+"6918_zapMint" -> "6918_getCollateralPrice"
+"6918_setSlippage" -> "6918_onlyOwner"
+"6918_setRouter" -> "6918_onlyOwner"
+"6918__transferCollateralToReserve" -> "6918_collateralReserve"
+"6918_zapMint" -> "6918__transferCollateralToReserve"
+"6918_toggleMinting" -> "6918_onlyOwner"
+"6918_initialize" -> "6918_onlyOwner"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"6918__transferCollateralToReserve" -> "require(bool,string)"
+"6918_zapMint" -> "require(bool,string)"
+"6918_setSlippage" -> "require(bool,string)"
+"6918_setOracle" -> "require(bool,string)"
+"201_transferOwnership" -> "require(bool,string)"
+"6918_setRouter" -> "require(bool,string)"
+}
+}

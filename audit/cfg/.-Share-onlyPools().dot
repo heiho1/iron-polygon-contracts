@@ -1,0 +1,17 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(ITreasury(treasury).hasPool(msg.sender),!pools)
+
+IRs:
+TMP_881 = CONVERT treasury to ITreasury
+TMP_882(bool) = HIGH_LEVEL_CALL, dest:TMP_881(ITreasury), function:hasPool, arguments:['msg.sender']  
+TMP_883(None) = SOLIDITY_CALL require(bool,string)(TMP_882,!pools)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}

@@ -1,0 +1,17 @@
+digraph{
+0[label="Node Type: OTHER_ENTRYPOINT 0
+
+EXPRESSION:
+slippage = 50000
+
+IRs:
+slippage(uint256) := 50000(uint256)"];
+0->1;
+1[label="Node Type: OTHER_ENTRYPOINT 1
+
+EXPRESSION:
+mint_paused = false
+
+IRs:
+mint_paused(bool) := False(bool)"];
+}

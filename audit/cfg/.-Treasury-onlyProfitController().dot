@@ -1,0 +1,19 @@
+digraph{
+0[label="Node Type: ENTRY_POINT 0
+"];
+0->1;
+1[label="Node Type: EXPRESSION 1
+
+EXPRESSION:
+require(bool,string)(msg.sender == profitController || msg.sender == owner(),Only profit controller or owner can trigger)
+
+IRs:
+TMP_1045(bool) = msg.sender == profitController
+TMP_1046(address) = INTERNAL_CALL, Ownable.owner()()
+TMP_1047(bool) = msg.sender == TMP_1046
+TMP_1048(bool) = TMP_1045 || TMP_1047
+TMP_1049(None) = SOLIDITY_CALL require(bool,string)(TMP_1048,Only profit controller or owner can trigger)"];
+1->2;
+2[label="Node Type: _ 2
+"];
+}
